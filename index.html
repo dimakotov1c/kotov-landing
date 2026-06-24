@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дмитрий Котов — 1С-эксперт, блогер, спикер</title>
+<meta name="description" content="Дмитрий Котов — 1Сник, блогер «1С Заметки», спикер и организатор митапов. Вайбкодинг, SRM/SCM, менторство и консультации.">
+<meta name="theme-color" content="#0A0A0F">
+<link rel="canonical" href="https://kotov.top/">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+<!-- Open Graph / Telegram / соцсети -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kotov.top/">
+<meta property="og:title" content="Дмитрий Котов — 1Сник, блогер, спикер">
+<meta property="og:description" content="Канал «1С Заметки», вайбкодинг на 1С, SRM/SCM. Менторство и консультации.">
+<meta property="og:image" content="https://kotov.top/assets/dmitry.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1000">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Дмитрий Котов — 1Сник, блогер, спикер">
+<meta name="twitter:description" content="Канал «1С Заметки», вайбкодинг на 1С, SRM/SCM. Менторство и консультации.">
+<meta name="twitter:image" content="https://kotov.top/assets/dmitry.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ====================== TOKENS ====================== */
+  :root,
+  [data-theme="dark"] {
+    --bg:        #0A0A0F;
+    --bg-2:      #0D0D15;
+    --surface:   #15151F;
+    --surface-2: #1B1B28;
+    --border:    rgba(255,255,255,.09);
+    --border-2:  rgba(255,255,255,.16);
+    --text:      #ECECF2;
+    --muted:     #9A9AB0;
+    --faint:     #6B6B80;
+
+    --gold:      #FFC02E;
+    --gold-soft: #FFD96B;
+    --violet:    #8B5CF6;
+    --cyan:      #22D3EE;
+
+    --grad: linear-gradient(100deg, var(--gold) 0%, #FF8A3D 28%, var(--violet) 78%, var(--cyan) 110%);
+    --glow-gold:   rgba(255,192,46,.22);
+    --glow-violet: rgba(139,92,246,.30);
+    --glow-cyan:   rgba(34,211,238,.18);
+
+    --card-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 24px 60px -28px rgba(0,0,0,.85);
+    --header-bg: rgba(10,10,15,.72);
+  }
+
+  [data-theme="light"] {
+    --bg:        #EEF1F7;
+    --bg-2:      #E6EAF2;
+    --surface:   #FFFFFF;
+    --surface-2: #F6F8FC;
+    --border:    rgba(20,20,45,.10);
+    --border-2:  rgba(20,20,45,.18);
+    --text:      #15151E;
+    --muted:     #56566A;
+    --faint:     #8A8AA0;
+
+    --gold:      #C9870A;
+    --gold-soft: #E8A317;
+    --violet:    #6D3BEA;
+    --cyan:      #0E97B8;
+
+    --grad: linear-gradient(100deg, #C9870A 0%, #E0651F 30%, #6D3BEA 78%, #0E97B8 110%);
+    --glow-gold:   rgba(201,135,10,.16);
+    --glow-violet: rgba(109,59,234,.16);
+    --glow-cyan:   rgba(14,151,184,.12);
+
+    --card-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 18px 44px -26px rgba(30,30,70,.40);
+    --header-bg: rgba(238,241,247,.78);
+  }
+
+  /* ====================== BASE ====================== */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background .4s ease, color .4s ease;
+  }
+
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  button { font-family: inherit; cursor: pointer; }
+
+  ::selection { background: var(--violet); color: #fff; }
+
+  :focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap { width: min(1140px, 92vw); margin-inline: auto; }
+
+  .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    gap: .6em;
+    margin: 0 0 1.1rem;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 26px; height: 1px;
+    background: var(--gold);
+    opacity: .7;
+  }
+
+  h1, h2, h3 { font-family: "Unbounded", sans-serif; font-weight: 800; line-height: 1.04; letter-spacing: -.01em; margin: 0; }
+
+  .grad-text {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  section { position: relative; padding: clamp(72px, 11vh, 130px) 0; scroll-margin-top: 84px; }
+  footer { scroll-margin-top: 84px; }
+
+  .section-head { max-width: 760px; margin-bottom: clamp(36px, 5vw, 60px); }
+  .section-head h2 { font-size: clamp(1.9rem, 4.4vw, 3.1rem); }
+  .section-head p { color: var(--muted); font-size: 1.08rem; margin: 1.1rem 0 0; }
+
+  /* ====================== BUTTONS ====================== */
+  .btn {
+    --bs: 0 0 0 rgba(0,0,0,0);
+    display: inline-flex; align-items: center; gap: .55em;
+    padding: .85em 1.5em;
+    border-radius: 12px;
+    font-weight: 600; font-size: .98rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform .18s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--grad);
+    color: #15100a;
+    box-shadow: 0 8px 30px -10px var(--glow-gold), 0 0 0 1px rgba(255,192,46,.25);
+    font-weight: 700;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -10px var(--glow-gold), 0 0 26px -4px var(--glow-violet); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border-2);
+  }
+  .btn-ghost:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: 0 0 24px -8px var(--glow-gold); }
+  .btn svg { width: 1.05em; height: 1.05em; }
+
+  /* ====================== HEADER ====================== */
+  header {
+    position: sticky; top: 0; z-index: 60;
+    backdrop-filter: blur(14px);
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border);
+    transition: background .4s ease, border-color .4s ease;
+  }
+  .nav { display: flex; align-items: center; gap: 1.4rem; height: 68px; }
+  .brand {
+    font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 1.02rem;
+    text-decoration: none; letter-spacing: -.02em; white-space: nowrap;
+    display: flex; align-items: center; gap: .5em;
+  }
+  .brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--grad); box-shadow: 0 0 12px var(--glow-gold); }
+  .nav-links { display: flex; gap: 1.3rem; margin-left: auto; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted); font-size: .92rem; font-weight: 500;
+    position: relative; padding: .3em 0; transition: color .2s ease;
+  }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; bottom: -2px; height: 2px; width: 0;
+    background: var(--grad); transition: width .25s ease;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* theme toggle — the signature meme switch */
+  .theme-zone { display: flex; align-items: center; gap: .7rem; }
+  .meme {
+    font-family: "JetBrains Mono", monospace;
+    font-size: .68rem; line-height: 1.3; color: var(--faint);
+    text-align: right; white-space: nowrap;
+  }
+  .meme b { color: var(--gold); font-weight: 700; }
+  .toggle {
+    position: relative; width: 64px; height: 32px; border-radius: 20px;
+    border: 1px solid var(--border-2); background: var(--surface-2);
+    display: inline-flex; align-items: center; padding: 0 4px; flex-shrink: 0;
+    transition: background .3s ease, border-color .3s ease;
+  }
+  .toggle::after {
+    content: "🌙"; position: absolute; top: 50%; left: 4px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--grad); transform: translate(0, -50%);
+    display: grid; place-items: center; font-size: 13px;
+    box-shadow: 0 2px 10px -2px var(--glow-gold);
+    transition: transform .32s cubic-bezier(.5,1.6,.4,1), content .3s;
+  }
+  [data-theme="light"] .toggle::after { content: "☀️"; transform: translate(32px, -50%); }
+  .toggle .ico { font-size: 12px; opacity: .5; width: 24px; text-align: center; }
+  .toggle .ico:last-child { margin-left: auto; }
+
+  .burger { display: none; background: none; border: 1px solid var(--border-2); border-radius: 10px; width: 42px; height: 38px; color: var(--text); font-size: 1.1rem; }
+
+  /* ====================== AMBIENT GLOW ====================== */
+  .orb { position: absolute; border-radius: 50%; filter: blur(70px); z-index: 0; pointer-events: none; opacity: .9; }
+
+  /* ====================== HERO / ABOUT ====================== */
+  #about { padding-top: clamp(56px, 8vh, 96px); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 320px 1fr; gap: clamp(32px, 5vw, 70px); align-items: center; position: relative; z-index: 2; }
+  .hero-photo { position: relative; justify-self: center; }
+  .hero-photo img {
+    width: 280px; height: 280px; object-fit: cover; border-radius: 28px;
+    border: 1px solid var(--border-2);
+  }
+  .hero-photo .ring {
+    position: absolute; inset: -14px; border-radius: 36px; z-index: -1;
+    background: var(--grad); filter: blur(22px); opacity: .55;
+  }
+  .hero-badge {
+    position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+    font-family: "JetBrains Mono", monospace; font-size: .72rem; font-weight: 500;
+    background: var(--surface); border: 1px solid var(--border-2); color: var(--text);
+    padding: .5em 1em; border-radius: 30px; white-space: nowrap;
+    box-shadow: var(--card-shadow);
+  }
+  .hero-badge b { color: var(--gold); }
+  #about h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); }
+  .hero-sub {
+    font-family: "JetBrains Mono", monospace; color: var(--muted);
+    font-size: clamp(.82rem, 1.6vw, .98rem); margin: 1.1rem 0 0; letter-spacing: .01em;
+  }
+  .hero-text { margin: 1.6rem 0 0; }
+  .hero-text p { margin: 0 0 1rem; color: var(--muted); max-width: 60ch; }
+  .hero-text a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--gold); transition: color .2s; }
+  .hero-text a:hover { color: var(--gold); }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.8rem; }
+
+  /* ====================== CARDS GENERIC ====================== */
+  .card {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.7rem;
+    box-shadow: var(--card-shadow);
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .card:hover { transform: translateY(-4px); border-color: var(--border-2); }
+
+  /* ====================== AWARDS ====================== */
+  .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .award {
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .award:hover { box-shadow: 0 24px 60px -30px var(--glow-violet), var(--card-shadow); }
+  .award .ic { font-size: 2.4rem; line-height: 1; margin-bottom: .9rem; filter: drop-shadow(0 0 14px var(--glow-gold)); }
+  .award h3 { font-family: "Inter", sans-serif; font-weight: 700; font-size: 1.06rem; letter-spacing: 0; }
+  .award .stat {
+    font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: .82rem;
+    color: var(--gold); margin: .5rem 0 0;
+  }
+  .award p { color: var(--muted); font-size: .92rem; margin: .7rem 0 1.1rem; flex: 1; }
+  .src {
+    font-family: "JetBrains Mono", monospace; font-size: .74rem; text-decoration: none;
+    color: var(--cyan); display: inline-flex; gap: .3em; align-items: center;
+  }
+  .src:hover { text-decoration: underline; }
+  .award .yr { font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 1.5rem; }
+
+  .awards-more { margin-top: 14px; font-family: "JetBrains Mono", monospace; font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+
+  /* ====================== CAROUSEL (generic) ====================== */
+  .carousel { position: relative; margin-top: 1.2rem; }
+  .carousel-track { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 12px; scrollbar-width: none; }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track > * { scroll-snap-align: start; flex: 0 0 auto; }
+  .award-slide { width: clamp(260px, 32%, 360px); }
+
+  .car-nav { display: flex; gap: .5rem; align-items: center; margin-top: .4rem; }
+  .car-btn {
+    width: 42px; height: 42px; border-radius: 12px; background: var(--surface);
+    border: 1px solid var(--border-2); color: var(--text); font-size: 1.1rem;
+    display: grid; place-items: center; transition: background .2s, border-color .2s, transform .15s;
+  }
+  .car-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .car-btn:active { transform: scale(.94); }
+  .dots { display: flex; gap: .45rem; margin-left: auto; align-items: center; }
+  .dots button { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: none; background: var(--border-2); transition: width .25s, background .25s; }
+  .dots button[aria-current="true"] { width: 22px; border-radius: 6px; background: var(--grad); }
+
+  /* ====================== CHANNEL ====================== */
+  #channel .panel {
+    background: radial-gradient(120% 140% at 0% 0%, rgba(139,92,246,.10), transparent 55%), linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--border-2); border-radius: 26px;
+    padding: clamp(28px, 4vw, 52px); position: relative; overflow: hidden;
+  }
+  .chan-head { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: end; justify-content: space-between; margin-bottom: 2rem; }
+  .chan-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); }
+  .chan-head p { color: var(--muted); margin: .8rem 0 0; max-width: 46ch; }
+  .rubrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 2rem; }
+  .rubric { background: var(--bg-2); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem; transition: transform .2s, border-color .2s; }
+  .rubric:hover { transform: translateY(-3px); border-color: var(--gold); }
+  .rubric .ic { font-size: 1.5rem; margin-bottom: .6rem; }
+  .rubric b { display: block; font-family: "Unbounded", sans-serif; font-weight: 600; font-size: .92rem; letter-spacing: -.01em; }
+  .rubric span { color: var(--muted); font-size: .82rem; }
+
+  /* ====================== SERVICES ====================== */
+  .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+  .svc { display: flex; flex-direction: column; position: relative; overflow: hidden; }
+  .svc-aud {
+    margin: -1.7rem -1.7rem 1.4rem; padding: 1.1rem 1.7rem;
+    font-family: "JetBrains Mono", monospace; font-size: .8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .svc-aud b { font-size: .98rem; font-family: "Inter", sans-serif; display: block; margin-bottom: .15rem; }
+  .svc-aud span { color: var(--muted); }
+  .svc.spec .svc-aud { background: linear-gradient(90deg, rgba(34,211,238,.14), transparent); }
+  .svc.spec .svc-aud b { color: var(--cyan); }
+  .svc.biz  .svc-aud { background: linear-gradient(90deg, rgba(255,138,61,.16), transparent); }
+  .svc.biz  .svc-aud b { color: var(--gold); }
+  .svc h3 { font-family: "Unbounded", sans-serif; font-size: 1.35rem; }
+  .svc > p { color: var(--muted); font-size: .96rem; margin: .9rem 0; }
+  .svc .lbl { font-weight: 700; font-size: .92rem; margin: 1rem 0 .5rem; }
+  .svc ul { margin: 0 0 .4rem; padding-left: 1.1rem; color: var(--muted); font-size: .92rem; }
+  .svc ul li { margin-bottom: .4rem; }
+  .svc .meta { color: var(--muted); font-size: .9rem; margin: .7rem 0; }
+  .svc .meta b { color: var(--text); }
+  .price {
+    margin-top: auto; padding-top: 1.4rem; border-top: 1px solid var(--border);
+    font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 1.7rem;
+  }
+  .price .grad-text { font-size: inherit; }
+  .price small { display: block; font-family: "JetBrains Mono", monospace; font-weight: 400; font-size: .8rem; color: var(--muted); margin-top: .3rem; }
+
+  .svc-cta {
+    margin-top: 28px; text-align: center;
+    background: var(--surface); border: 1px solid var(--border-2); border-radius: 22px;
+    padding: clamp(28px, 4vw, 44px);
+  }
+  .svc-cta p { color: var(--muted); max-width: 60ch; margin: 0 auto 1.4rem; }
+  .svc-cta .contacts { font-family: "JetBrains Mono", monospace; font-size: .86rem; color: var(--muted); margin-top: 1.2rem; }
+  .svc-cta .contacts a { color: var(--cyan); text-decoration: none; }
+  .svc-cta .contacts a:hover { text-decoration: underline; }
+  .trust { color: var(--faint); font-size: .82rem; max-width: 70ch; margin: 1.4rem auto 0; line-height: 1.6; }
+  .trust a { color: var(--muted); }
+
+  /* ====================== SPEAKING ====================== */
+  .talks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .talk { display: flex; flex-direction: column; position: relative; overflow: hidden; padding: 1.5rem; }
+  .talk:hover { box-shadow: 0 24px 60px -30px var(--glow-violet), var(--card-shadow); }
+  .talk .tbadge {
+    position: absolute; top: 1.1rem; right: 1.1rem;
+    font-family: "JetBrains Mono", monospace; font-size: .64rem; font-weight: 700;
+    padding: .4em .75em; border-radius: 30px; white-space: nowrap;
+    background: var(--surface-2); border: 1px solid var(--border-2); color: var(--gold);
+  }
+  .talk .logo { font-size: 1.9rem; line-height: 1; margin-bottom: .8rem; filter: drop-shadow(0 0 12px var(--glow-violet)); }
+  .talk .ev { font-family: "JetBrains Mono", monospace; font-size: .7rem; letter-spacing: .03em; color: var(--muted); }
+  .talk .yr { font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 1.45rem; line-height: 1; margin: .15rem 0 .7rem; color: var(--muted); }
+  .talk h3 { font-family: "Inter", sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0; }
+  .talk > p { color: var(--muted); font-size: .87rem; margin: .6rem 0 1rem; flex: 1; }
+  .talk-foot { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 1.8rem; }
+  .talk-foot p { color: var(--muted); font-size: .92rem; margin: 0; max-width: 60ch; }
+
+  /* ====================== FOOTER ====================== */
+  footer { border-top: 1px solid var(--border); padding: clamp(56px, 8vh, 90px) 0 40px; position: relative; overflow: hidden; }
+  footer h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); max-width: 18ch; }
+  .foot-head { max-width: 640px; margin-bottom: clamp(34px, 5vw, 52px); }
+  .foot-sub { color: var(--muted); margin: 1.1rem 0 1.6rem; }
+  .foot-mail { font-family: "JetBrains Mono", monospace; font-size: .85rem; color: var(--muted); margin-top: 1.3rem; }
+  .foot-mail a { color: var(--cyan); text-decoration: none; }
+  .foot-mail a:hover { text-decoration: underline; }
+
+  .socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding-top: clamp(30px, 4vw, 44px); border-top: 1px solid var(--border); }
+  .soc-label { font-family: "JetBrains Mono", monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .soc-list { display: flex; flex-direction: column; }
+  .soc-list a {
+    text-decoration: none; color: var(--muted); font-size: .94rem;
+    display: flex; align-items: baseline; gap: .7em; padding: .45em 0;
+    border-bottom: 1px solid var(--border); transition: color .2s, padding-left .2s;
+  }
+  .soc-list a:last-child { border-bottom: none; }
+  .soc-list a:hover { color: var(--gold); padding-left: .3em; }
+  .soc-list .plat { font-family: "JetBrains Mono", monospace; font-size: .82rem; color: var(--text); flex: 0 0 96px; }
+  .soc-list a:hover .plat { color: var(--gold); }
+  .soc-list .note { font-family: "JetBrains Mono", monospace; font-size: .7rem; color: var(--faint); }
+  .foot-bottom { margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; color: var(--faint); font-size: .8rem; font-family: "JetBrains Mono", monospace; }
+
+  /* ====================== REVEAL ====================== */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .btn, .card, .rubric { transition: none; }
+  }
+
+  /* ====================== RESPONSIVE ====================== */
+  @media (max-width: 960px) {
+    .awards-grid { grid-template-columns: 1fr 1fr; }
+    .talks-grid { grid-template-columns: 1fr 1fr; }
+    .rubrics { grid-template-columns: 1fr 1fr; }
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero-photo { margin-bottom: 1rem; }
+    .hero-text p, .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-cta { justify-content: center; }
+  }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .meme { display: none; }
+    .burger { display: grid; place-items: center; margin-left: auto; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border); padding: 1rem 4vw 1.4rem; gap: .4rem;
+    }
+    .nav-links.open a { padding: .6em 0; font-size: 1rem; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .socials { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media (max-width: 480px) {
+    .awards-grid { grid-template-columns: 1fr; }
+    .talks-grid { grid-template-columns: 1fr; }
+    .rubrics { grid-template-columns: 1fr; }
+    body { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="#about" class="brand"><span class="dot"></span>Дмитрий&nbsp;Котов</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">Обо мне</a>
+      <a href="#awards">Награды</a>
+      <a href="#channel">Канал</a>
+      <a href="#talks">Выступления</a>
+      <a href="#services">Услуги</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="theme-zone">
+      <span class="meme">В конфигураторе нет,<br>а <b>у меня есть</b></span>
+      <button class="toggle" id="themeToggle" role="switch" aria-checked="true" aria-label="Переключить тёмную и светлую тему">
+        <span class="ico">🌙</span><span class="ico">☀️</span>
+      </button>
+    </div>
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<!-- ============ HERO / ABOUT ============ -->
+<section id="about">
+  <div class="orb" style="width:420px;height:420px;background:var(--glow-violet);top:-120px;right:-80px;"></div>
+  <div class="orb" style="width:360px;height:360px;background:var(--glow-gold);bottom:-140px;left:-100px;"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-photo reveal">
+        <span class="ring"></span>
+        <img src="assets/dmitry.jpg" alt="Дмитрий Котов — 1Сник из Иркутска, автор канала «1С Заметки»" width="280" height="280">
+        <span class="hero-badge">Иркутск · in-house · <b>1С</b></span>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow reveal">// Привет, я</p>
+        <h1 class="reveal"><span class="grad-text">Дмитрий Котов</span></h1>
+        <p class="hero-sub reveal">1Сник · блогер · спикер · организатор митапов · вайбкодер в выходные</p>
+        <div class="hero-text reveal">
+          <p>20 лет в ИТ. 10 — в обнимку с 1С, всегда in-house. Был программистом, стал аналитиком. Карьерный путь: алкоголь → газ → золото → нефть → конфетки. Сейчас кручу <b>SRM/SCM</b> и показываю, как ИИ реально работает в 1С — не в презентациях, а на экране.</p>
+          <p>Веду канал <a href="https://t.me/top_1c" target="_blank" rel="noopener">«Дмитрий Котов | 1С Заметки»</a>, организую митапы Жёлтого клуба в Иркутске и <a href="https://kungfu-conf.ru/" target="_blank" rel="noopener">Кунг-фу конфу</a> — живые встречи 1Сников. Дважды лауреат <a href="https://awards.infostart.ru/" target="_blank" rel="noopener">Infostart Awards</a>.</p>
+          <p>Живу в Иркутске. Люблю Байкал, путешествия и настольные игры.</p>
+        </div>
+        <div class="hero-cta reveal">
+          <a class="btn btn-primary" href="https://t.me/top_1c" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.5 20c-.3 1.1-.9 1.4-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.6-8.7c.4-.4-.1-.6-.6-.2L5.1 13.1l-5.1-1.6c-1.1-.4-1.1-1.1.2-1.6L20.5 2.8c.9-.3 1.7.2 1.4 1.5z"/></svg>
+            Подписаться в Telegram
+          </a>
+          <a class="btn btn-ghost" href="#contacts">Все соцсети</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AWARDS ============ -->
+<section id="awards">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">// Награды и признание</p>
+      <h2>Не просто <span class="grad-text">«ещё один 1С-блогер»</span></h2>
+      <p>Награды, рейтинги и места, где меня уже проверили — не на словах, а на сцене и в голосовании сообщества.</p>
+    </div>
+
+    <div class="awards-grid">
+      <article class="card award reveal">
+        <div class="ic">⭐</div>
+        <h3>Топ-автор Инфостарт</h3>
+        <p class="stat">4000+ рейтинг · 20-е место в Топ-100</p>
+        <p>Среди сотен тысяч авторов базы знаний — в двадцатке лучших по рейтингу сообщества.</p>
+        <a class="src" href="https://infostart.ru/profile/564942/" target="_blank" rel="noopener">Профиль →</a>
+      </article>
+      <article class="card award reveal">
+        <div class="ic">🏆</div>
+        <span class="yr grad-text">2018</span>
+        <h3>Infostart Awards</h3>
+        <p>Лауреат премии Infostart Awards — один из главных призов профессионального сообщества 1С.</p>
+        <a class="src" href="https://awards.infostart.ru/" target="_blank" rel="noopener">Источник →</a>
+      </article>
+      <article class="card award reveal">
+        <div class="ic">🏆</div>
+        <span class="yr grad-text">2020</span>
+        <h3>Infostart Awards</h3>
+        <p>Второй раз лауреат — не случайность, а системный вклад в базу знаний и комьюнити.</p>
+        <a class="src" href="https://awards.infostart.ru/" target="_blank" rel="noopener">Источник →</a>
+      </article>
+      <article class="card award reveal">
+        <div class="ic">🧢</div>
+        <h3>Золотая кепка · Блогер №1</h3>
+        <p class="stat">Жёлтый клуб</p>
+        <p>Первое место в рейтинге телеграм-блогеров сообщества Жёлтый клуб. Золотая кепка — не виртуальная.</p>
+        <a class="src" href="https://t.me/yellowclub_official/945" target="_blank" rel="noopener">Источник →</a>
+      </article>
+    </div>
+
+    <p class="trust reveal" style="margin-top:2rem">За спиной — не «галочки в резюме», а живые доклады, статьи и митапы. Хочешь пруф — кликай на источник. Не веришь — приходи на следующий мастер-класс и проверяй сам.</p>
+  </div>
+</section>
+
+<!-- ============ CHANNEL ============ -->
+<section id="channel">
+  <div class="wrap">
+    <div class="panel reveal">
+      <div class="orb" style="width:300px;height:300px;background:var(--glow-cyan);top:-100px;right:-60px;"></div>
+      <div class="chan-head">
+        <div>
+          <p class="eyebrow">// Telegram-канал</p>
+          <h2>«Дмитрий Котов | <span class="grad-text">1С&nbsp;Заметки</span>»</h2>
+          <p>Новости, вайбкодинг и инструменты 1С — без воды и пресс-релизов. Коротко, по делу, со своими инсайдами.</p>
+        </div>
+        <a class="btn btn-primary" href="https://t.me/top_1c" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.5 20c-.3 1.1-.9 1.4-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.6-8.7c.4-.4-.1-.6-.6-.2L5.1 13.1l-5.1-1.6c-1.1-.4-1.1-1.1.2-1.6L20.5 2.8c.9-.3 1.7.2 1.4 1.5z"/></svg>
+          Подписаться
+        </a>
+      </div>
+      <div class="rubrics">
+        <div class="rubric"><div class="ic">📰</div><b>Новости 1С и около</b><span>Что происходит в мире 1С и рядом</span></div>
+        <div class="rubric"><div class="ic">🤖</div><b>Вайбкодинг на 1С</b><span>ИИ в реальной разработке, а не в слайдах</span></div>
+        <div class="rubric"><div class="ic">🧰</div><b>Обзоры инструментов</b><span>Новое железо и софт для 1С-разработчика</span></div>
+        <div class="rubric"><div class="ic">💡</div><b>Инсайды и лайфхаки</b><span>Свои и найденные — то, что экономит время</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPEAKING ============ -->
+<section id="talks">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">// Со сцены</p>
+      <h2>Не только пишу — <span class="grad-text">выхожу на сцену</span></h2>
+      <p>От дебютного митапа в Иркутске до федеральных конференций и мастер-классов с живым кодом. Без слайдовой воды — с практикой, которую можно унести в проект.</p>
+    </div>
+
+    <div class="talks-grid">
+      <article class="card talk reveal">
+        <span class="tbadge">🎤 Дебют</span>
+        <div class="logo">🟡</div>
+        <div class="ev">Митап Жёлтого клуба · Иркутск</div>
+        <div class="yr" style="color:var(--faint)">2023</div>
+        <h3>«Разработка интерфейсов в 1С»</h3>
+        <p>Первое публичное выступление и первый опыт организации митапа — с этого начался путь спикера.</p>
+        <a class="src" href="https://t.me/top_1c/264" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <span class="tbadge">🏆 Топ-10</span>
+        <div class="logo">🏛</div>
+        <div class="ev">Infostart A&amp;PM · Санкт-Петербург</div>
+        <div class="yr">2024</div>
+        <h3>«Лайфхаки СКД без программиста»</h3>
+        <p>15 кейсов, как аналитику и пользователю обойтись без программиста. Доклад вошёл в топ-10 конференции.</p>
+        <a class="src" href="https://event.infostart.ru/analysis_pm2024/agenda/2050221/" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <div class="logo">🏛</div>
+        <div class="ev">Infostart Tech Event · Санкт-Петербург</div>
+        <div class="yr">2024</div>
+        <h3>«Разработка интерфейсов в 1С»</h3>
+        <p>Подходы к разработке интерфейсов на 1С, ограничения платформы и практика на примере реального проекта.</p>
+        <a class="src" href="https://event.infostart.ru/2024/agenda/2157144/" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <div class="logo">🏛</div>
+        <div class="ev">Infostart Teamlead &amp; CIO · Москва</div>
+        <div class="yr" style="color:var(--gold)">2025</div>
+        <h3>«Личный бренд»</h3>
+        <p>Зачем 1Снику личный бренд, с чего начать и какие риски ждут по дороге — сторителлинг от стажёра до тимлида.</p>
+        <a class="src" href="https://event.infostart.ru/teamlead_2025/agenda_complete/2246154/" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <span class="tbadge">🎓 По приглашению 1С</span>
+        <div class="logo">🎓</div>
+        <div class="ev">НПК «1С:Образование» · Москва</div>
+        <div class="yr"><span class="grad-text">2026</span></div>
+        <h3>«Карьерный респаун: зачем я стал 1Сником?»</h3>
+        <p>По приглашению фирмы «1С» — для студентов и преподавателей: почему выбор стека 1С — сильный карьерный ход.</p>
+        <a class="src" href="https://educonf.1c.ru/conf2026/about/agenda/?a529=Y&amp;b537=Y" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <span class="tbadge">🐼 Первая конференция</span>
+        <div class="logo">🐼</div>
+        <div class="ev">Кунг-фу конфа · Екатеринбург</div>
+        <div class="yr"><span class="grad-text">2026</span></div>
+        <h3>Мастер-класс «Вайбкодинг на 1С — проще простого!»</h3>
+        <p>Пилотный мастер-класс перед участниками. Первый опыт организации полноценной конференции — не митапа.</p>
+        <a class="src" href="https://kungfu-conf.ru/ekb2026" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <span class="tbadge">🥈 2-е место из 30</span>
+        <div class="logo">🤖</div>
+        <div class="ev">ЕСТЬРЕСУРС ERP AI FORUM · Москва</div>
+        <div class="yr"><span class="grad-text">2026</span></div>
+        <h3>Мастер-класс «Вайбкодинг на 1С — проще простого!»</h3>
+        <p>Разработка вживую, а не вода на слайдах. Второе место среди 30 докладов по оценке зала.</p>
+        <a class="src" href="https://esresforum.ru/" target="_blank" rel="noopener">Сайт форума →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <span class="tbadge">🔥 70 человек</span>
+        <div class="logo">🐼</div>
+        <div class="ev">Кунг-фу митап · Иркутск</div>
+        <div class="yr"><span class="grad-text">2026</span></div>
+        <h3>Мастер-класс «Вайбкодинг на 1С — на стероидах!»</h3>
+        <p>Рекордный митап в Иркутске — 70 человек, почти вдвое больше обычного. Три часа практики в одном зале.</p>
+        <a class="src" href="https://kotovdima.timepad.ru/event/4024826/" target="_blank" rel="noopener">Регистрация →</a>
+      </article>
+    </div>
+
+    <div class="talk-foot reveal">
+      <p>От первого митапа в родном Иркутске — до сцены в Москве и Екатеринбурге. Хочешь увидеть вживую — следи за <a href="https://t.me/top_1c" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">каналом</a>, там анонсы следующих выступлений.</p>
+      <a class="btn btn-ghost" href="https://t.me/kotovdima" target="_blank" rel="noopener">Пригласить спикером</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">// Работа со мной</p>
+      <h2>Нужен не «ещё один курс», а человек, который <span class="grad-text">уже прошёл этот путь?</span></h2>
+      <p>Два формата — не путай: <b>менторство для специалистов</b>, <b>консультации для бизнеса</b>. Один человек, разные задачи.</p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="card svc spec reveal">
+        <div class="svc-aud"><b>👤 Для специалистов</b><span>Личный формат — ты как профессионал, не компания.</span></div>
+        <h3>🧭 Менторство в 1С</h3>
+        <p>Не «расскажу теорию и пропаду». Разбираем <b>твой</b> путь: от «куда вообще лезть» до «как не сгореть на проекте и не утонуть в доработках».</p>
+        <div class="lbl">Чем помогаю</div>
+        <ul>
+          <li>выбрать траекторию: аналитик, разработчик, гибрид, in-house vs франч;</li>
+          <li>разложить по полочкам SRM/SCM, ERP, интеграции, работу с заказчиком;</li>
+          <li>вайбкодинг и ИИ в 1С — что реально ускоряет, а что маркетинг;</li>
+          <li>карьерные развилки: собесы, зарплата, выгорание, «когда пора уходить»;</li>
+          <li>блог, спикерство, личный бренд в 1С-комьюнити.</li>
+        </ul>
+        <p class="meta"><b>Формат:</b> регулярные созвоны, чат между сессиями, домашка с обратной связью. Работаю с ограниченным числом менти.</p>
+        <p class="meta"><b>Для кого:</b> разработчики, аналитики, тимлиды — от junior, кто застрял, до senior, кто меняет траекторию.</p>
+        <div class="price"><span class="grad-text">10 000 ₽ / час</span></div>
+      </article>
+
+      <article class="card svc biz reveal">
+        <div class="svc-aud"><b>🏢 Для бизнеса</b><span>Руководители, собственники, команды — решения под задачу компании.</span></div>
+        <h3>⚡ Консультация для бизнеса</h3>
+        <p>Разбираем <b>задачу компании</b>, а не карьерный путь сотрудника. Без воды, без «давайте ещё созвонимся, я подумаю».</p>
+        <div class="lbl">Подойдёт, если</div>
+        <ul>
+          <li>нужен взгляд со стороны на проект, внедрение или «завал» в 1С;</li>
+          <li>хотите понять, куда вкладываться: ИИ, MCP, автоматизация, доработки vs типовое;</li>
+          <li>руководитель не понимает, что происходит в учёте и отчётах;</li>
+          <li>нужно подготовить команду к изменениям, выбрать подрядчика или оценить ТЗ;</li>
+          <li>«директор орёт про цифру в отчёте» — разберём, с чего начать.</li>
+        </ul>
+        <p class="meta"><b>Что получите:</b> план действий, список «делай / не делай», приоритеты. Если задача шире разовой консультации — скажу сразу и предложу формат сопровождения.</p>
+        <div class="price"><span class="grad-text">10 000 ₽ / час</span><small>минимум 2 часа — чтобы успеть погрузиться в контекст</small></div>
+      </article>
+    </div>
+
+    <div class="svc-cta reveal">
+      <p>Слоты ограничены — я не фабрика консультаций. Напиши, <b>что болит</b> — и укажи, ты специалист или представляешь бизнес. Отвечу, подходит ли формат и когда есть окно.</p>
+      <a class="btn btn-primary" href="https://t.me/kotovdima" target="_blank" rel="noopener">Записаться →</a>
+      <p class="contacts">Telegram: <a href="https://t.me/kotovdima" target="_blank" rel="noopener">@kotovdima</a> &nbsp;·&nbsp; Почта: <a href="mailto:kotovdima1c@gmail.com">kotovdima1c@gmail.com</a></p>
+      <p class="trust">20 лет в ИТ. 10 в 1С. Лауреат Infostart Awards. Спикер ERP AI FORUM, Кунг-фу конфы, Жёлтого клуба. Топ-автор Инфостарт. Показываю на практике — <a href="https://t.me/top_1c" target="_blank" rel="noopener">канал «1С Заметки»</a> как витрина, не как обещание.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER / CONTACTS ============ -->
+<footer id="contacts">
+  <div class="orb" style="width:380px;height:380px;background:var(--glow-gold);bottom:-180px;right:-100px;"></div>
+  <div class="wrap">
+    <div class="foot-head">
+      <p class="eyebrow">// Контакты</p>
+      <h2>Пиши — <span class="grad-text">обсудим</span> задачу или коллаб</h2>
+      <p class="foot-sub">Заявки на менторство и консультации — в личку. А ниже — все площадки, где я есть.</p>
+      <a class="btn btn-primary" href="https://t.me/kotovdima" target="_blank" rel="noopener">Написать в Telegram →</a>
+      <p class="foot-mail">Почта: <a href="mailto:kotovdima1c@gmail.com">kotovdima1c@gmail.com</a></p>
+    </div>
+
+    <div class="socials reveal">
+      <div class="soc-group">
+        <div class="soc-label">🟡 Каналы</div>
+        <div class="soc-list">
+          <a href="https://t.me/top_1c" target="_blank" rel="noopener"><span class="plat">Telegram</span> 1С Заметки</a>
+          <a href="https://max.ru/top_1c" target="_blank" rel="noopener"><span class="plat">MAX</span> 1С Заметки</a>
+          <a href="https://www.youtube.com/@top_1c" target="_blank" rel="noopener"><span class="plat">YouTube</span> Стримы, подкасты, видео митапов</a>
+          <a href="https://boosty.to/top_1c" target="_blank" rel="noopener"><span class="plat">Boosty</span> Эксклюзивные видео и ранний доступ к видео митапов</a>
+          <a href="https://vk.com/top_1c" target="_blank" rel="noopener"><span class="plat">ВКонтакте</span> Сообщество</a>
+          <a href="https://live.vkvideo.ru/top_1c" target="_blank" rel="noopener"><span class="plat">ВК Видео</span> Стримы, подкасты, видео митапов</a>
+          <a href="https://rutube.ru/channel/48898598/" target="_blank" rel="noopener"><span class="plat">RUTUBE</span> Стримы, подкасты, видео митапов</a>
+        </div>
+      </div>
+
+      <div class="soc-group">
+        <div class="soc-label">🟡 Профильные блоги</div>
+        <div class="soc-list">
+          <a href="https://infostart.ru/profile/564942/" target="_blank" rel="noopener"><span class="plat">Infostart</span> профиль автора</a>
+          <a href="https://github.com/DimaKotov1C" target="_blank" rel="noopener"><span class="plat">GitHub</span> DimaKotov1C <span class="note">новый</span></a>
+          <a href="https://github.com/KotovDima1C" target="_blank" rel="noopener"><span class="plat">GitHub</span> KotovDima1C <span class="note">старый</span></a>
+        </div>
+      </div>
+
+      <div class="soc-group">
+        <div class="soc-label">👤 Личные странички</div>
+        <div class="soc-list">
+          <a href="https://t.me/KotovDima" target="_blank" rel="noopener"><span class="plat">Telegram</span> @KotovDima</a>
+          <a href="https://vk.com/kotovdima1c" target="_blank" rel="noopener"><span class="plat">ВКонтакте</span> kotovdima1c</a>
+          <a href="mailto:kotovdima1c@gmail.com"><span class="plat">Почта</span> kotovdima1c@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Дмитрий Котов · Иркутск · 1С</span>
+      <span>made with vibecoding ⚡</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- THEME ---------- */
+  var root = document.documentElement;
+  var toggle = document.getElementById("themeToggle");
+  var saved = null;
+  try { saved = localStorage.getItem("dk-theme"); } catch (e) {}
+  if (saved) root.setAttribute("data-theme", saved);
+  function syncToggle() {
+    var dark = root.getAttribute("data-theme") !== "light";
+    toggle.setAttribute("aria-checked", String(dark));
+  }
+  syncToggle();
+  toggle.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("dk-theme", next); } catch (e) {}
+    syncToggle();
+  });
+
+  /* ---------- MOBILE NAV ---------- */
+  var burger = document.getElementById("burger");
+  var navLinks = document.getElementById("navLinks");
+  burger.addEventListener("click", function () {
+    var open = navLinks.classList.toggle("open");
+    burger.setAttribute("aria-expanded", String(open));
+  });
+  navLinks.addEventListener("click", function (e) {
+    if (e.target.tagName === "A") { navLinks.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); }
+  });
+
+  /* ---------- CAROUSELS ---------- */
+  document.querySelectorAll("[data-carousel]").forEach(function (car) {
+    var trk = car.querySelector(".carousel-track");
+    var dotsBox = car.querySelector("[data-dots]");
+    var prev = car.querySelector("[data-prev]");
+    var next = car.querySelector("[data-next]");
+    var slides = Array.prototype.slice.call(trk.children);
+    if (!slides.length) return;
+
+    function step() { return slides[0].getBoundingClientRect().width + 18; }
+    function current() { return Math.round(trk.scrollLeft / step()); }
+
+    dotsBox.innerHTML = "";
+    var dots = slides.map(function (_, i) {
+      var d = document.createElement("button");
+      d.setAttribute("aria-label", "Слайд " + (i + 1));
+      d.addEventListener("click", function () { trk.scrollTo({ left: step() * i, behavior: reduceMotion ? "auto" : "smooth" }); });
+      dotsBox.appendChild(d);
+      return d;
+    });
+    function paint() {
+      var c = Math.max(0, Math.min(current(), slides.length - 1));
+      dots.forEach(function (d, i) { d.setAttribute("aria-current", String(i === c)); });
+    }
+    paint();
+    trk.addEventListener("scroll", function () { window.requestAnimationFrame(paint); }, { passive: true });
+    prev.addEventListener("click", function () { trk.scrollBy({ left: -step(), behavior: reduceMotion ? "auto" : "smooth" }); });
+    next.addEventListener("click", function () { trk.scrollBy({ left: step(), behavior: reduceMotion ? "auto" : "smooth" }); });
+
+    var delay = parseInt(car.getAttribute("data-autoplay"), 10);
+    if (delay && !reduceMotion) {
+      var timer = setInterval(tick, delay);
+      function tick() {
+        if (document.hidden) return;
+        var c = current();
+        if (c >= slides.length - 1) trk.scrollTo({ left: 0, behavior: "smooth" });
+        else trk.scrollBy({ left: step(), behavior: "smooth" });
+      }
+      car.addEventListener("mouseenter", function () { clearInterval(timer); });
+      car.addEventListener("mouseleave", function () { timer = setInterval(tick, delay); });
+      car.addEventListener("focusin", function () { clearInterval(timer); });
+    }
+  });
+
+  /* ---------- SCROLL REVEAL ---------- */
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll(".reveal").forEach(function (el, i) {
+      el.style.transitionDelay = Math.min(i % 4, 3) * 60 + "ms";
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+  }
+})();
+</script>
+</body>
+</html>
