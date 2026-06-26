@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Дмитрий Котов — 1С-эксперт, блогер, спикер</title>
-<meta name="description" content="Дмитрий Котов — 1Сник, блогер «1С Заметки», спикер и организатор митапов. Вайбкодинг, SRM/SCM, менторство и консультации.">
+<meta name="description" content="Дмитрий Котов — 1Сник, блогер «1С Заметки», спикер и организатор митапов. Вайбкодинг, ИИ в 1С, SRM/SCM.">
 <meta name="theme-color" content="#0A0A0F">
 <link rel="canonical" href="https://kotov.top/">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -13,14 +13,14 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotov.top/">
 <meta property="og:title" content="Дмитрий Котов — 1Сник, блогер, спикер">
-<meta property="og:description" content="Канал «1С Заметки», вайбкодинг на 1С, SRM/SCM. Менторство и консультации.">
+<meta property="og:description" content="Канал «1С Заметки» — вайбкодинг, ИИ в 1С, SRM/SCM. 8 400+ подписчиков.">
 <meta property="og:image" content="https://kotov.top/assets/dmitry.jpg">
 <meta property="og:image:width" content="1000">
 <meta property="og:image:height" content="1000">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Дмитрий Котов — 1Сник, блогер, спикер">
-<meta name="twitter:description" content="Канал «1С Заметки», вайбкодинг на 1С, SRM/SCM. Менторство и консультации.">
+<meta name="twitter:description" content="Канал «1С Заметки» — вайбкодинг, ИИ в 1С, SRM/SCM. 8 400+ подписчиков.">
 <meta name="twitter:image" content="https://kotov.top/assets/dmitry.jpg">
 
 <!-- Schema.org structured data -->
@@ -355,81 +355,6 @@
 
   .awards-more { margin-top: 14px; font-family: "JetBrains Mono", monospace; font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
 
-  /* ====================== CAROUSEL (generic) ====================== */
-  .carousel { position: relative; margin-top: 1.2rem; }
-  .carousel-track { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 12px; scrollbar-width: none; }
-  .carousel-track::-webkit-scrollbar { display: none; }
-  .carousel-track > * { scroll-snap-align: start; flex: 0 0 auto; }
-  .award-slide { width: clamp(260px, 32%, 360px); }
-
-  .car-nav { display: flex; gap: .5rem; align-items: center; margin-top: .4rem; }
-  .car-btn {
-    width: 42px; height: 42px; border-radius: 12px; background: var(--surface);
-    border: 1px solid var(--border-2); color: var(--text); font-size: 1.1rem;
-    display: grid; place-items: center; transition: background .2s, border-color .2s, transform .15s;
-  }
-  .car-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .car-btn:active { transform: scale(.94); }
-  .dots { display: flex; gap: .45rem; margin-left: auto; align-items: center; }
-  .dots button { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: none; background: var(--border-2); transition: width .25s, background .25s; }
-  .dots button[aria-current="true"] { width: 22px; border-radius: 6px; background: var(--grad); }
-
-  /* ====================== CHANNEL ====================== */
-  #channel .panel {
-    background: radial-gradient(120% 140% at 0% 0%, rgba(139,92,246,.10), transparent 55%), linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
-    border: 1px solid var(--border-2); border-radius: 26px;
-    padding: clamp(28px, 4vw, 52px); position: relative; overflow: hidden;
-  }
-  .chan-head { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: end; justify-content: space-between; margin-bottom: 2rem; }
-  .chan-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); }
-  .chan-head p { color: var(--muted); margin: .8rem 0 0; max-width: 46ch; }
-  .rubrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 2rem; }
-  .rubric { background: var(--bg-2); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem; transition: transform .2s, border-color .2s; }
-  .rubric:hover { transform: translateY(-3px); border-color: var(--gold); }
-  .rubric .ic { font-size: 1.5rem; margin-bottom: .6rem; }
-  .rubric b { display: block; font-family: "Unbounded", sans-serif; font-weight: 600; font-size: .92rem; letter-spacing: -.01em; }
-  .rubric span { color: var(--muted); font-size: .82rem; }
-
-  /* ====================== SERVICES ====================== */
-  .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
-  .svc { display: flex; flex-direction: column; position: relative; overflow: hidden; }
-  .svc-aud {
-    margin: -1.7rem -1.7rem 1.4rem; padding: 1.1rem 1.7rem;
-    font-family: "JetBrains Mono", monospace; font-size: .8rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .svc-aud b { font-size: .98rem; font-family: "Inter", sans-serif; display: block; margin-bottom: .15rem; }
-  .svc-aud span { color: var(--muted); }
-  .svc.spec .svc-aud { background: linear-gradient(90deg, rgba(34,211,238,.14), transparent); }
-  .svc.spec .svc-aud b { color: var(--cyan); }
-  .svc.biz  .svc-aud { background: linear-gradient(90deg, rgba(255,138,61,.16), transparent); }
-  .svc.biz  .svc-aud b { color: var(--gold); }
-  .svc h3 { font-family: "Unbounded", sans-serif; font-size: 1.35rem; }
-  .svc > p { color: var(--muted); font-size: .96rem; margin: .9rem 0; }
-  .svc .lbl { font-weight: 700; font-size: .92rem; margin: 1rem 0 .5rem; }
-  .svc ul { margin: 0 0 .4rem; padding-left: 1.1rem; color: var(--muted); font-size: .92rem; }
-  .svc ul li { margin-bottom: .4rem; }
-  .svc .meta { color: var(--muted); font-size: .9rem; margin: .7rem 0; }
-  .svc .meta b { color: var(--text); }
-  .price {
-    margin-top: auto; padding-top: 1.4rem; border-top: 1px solid var(--border);
-    font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 1.7rem;
-  }
-  .price .grad-text { font-size: inherit; }
-  .price small { display: block; font-family: "JetBrains Mono", monospace; font-weight: 400; font-size: .8rem; color: var(--muted); margin-top: .3rem; }
-
-  .svc-cta {
-    margin-top: 28px; text-align: center;
-    background: var(--surface); border: 1px solid var(--border-2); border-radius: 22px;
-    padding: clamp(28px, 4vw, 44px);
-  }
-  .svc-cta p { color: var(--muted); max-width: 60ch; margin: 0 auto 1.4rem; }
-  .svc-cta .contacts { font-family: "JetBrains Mono", monospace; font-size: .86rem; color: var(--muted); margin-top: 1.2rem; }
-  .svc-cta .contacts a { color: var(--cyan); text-decoration: none; }
-  .svc-cta .contacts a:hover { text-decoration: underline; }
-  .trust { color: var(--faint); font-size: .82rem; max-width: 70ch; margin: 1.4rem auto 0; line-height: 1.6; }
-  .trust a { color: var(--muted); }
-
   /* ====================== SPEAKING ====================== */
   .talks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
   .talk { display: flex; flex-direction: column; position: relative; overflow: hidden; padding: 1.5rem; }
@@ -467,46 +392,12 @@
   .video-title { font-weight: 600; font-size: .93rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .video-date { font-family: "JetBrains Mono", monospace; font-size: .72rem; color: var(--faint); }
 
-  .tg-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; min-height: 220px; }
-  .tg-card:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 24px 60px -30px var(--glow-cyan), var(--card-shadow); }
-  .tg-head { display: flex; align-items: center; gap: .7rem; margin-bottom: 1rem; }
-  .tg-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--violet), var(--cyan)); display: grid; place-items: center; flex-shrink: 0; }
-  .tg-avatar svg { width: 18px; height: 18px; fill: #fff; }
-  .tg-channel { font-weight: 600; font-size: .9rem; }
-  .tg-handle { font-family: "JetBrains Mono", monospace; font-size: .72rem; color: var(--cyan); }
-  .tg-text { font-size: .91rem; color: var(--muted); line-height: 1.6; flex: 1; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
-  .tg-footer { margin-top: 1rem; display: flex; align-items: center; justify-content: space-between; }
-  .tg-date { font-family: "JetBrains Mono", monospace; font-size: .72rem; color: var(--faint); }
-  .tg-link { font-family: "JetBrains Mono", monospace; font-size: .76rem; color: var(--cyan); }
-
   .video-skeleton { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
   .video-skeleton .sk-thumb { aspect-ratio: 16/9; background: var(--surface-2); animation: sk 1.4s infinite ease-in-out; }
   .video-skeleton.sk-tg .sk-thumb { display: none; }
   .video-skeleton .sk-line { height: 13px; border-radius: 6px; margin: 1rem 1.1rem .5rem; background: var(--surface-2); animation: sk 1.4s infinite ease-in-out; }
   .video-skeleton .sk-line.short { width: 55%; margin-top: 0; }
   @keyframes sk { 0%,100%{opacity:.4} 50%{opacity:.9} }
-  .videos-footer { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
-
-  /* ====================== REVIEWS ====================== */
-  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .review { display: flex; flex-direction: column; gap: 1rem; }
-  .review blockquote {
-    margin: 0; flex: 1;
-    font-size: .97rem; color: var(--muted); line-height: 1.7;
-    font-style: italic;
-  }
-  .review blockquote::before { content: "\201C"; font-family: "Unbounded", sans-serif; font-size: 2.4rem; color: var(--gold); line-height: .8; display: block; margin-bottom: .4rem; }
-  .review-author { display: flex; align-items: center; gap: .8rem; }
-  .review-avatar {
-    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
-    background: var(--surface-2); border: 1px solid var(--border-2);
-    display: grid; place-items: center;
-    font-family: "Unbounded", sans-serif; font-size: .75rem; font-weight: 800; font-style: normal;
-    color: var(--gold);
-  }
-  .review-name { font-weight: 600; font-size: .92rem; }
-  .review-role { font-family: "JetBrains Mono", monospace; font-size: .74rem; color: var(--faint); margin-top: .1rem; }
-  @media (max-width: 720px) { .reviews-grid { grid-template-columns: 1fr; } }
 
   /* ====================== CHANNEL CARDS ====================== */
   .ch-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 2rem; }
@@ -568,19 +459,6 @@
   .foot-mail a { color: var(--cyan); text-decoration: none; }
   .foot-mail a:hover { text-decoration: underline; }
 
-  .socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding-top: clamp(30px, 4vw, 44px); border-top: 1px solid var(--border); }
-  .soc-label { font-family: "JetBrains Mono", monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-  .soc-list { display: flex; flex-direction: column; }
-  .soc-list a {
-    text-decoration: none; color: var(--muted); font-size: .94rem;
-    display: flex; align-items: baseline; gap: .7em; padding: .45em 0;
-    border-bottom: 1px solid var(--border); transition: color .2s, padding-left .2s;
-  }
-  .soc-list a:last-child { border-bottom: none; }
-  .soc-list a:hover { color: var(--gold); padding-left: .3em; }
-  .soc-list .plat { font-family: "JetBrains Mono", monospace; font-size: .82rem; color: var(--text); flex: 0 0 96px; }
-  .soc-list a:hover .plat { color: var(--gold); }
-  .soc-list .note { font-family: "JetBrains Mono", monospace; font-size: .7rem; color: var(--faint); }
   .foot-bottom { margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; color: var(--faint); font-size: .8rem; font-family: "JetBrains Mono", monospace; }
 
   /* ====================== REVEAL ====================== */
@@ -681,14 +559,14 @@
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">// Контент</p>
-      <h2>Свежее с <span class="grad-text">каналов</span></h2>
-      <p>Последние видео и пост из Telegram — всё актуальное в одном месте.</p>
+      <h2>Последние видео с <span class="grad-text">YouTube</span></h2>
+      <p>Три последних видео с YouTube — всё свежее в одном месте.</p>
     </div>
 
     <div class="content-grid" id="contentGrid">
       <div class="video-skeleton"><div class="sk-thumb"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
       <div class="video-skeleton"><div class="sk-thumb"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
-      <div class="video-skeleton sk-tg"><div class="sk-line" style="margin-top:1rem"></div><div class="sk-line"></div><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+      <div class="video-skeleton"><div class="sk-thumb"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
     </div>
 
     <!-- Три главных канала -->
@@ -698,7 +576,7 @@
         <img class="ch-logo" src="https://cdn.simpleicons.org/telegram/22d3ee" alt="Telegram">
         <div class="ch-name">Telegram</div>
         <div class="ch-desc">1С Заметки · вайбкодинг<br>ИИ · инсайды</div>
-        <div class="ch-count">8 400+</div>
+        <div class="ch-count">8 478</div>
         <div class="ch-count-label">подписчиков</div>
         <div class="ch-spacer"></div>
         <a class="ch-btn tg-btn" href="https://t.me/top_1c" target="_blank" rel="noopener">Подписаться</a>
@@ -964,50 +842,6 @@
     if (e.target.tagName === "A") { navLinks.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); }
   });
 
-  /* ---------- CAROUSELS ---------- */
-  document.querySelectorAll("[data-carousel]").forEach(function (car) {
-    var trk = car.querySelector(".carousel-track");
-    var dotsBox = car.querySelector("[data-dots]");
-    var prev = car.querySelector("[data-prev]");
-    var next = car.querySelector("[data-next]");
-    var slides = Array.prototype.slice.call(trk.children);
-    if (!slides.length) return;
-
-    function step() { return slides[0].getBoundingClientRect().width + 18; }
-    function current() { return Math.round(trk.scrollLeft / step()); }
-
-    dotsBox.innerHTML = "";
-    var dots = slides.map(function (_, i) {
-      var d = document.createElement("button");
-      d.setAttribute("aria-label", "Слайд " + (i + 1));
-      d.addEventListener("click", function () { trk.scrollTo({ left: step() * i, behavior: reduceMotion ? "auto" : "smooth" }); });
-      dotsBox.appendChild(d);
-      return d;
-    });
-    function paint() {
-      var c = Math.max(0, Math.min(current(), slides.length - 1));
-      dots.forEach(function (d, i) { d.setAttribute("aria-current", String(i === c)); });
-    }
-    paint();
-    trk.addEventListener("scroll", function () { window.requestAnimationFrame(paint); }, { passive: true });
-    prev.addEventListener("click", function () { trk.scrollBy({ left: -step(), behavior: reduceMotion ? "auto" : "smooth" }); });
-    next.addEventListener("click", function () { trk.scrollBy({ left: step(), behavior: reduceMotion ? "auto" : "smooth" }); });
-
-    var delay = parseInt(car.getAttribute("data-autoplay"), 10);
-    if (delay && !reduceMotion) {
-      var timer = setInterval(tick, delay);
-      function tick() {
-        if (document.hidden) return;
-        var c = current();
-        if (c >= slides.length - 1) trk.scrollTo({ left: 0, behavior: "smooth" });
-        else trk.scrollBy({ left: step(), behavior: "smooth" });
-      }
-      car.addEventListener("mouseenter", function () { clearInterval(timer); });
-      car.addEventListener("mouseleave", function () { timer = setInterval(tick, delay); });
-      car.addEventListener("focusin", function () { clearInterval(timer); });
-    }
-  });
-
   /* ---------- SCROLL REVEAL ---------- */
   if (!reduceMotion && "IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -1028,9 +862,7 @@
 <script>
 (function () {
   var YT_CHANNEL_ID = 'UCR90x4LTVrYm54jXV6AO1Yw';
-  var RT_PERSON_ID  = '48898598';
-  var TG_CHANNEL    = 'top_1c';
-  var PROXY = 'https://api.rss2json.com/v1/api.json?count=1&rss_url=';
+  var PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
 
   var grid = document.getElementById('contentGrid');
 
@@ -1064,51 +896,25 @@
   }
 
   var ytUrl = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + YT_CHANNEL_ID;
-  var rtUrl = 'https://rutube.ru/feeds/video/person/' + RT_PERSON_ID + '/';
-  var tgUrl = 'https://rsshub.app/telegram/channel/' + TG_CHANNEL;
 
   function rss(url) {
     return fetch(PROXY + encodeURIComponent(url)).then(function(r){ return r.json(); }).catch(function(){ return {items:[]}; });
   }
 
-  function fallbackVideo(platform, href) {
-    var label = platform === 'youtube' ? 'YouTube' : 'RuTube';
-    var color = platform === 'youtube' ? 'var(--gold)' : 'var(--cyan)';
-    return '<a href="' + href + '" target="_blank" rel="noopener" class="card video-card" style="justify-content:center;align-items:center;min-height:220px;text-decoration:none">'
-      + '<div style="text-align:center;color:var(--muted)">'
-      + '<div style="font-size:2.4rem;margin-bottom:.6rem">▶</div>'
-      + '<div style="font-family:JetBrains Mono,monospace;font-size:.85rem;color:' + color + '">' + label + '</div>'
-      + '<div style="font-size:.85rem;margin-top:.5rem">Смотреть видео →</div></div></a>';
-  }
-
   rss(ytUrl).then(function(res) {
-    var item = (res.items || [])[0];
-    var slot = grid.children[0];
-    if (slot) slot.outerHTML = item ? videoCard(item, 'youtube') : fallbackVideo('youtube', 'https://www.youtube.com/@top_1c');
-  });
-  rss(rtUrl).then(function(res) {
-    var item = (res.items || [])[0];
-    var slot = grid.children[1];
-    if (slot) slot.outerHTML = item ? videoCard(item, 'rutube') : fallbackVideo('rutube', 'https://rutube.ru/channel/48898598/');
-  });
-  rss(tgUrl).then(function(res) {
-    var item = (res.items || [])[0];
-    var slot = grid.children[2];
-    if (!slot) return;
-    var link = item ? (item.link || '') : '';
-    var m = link.match(/\/(\d+)$/);
-    if (!m) { slot.outerHTML = ''; return; }
-    var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-    var wrapper = document.createElement('div');
-    wrapper.className = 'tg-widget-wrap';
-    var s = document.createElement('script');
-    s.setAttribute('async', '');
-    s.src = 'https://telegram.org/js/telegram-widget.js?22';
-    s.setAttribute('data-telegram-post', TG_CHANNEL + '/' + m[1]);
-    s.setAttribute('data-width', '100%');
-    s.setAttribute('data-dark', isDark ? '1' : '0');
-    wrapper.appendChild(s);
-    grid.replaceChild(wrapper, slot);
+    var items = (res.items || []).slice(0, 3);
+    for (var i = 0; i < 3; i++) {
+      var slot = grid.children[i];
+      if (!slot) continue;
+      if (items[i]) {
+        slot.outerHTML = videoCard(items[i], 'youtube');
+      } else {
+        slot.outerHTML = '<a href="https://www.youtube.com/@top_1c" target="_blank" rel="noopener" class="card video-card" style="justify-content:center;align-items:center;min-height:220px;text-decoration:none">'
+          + '<div style="text-align:center;color:var(--muted)"><div style="font-size:2.4rem;margin-bottom:.6rem">▶</div>'
+          + '<div style="font-family:JetBrains Mono,monospace;font-size:.85rem;color:var(--gold)">YouTube</div>'
+          + '<div style="font-size:.85rem;margin-top:.5rem">Смотреть видео →</div></div></a>';
+      }
+    }
   });
 })();
 </script>
