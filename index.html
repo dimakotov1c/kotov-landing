@@ -23,6 +23,63 @@
 <meta name="twitter:description" content="Канал «1С Заметки», вайбкодинг на 1С, SRM/SCM. Менторство и консультации.">
 <meta name="twitter:image" content="https://kotov.top/assets/dmitry.jpg">
 
+<!-- Schema.org structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Дмитрий Котов",
+  "jobTitle": "1С-эксперт, аналитик, блогер",
+  "url": "https://kotov.top",
+  "image": "https://kotov.top/assets/dmitry.jpg",
+  "email": "kotovdima1c@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Иркутск", "addressCountry": "RU" },
+  "knowsAbout": ["1С", "SRM", "SCM", "ERP", "вайбкодинг", "ИИ в 1С", "менторство"],
+  "sameAs": [
+    "https://t.me/top_1c",
+    "https://t.me/KotovDima",
+    "https://infostart.ru/profile/564942/",
+    "https://github.com/DimaKotov1C",
+    "https://vk.com/kotovdima1c"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Услуги",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Менторство в 1С",
+        "description": "Персональное менторство для 1С-специалистов: карьерные развилки, технологии, личный бренд",
+        "price": "10000",
+        "priceCurrency": "RUB",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "10000", "priceCurrency": "RUB", "unitText": "час" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Консультация для бизнеса",
+        "description": "Консультации по проектам 1С для руководителей и собственников. Минимум 2 часа",
+        "price": "20000",
+        "priceCurrency": "RUB"
+      }
+    ]
+  }
+}
+</script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110165700', 'ym');
+
+    ym(110165700, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/110165700" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -391,6 +448,117 @@
   .talk-foot { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 1.8rem; }
   .talk-foot p { color: var(--muted); font-size: .92rem; margin: 0; max-width: 60ch; }
 
+  /* ====================== CONTENT ====================== */
+  .content-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .content-grid { grid-template-columns: 1fr; } }
+  .tg-widget-wrap { border-radius: 18px; overflow: hidden; min-height: 120px; }
+
+  a.video-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+  a.video-card:hover { transform: translateY(-4px); border-color: var(--border-2); }
+  .video-thumb-wrap { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 14px 14px 0 0; background: var(--surface-2); }
+  .video-thumb { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+  a.video-card:hover .video-thumb { transform: scale(1.04); }
+  .video-play { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.28); opacity: 0; transition: opacity .2s; }
+  .video-play svg { width: 48px; height: 48px; filter: drop-shadow(0 2px 8px rgba(0,0,0,.6)); }
+  a.video-card:hover .video-play { opacity: 1; }
+  .video-platform { position: absolute; top: 8px; left: 8px; font-family: "JetBrains Mono", monospace; font-size: .64rem; font-weight: 700; padding: .35em .7em; border-radius: 20px; background: rgba(10,10,15,.75); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.12); }
+  .video-info { padding: 1rem 1.1rem 1.1rem; display: flex; flex-direction: column; gap: .45rem; flex: 1; }
+  .video-title { font-weight: 600; font-size: .93rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .video-date { font-family: "JetBrains Mono", monospace; font-size: .72rem; color: var(--faint); }
+
+  .tg-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; min-height: 220px; }
+  .tg-card:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 24px 60px -30px var(--glow-cyan), var(--card-shadow); }
+  .tg-head { display: flex; align-items: center; gap: .7rem; margin-bottom: 1rem; }
+  .tg-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--violet), var(--cyan)); display: grid; place-items: center; flex-shrink: 0; }
+  .tg-avatar svg { width: 18px; height: 18px; fill: #fff; }
+  .tg-channel { font-weight: 600; font-size: .9rem; }
+  .tg-handle { font-family: "JetBrains Mono", monospace; font-size: .72rem; color: var(--cyan); }
+  .tg-text { font-size: .91rem; color: var(--muted); line-height: 1.6; flex: 1; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+  .tg-footer { margin-top: 1rem; display: flex; align-items: center; justify-content: space-between; }
+  .tg-date { font-family: "JetBrains Mono", monospace; font-size: .72rem; color: var(--faint); }
+  .tg-link { font-family: "JetBrains Mono", monospace; font-size: .76rem; color: var(--cyan); }
+
+  .video-skeleton { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+  .video-skeleton .sk-thumb { aspect-ratio: 16/9; background: var(--surface-2); animation: sk 1.4s infinite ease-in-out; }
+  .video-skeleton.sk-tg .sk-thumb { display: none; }
+  .video-skeleton .sk-line { height: 13px; border-radius: 6px; margin: 1rem 1.1rem .5rem; background: var(--surface-2); animation: sk 1.4s infinite ease-in-out; }
+  .video-skeleton .sk-line.short { width: 55%; margin-top: 0; }
+  @keyframes sk { 0%,100%{opacity:.4} 50%{opacity:.9} }
+  .videos-footer { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
+
+  /* ====================== REVIEWS ====================== */
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .review { display: flex; flex-direction: column; gap: 1rem; }
+  .review blockquote {
+    margin: 0; flex: 1;
+    font-size: .97rem; color: var(--muted); line-height: 1.7;
+    font-style: italic;
+  }
+  .review blockquote::before { content: "\201C"; font-family: "Unbounded", sans-serif; font-size: 2.4rem; color: var(--gold); line-height: .8; display: block; margin-bottom: .4rem; }
+  .review-author { display: flex; align-items: center; gap: .8rem; }
+  .review-avatar {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    background: var(--surface-2); border: 1px solid var(--border-2);
+    display: grid; place-items: center;
+    font-family: "Unbounded", sans-serif; font-size: .75rem; font-weight: 800; font-style: normal;
+    color: var(--gold);
+  }
+  .review-name { font-weight: 600; font-size: .92rem; }
+  .review-role { font-family: "JetBrains Mono", monospace; font-size: .74rem; color: var(--faint); margin-top: .1rem; }
+  @media (max-width: 720px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+  /* ====================== CHANNEL CARDS ====================== */
+  .ch-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 2rem; }
+  .ch-card {
+    border-radius: 18px; padding: 20px 16px 16px;
+    background: var(--surface); border: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    box-shadow: var(--card-shadow);
+  }
+  .ch-card.ch-tg { background: linear-gradient(160deg, rgba(34,211,238,.08), rgba(139,92,246,.05)); border-color: rgba(34,211,238,.20); }
+  .ch-card.ch-mx { background: linear-gradient(160deg, rgba(0,95,249,.08), rgba(0,95,249,.03)); border-color: rgba(0,95,249,.22); }
+  .ch-card.ch-yt { background: linear-gradient(160deg, rgba(255,68,68,.08), rgba(255,68,68,.03)); border-color: rgba(255,68,68,.20); }
+  .ch-logo { width: 40px; height: 40px; object-fit: contain; }
+  .ch-logo-box { width: 40px; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; color: #fff; flex-shrink: 0; }
+  .ch-name { font-family: "Unbounded", sans-serif; font-size: .82rem; font-weight: 800; color: var(--text); }
+  .ch-desc { font-size: .78rem; color: var(--muted); line-height: 1.4; text-align: center; }
+  .ch-count {
+    font-family: "JetBrains Mono", monospace; font-size: 1.6rem; font-weight: 800;
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin: 6px 0 0;
+  }
+  .ch-count-label { font-family: "JetBrains Mono", monospace; font-size: .65rem; color: var(--faint); letter-spacing: .10em; text-transform: uppercase; }
+  .ch-spacer { flex: 1; min-height: 6px; }
+  .ch-btn {
+    width: 100%; padding: 9px 0; border-radius: 10px;
+    font-size: .82rem; font-weight: 700; cursor: pointer; border: none; white-space: nowrap;
+    text-align: center; text-decoration: none; display: block; transition: opacity .2s;
+  }
+  .ch-btn:hover { opacity: .82; }
+  .ch-btn.tg-btn { background: rgba(34,211,238,.14); color: var(--cyan); border: 1px solid rgba(34,211,238,.32); }
+  .ch-btn.mx-btn { background: rgba(0,95,249,.14); color: #5ba4ff; border: 1px solid rgba(0,95,249,.32); }
+  .ch-btn.yt-btn { background: rgba(255,68,68,.14); color: #ff6666; border: 1px solid rgba(255,68,68,.32); }
+
+  .ch-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 2rem; }
+  .ch-link-item {
+    display: flex; align-items: center; gap: 9px; padding: 10px 12px;
+    border-radius: 12px; background: var(--surface); border: 1px solid var(--border);
+    text-decoration: none; transition: border-color .2s, transform .2s;
+  }
+  .ch-link-item:hover { border-color: var(--border-2); transform: translateY(-2px); }
+  .ch-link-icon { width: 26px; height: 26px; flex-shrink: 0; object-fit: contain; }
+  .ch-link-icon-box { width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; color: #fff; }
+  .ch-link-name { font-size: .82rem; font-weight: 600; color: var(--text); line-height: 1.2; }
+
+  @media (max-width: 720px) {
+    .ch-cards-grid { grid-template-columns: 1fr; gap: 12px; }
+    .ch-links-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 420px) {
+    .ch-links-grid { grid-template-columns: 1fr; }
+  }
+
   /* ====================== FOOTER ====================== */
   footer { border-top: 1px solid var(--border); padding: clamp(56px, 8vh, 90px) 0 40px; position: relative; overflow: hidden; }
   footer h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); max-width: 18ch; }
@@ -461,10 +629,9 @@
     <a href="#about" class="brand"><span class="dot"></span>Дмитрий&nbsp;Котов</a>
     <nav class="nav-links" id="navLinks">
       <a href="#about">Обо мне</a>
+      <a href="#content">Контент</a>
       <a href="#awards">Награды</a>
-      <a href="#channel">Канал</a>
       <a href="#talks">Выступления</a>
-      <a href="#services">Услуги</a>
       <a href="#contacts">Контакты</a>
     </nav>
     <div class="theme-zone">
@@ -494,18 +661,114 @@
         <p class="hero-sub reveal">1Сник · блогер · спикер · организатор митапов · вайбкодер в выходные</p>
         <div class="hero-text reveal">
           <p>20 лет в ИТ. 10 — в обнимку с 1С, всегда in-house. Был программистом, стал аналитиком. Карьерный путь: алкоголь → газ → золото → нефть → конфетки. Сейчас кручу <b>SRM/SCM</b> и показываю, как ИИ реально работает в 1С — не в презентациях, а на экране.</p>
-          <p>Веду канал <a href="https://t.me/top_1c" target="_blank" rel="noopener">«Дмитрий Котов | 1С Заметки»</a>, организую митапы Жёлтого клуба в Иркутске и <a href="https://kungfu-conf.ru/" target="_blank" rel="noopener">Кунг-фу конфу</a> — живые встречи 1Сников. Дважды лауреат <a href="https://awards.infostart.ru/" target="_blank" rel="noopener">Infostart Awards</a>.</p>
+          <p>Веду канал <a href="https://t.me/top_1c" target="_blank" rel="noopener">«Дмитрий Котов | 1С Заметки»</a>, организую митапы и конференции <a href="https://kungfu-conf.ru/" target="_blank" rel="noopener">«Кунг-фу»</a> — живые встречи 1Сников. Дважды лауреат <a href="https://awards.infostart.ru/" target="_blank" rel="noopener">Infostart Awards</a>.</p>
           <p>Живу в Иркутске. Люблю Байкал, путешествия и настольные игры.</p>
         </div>
         <div class="hero-cta reveal">
           <a class="btn btn-primary" href="https://t.me/top_1c" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.5 20c-.3 1.1-.9 1.4-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.6-8.7c.4-.4-.1-.6-.6-.2L5.1 13.1l-5.1-1.6c-1.1-.4-1.1-1.1.2-1.6L20.5 2.8c.9-.3 1.7.2 1.4 1.5z"/></svg>
-            Подписаться в Telegram
+            Подписаться на канал
           </a>
-          <a class="btn btn-ghost" href="#contacts">Все соцсети</a>
+          <a class="btn btn-ghost" href="https://t.me/kotovdima" target="_blank" rel="noopener">Записаться на консультацию</a>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ CONTENT ============ -->
+<section id="content">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">// Контент</p>
+      <h2>Свежее с <span class="grad-text">каналов</span></h2>
+      <p>Последние видео и пост из Telegram — всё актуальное в одном месте.</p>
+    </div>
+
+    <div class="content-grid" id="contentGrid">
+      <div class="video-skeleton"><div class="sk-thumb"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+      <div class="video-skeleton"><div class="sk-thumb"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+      <div class="video-skeleton sk-tg"><div class="sk-line" style="margin-top:1rem"></div><div class="sk-line"></div><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+    </div>
+
+    <!-- Три главных канала -->
+    <div class="eyebrow reveal" style="margin-top: clamp(36px,5vw,60px);">// Главные каналы</div>
+    <div class="ch-cards-grid reveal" style="margin-top:1rem">
+      <div class="ch-card ch-tg">
+        <img class="ch-logo" src="https://cdn.simpleicons.org/telegram/22d3ee" alt="Telegram">
+        <div class="ch-name">Telegram</div>
+        <div class="ch-desc">1С Заметки · вайбкодинг<br>ИИ · инсайды</div>
+        <div class="ch-count">8 400+</div>
+        <div class="ch-count-label">подписчиков</div>
+        <div class="ch-spacer"></div>
+        <a class="ch-btn tg-btn" href="https://t.me/top_1c" target="_blank" rel="noopener">Подписаться</a>
+      </div>
+      <div class="ch-card ch-mx">
+        <img class="ch-logo" src="https://www.google.com/s2/favicons?domain=max.ru&sz=128" alt="MAX">
+        <div class="ch-name">MAX</div>
+        <div class="ch-desc">1С Заметки<br>зеркало Telegram-канала</div>
+        <div class="ch-count">300+</div>
+        <div class="ch-count-label">подписчиков</div>
+        <div class="ch-spacer"></div>
+        <a class="ch-btn mx-btn" href="https://max.ru/top_1c" target="_blank" rel="noopener">Подписаться</a>
+      </div>
+      <div class="ch-card ch-yt">
+        <img class="ch-logo" src="https://cdn.simpleicons.org/youtube/ff4444" alt="YouTube">
+        <div class="ch-name">YouTube</div>
+        <div class="ch-desc">Стримы и подкасты<br>записи митапов</div>
+        <div class="ch-count">1 000+</div>
+        <div class="ch-count-label">подписчиков</div>
+        <div class="ch-spacer"></div>
+        <a class="ch-btn yt-btn" href="https://www.youtube.com/@top_1c" target="_blank" rel="noopener">Подписаться</a>
+      </div>
+    </div>
+
+    <!-- Также есть на -->
+    <div class="eyebrow reveal">// Также есть на</div>
+    <div class="ch-links-grid reveal" style="margin-top:1rem">
+      <a class="ch-link-item" href="https://boosty.to/top_1c" target="_blank" rel="noopener">
+        <div class="ch-link-icon-box" style="background:#F15C22">B</div>
+        <span class="ch-link-name">Boosty</span>
+      </a>
+      <a class="ch-link-item" href="https://live.vkvideo.ru/top_1c" target="_blank" rel="noopener">
+        <img class="ch-link-icon" src="https://cdn.simpleicons.org/vk/5ba4ff" alt="VK">
+        <span class="ch-link-name">ВК Видео</span>
+      </a>
+      <a class="ch-link-item" href="https://vk.com/top_1c" target="_blank" rel="noopener">
+        <img class="ch-link-icon" src="https://cdn.simpleicons.org/vk/5ba4ff" alt="VK">
+        <span class="ch-link-name">ВК Сообщество</span>
+      </a>
+      <a class="ch-link-item" href="https://rutube.ru/channel/48898598/" target="_blank" rel="noopener">
+        <div class="ch-link-icon-box" style="border-radius:7px;overflow:hidden;padding:0;background:#FF2700"><img style="width:100%;height:100%;object-fit:cover;display:block" src="https://www.google.com/s2/favicons?domain=rutube.ru&sz=64" alt="RUTUBE"></div>
+        <span class="ch-link-name">RUTUBE</span>
+      </a>
+      <a class="ch-link-item" href="https://infostart.ru/profile/564942/" target="_blank" rel="noopener">
+        <img class="ch-link-icon" src="https://www.google.com/s2/favicons?domain=infostart.ru&sz=64" alt="Infostart">
+        <span class="ch-link-name">Infostart</span>
+      </a>
+      <a class="ch-link-item" href="https://github.com/DimaKotov1C" target="_blank" rel="noopener">
+        <img class="ch-link-icon" src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">
+        <span class="ch-link-name">GitHub</span>
+      </a>
+    </div>
+
+    <!-- Личный контакт -->
+    <div class="eyebrow reveal">// Личный контакт</div>
+    <div class="ch-links-grid reveal" style="margin-top:1rem">
+      <a class="ch-link-item" href="https://t.me/KotovDima" target="_blank" rel="noopener">
+        <img class="ch-link-icon" src="https://cdn.simpleicons.org/telegram/22d3ee" alt="Telegram">
+        <span class="ch-link-name">@KotovDima</span>
+      </a>
+      <a class="ch-link-item" href="https://vk.com/kotovdima1c" target="_blank" rel="noopener">
+        <img class="ch-link-icon" src="https://cdn.simpleicons.org/vk/5ba4ff" alt="VK">
+        <span class="ch-link-name">kotovdima1c</span>
+      </a>
+      <a class="ch-link-item" href="mailto:kotovdima1c@gmail.com">
+        <div class="ch-link-icon-box" style="background:#8b5cf6;font-size:13px">✉</div>
+        <span class="ch-link-name">Почта</span>
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -550,32 +813,6 @@
     </div>
 
     <p class="trust reveal" style="margin-top:2rem">За спиной — не «галочки в резюме», а живые доклады, статьи и митапы. Хочешь пруф — кликай на источник. Не веришь — приходи на следующий мастер-класс и проверяй сам.</p>
-  </div>
-</section>
-
-<!-- ============ CHANNEL ============ -->
-<section id="channel">
-  <div class="wrap">
-    <div class="panel reveal">
-      <div class="orb" style="width:300px;height:300px;background:var(--glow-cyan);top:-100px;right:-60px;"></div>
-      <div class="chan-head">
-        <div>
-          <p class="eyebrow">// Telegram-канал</p>
-          <h2>«Дмитрий Котов | <span class="grad-text">1С&nbsp;Заметки</span>»</h2>
-          <p>Новости, вайбкодинг и инструменты 1С — без воды и пресс-релизов. Коротко, по делу, со своими инсайдами.</p>
-        </div>
-        <a class="btn btn-primary" href="https://t.me/top_1c" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.5 20c-.3 1.1-.9 1.4-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.6-8.7c.4-.4-.1-.6-.6-.2L5.1 13.1l-5.1-1.6c-1.1-.4-1.1-1.1.2-1.6L20.5 2.8c.9-.3 1.7.2 1.4 1.5z"/></svg>
-          Подписаться
-        </a>
-      </div>
-      <div class="rubrics">
-        <div class="rubric"><div class="ic">📰</div><b>Новости 1С и около</b><span>Что происходит в мире 1С и рядом</span></div>
-        <div class="rubric"><div class="ic">🤖</div><b>Вайбкодинг на 1С</b><span>ИИ в реальной разработке, а не в слайдах</span></div>
-        <div class="rubric"><div class="ic">🧰</div><b>Обзоры инструментов</b><span>Новое железо и софт для 1С-разработчика</span></div>
-        <div class="rubric"><div class="ic">💡</div><b>Инсайды и лайфхаки</b><span>Свои и найденные — то, что экономит время</span></div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -670,60 +907,7 @@
 
     <div class="talk-foot reveal">
       <p>От первого митапа в родном Иркутске — до сцены в Москве и Екатеринбурге. Хочешь увидеть вживую — следи за <a href="https://t.me/top_1c" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">каналом</a>, там анонсы следующих выступлений.</p>
-      <a class="btn btn-ghost" href="https://t.me/kotovdima" target="_blank" rel="noopener">Пригласить спикером</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SERVICES ============ -->
-<section id="services">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">// Работа со мной</p>
-      <h2>Нужен не «ещё один курс», а человек, который <span class="grad-text">уже прошёл этот путь?</span></h2>
-      <p>Два формата — не путай: <b>менторство для специалистов</b>, <b>консультации для бизнеса</b>. Один человек, разные задачи.</p>
-    </div>
-
-    <div class="svc-grid">
-      <article class="card svc spec reveal">
-        <div class="svc-aud"><b>👤 Для специалистов</b><span>Личный формат — ты как профессионал, не компания.</span></div>
-        <h3>🧭 Менторство в 1С</h3>
-        <p>Не «расскажу теорию и пропаду». Разбираем <b>твой</b> путь: от «куда вообще лезть» до «как не сгореть на проекте и не утонуть в доработках».</p>
-        <div class="lbl">Чем помогаю</div>
-        <ul>
-          <li>выбрать траекторию: аналитик, разработчик, гибрид, in-house vs франч;</li>
-          <li>разложить по полочкам SRM/SCM, ERP, интеграции, работу с заказчиком;</li>
-          <li>вайбкодинг и ИИ в 1С — что реально ускоряет, а что маркетинг;</li>
-          <li>карьерные развилки: собесы, зарплата, выгорание, «когда пора уходить»;</li>
-          <li>блог, спикерство, личный бренд в 1С-комьюнити.</li>
-        </ul>
-        <p class="meta"><b>Формат:</b> регулярные созвоны, чат между сессиями, домашка с обратной связью. Работаю с ограниченным числом менти.</p>
-        <p class="meta"><b>Для кого:</b> разработчики, аналитики, тимлиды — от junior, кто застрял, до senior, кто меняет траекторию.</p>
-        <div class="price"><span class="grad-text">10 000 ₽ / час</span></div>
-      </article>
-
-      <article class="card svc biz reveal">
-        <div class="svc-aud"><b>🏢 Для бизнеса</b><span>Руководители, собственники, команды — решения под задачу компании.</span></div>
-        <h3>⚡ Консультация для бизнеса</h3>
-        <p>Разбираем <b>задачу компании</b>, а не карьерный путь сотрудника. Без воды, без «давайте ещё созвонимся, я подумаю».</p>
-        <div class="lbl">Подойдёт, если</div>
-        <ul>
-          <li>нужен взгляд со стороны на проект, внедрение или «завал» в 1С;</li>
-          <li>хотите понять, куда вкладываться: ИИ, MCP, автоматизация, доработки vs типовое;</li>
-          <li>руководитель не понимает, что происходит в учёте и отчётах;</li>
-          <li>нужно подготовить команду к изменениям, выбрать подрядчика или оценить ТЗ;</li>
-          <li>«директор орёт про цифру в отчёте» — разберём, с чего начать.</li>
-        </ul>
-        <p class="meta"><b>Что получите:</b> план действий, список «делай / не делай», приоритеты. Если задача шире разовой консультации — скажу сразу и предложу формат сопровождения.</p>
-        <div class="price"><span class="grad-text">10 000 ₽ / час</span><small>минимум 2 часа — чтобы успеть погрузиться в контекст</small></div>
-      </article>
-    </div>
-
-    <div class="svc-cta reveal">
-      <p>Слоты ограничены — я не фабрика консультаций. Напиши, <b>что болит</b> — и укажи, ты специалист или представляешь бизнес. Отвечу, подходит ли формат и когда есть окно.</p>
-      <a class="btn btn-primary" href="https://t.me/kotovdima" target="_blank" rel="noopener">Записаться →</a>
-      <p class="contacts">Telegram: <a href="https://t.me/kotovdima" target="_blank" rel="noopener">@kotovdima</a> &nbsp;·&nbsp; Почта: <a href="mailto:kotovdima1c@gmail.com">kotovdima1c@gmail.com</a></p>
-      <p class="trust">20 лет в ИТ. 10 в 1С. Лауреат Infostart Awards. Спикер ERP AI FORUM, Кунг-фу конфы, Жёлтого клуба. Топ-автор Инфостарт. Показываю на практике — <a href="https://t.me/top_1c" target="_blank" rel="noopener">канал «1С Заметки»</a> как витрина, не как обещание.</p>
+      <a class="btn btn-primary" href="https://t.me/kotovdima" target="_blank" rel="noopener">Пригласить спикером</a>
     </div>
   </div>
 </section>
@@ -735,42 +919,9 @@
     <div class="foot-head">
       <p class="eyebrow">// Контакты</p>
       <h2>Пиши — <span class="grad-text">обсудим</span> задачу или коллаб</h2>
-      <p class="foot-sub">Заявки на менторство и консультации — в личку. А ниже — все площадки, где я есть.</p>
+      <p class="foot-sub">Есть вопрос или идея для коллаба — пиши напрямую.</p>
       <a class="btn btn-primary" href="https://t.me/kotovdima" target="_blank" rel="noopener">Написать в Telegram →</a>
       <p class="foot-mail">Почта: <a href="mailto:kotovdima1c@gmail.com">kotovdima1c@gmail.com</a></p>
-    </div>
-
-    <div class="socials reveal">
-      <div class="soc-group">
-        <div class="soc-label">🟡 Каналы</div>
-        <div class="soc-list">
-          <a href="https://t.me/top_1c" target="_blank" rel="noopener"><span class="plat">Telegram</span> 1С Заметки</a>
-          <a href="https://max.ru/top_1c" target="_blank" rel="noopener"><span class="plat">MAX</span> 1С Заметки</a>
-          <a href="https://www.youtube.com/@top_1c" target="_blank" rel="noopener"><span class="plat">YouTube</span> Стримы, подкасты, видео митапов</a>
-          <a href="https://boosty.to/top_1c" target="_blank" rel="noopener"><span class="plat">Boosty</span> Эксклюзивные видео и ранний доступ к видео митапов</a>
-          <a href="https://vk.com/top_1c" target="_blank" rel="noopener"><span class="plat">ВКонтакте</span> Сообщество</a>
-          <a href="https://live.vkvideo.ru/top_1c" target="_blank" rel="noopener"><span class="plat">ВК Видео</span> Стримы, подкасты, видео митапов</a>
-          <a href="https://rutube.ru/channel/48898598/" target="_blank" rel="noopener"><span class="plat">RUTUBE</span> Стримы, подкасты, видео митапов</a>
-        </div>
-      </div>
-
-      <div class="soc-group">
-        <div class="soc-label">🟡 Профильные блоги</div>
-        <div class="soc-list">
-          <a href="https://infostart.ru/profile/564942/" target="_blank" rel="noopener"><span class="plat">Infostart</span> профиль автора</a>
-          <a href="https://github.com/DimaKotov1C" target="_blank" rel="noopener"><span class="plat">GitHub</span> DimaKotov1C <span class="note">новый</span></a>
-          <a href="https://github.com/KotovDima1C" target="_blank" rel="noopener"><span class="plat">GitHub</span> KotovDima1C <span class="note">старый</span></a>
-        </div>
-      </div>
-
-      <div class="soc-group">
-        <div class="soc-label">👤 Личные странички</div>
-        <div class="soc-list">
-          <a href="https://t.me/KotovDima" target="_blank" rel="noopener"><span class="plat">Telegram</span> @KotovDima</a>
-          <a href="https://vk.com/kotovdima1c" target="_blank" rel="noopener"><span class="plat">ВКонтакте</span> kotovdima1c</a>
-          <a href="mailto:kotovdima1c@gmail.com"><span class="plat">Почта</span> kotovdima1c@gmail.com</a>
-        </div>
-      </div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 Дмитрий Котов · Иркутск · 1С</span>
@@ -871,6 +1022,94 @@
   } else {
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
   }
+})();
+</script>
+
+<script>
+(function () {
+  var YT_CHANNEL_ID = 'UCR90x4LTVrYm54jXV6AO1Yw';
+  var RT_PERSON_ID  = '48898598';
+  var TG_CHANNEL    = 'top_1c';
+  var PROXY = 'https://api.rss2json.com/v1/api.json?count=1&rss_url=';
+
+  var grid = document.getElementById('contentGrid');
+
+  function ytThumb(link) {
+    var m = link.match(/[?&]v=([^&]+)/);
+    return m ? 'https://i.ytimg.com/vi/' + m[1] + '/mqdefault.jpg' : '';
+  }
+
+  function fmtDate(str) {
+    var d = new Date(str);
+    return isNaN(d) ? '' : d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function stripHtml(s) {
+    return (s || '').replace(/<[^>]*>/g, '').replace(/&[a-z]+;/g, ' ').trim();
+  }
+
+  function videoCard(item, platform) {
+    var thumb = platform === 'youtube' ? ytThumb(item.link) : (item.thumbnail || '');
+    var label = platform === 'youtube' ? 'YouTube' : 'RuTube';
+    var color = platform === 'youtube' ? 'var(--gold)' : 'var(--cyan)';
+    var img   = thumb
+      ? '<img src="' + thumb + '" alt="' + (item.title||'').replace(/"/g,'&quot;') + '" class="video-thumb" loading="lazy">'
+      : '<div style="width:100%;height:100%;background:var(--surface-2)"></div>';
+    return '<a href="' + (item.link||'#') + '" target="_blank" rel="noopener" class="card video-card">'
+      + '<div class="video-thumb-wrap">' + img
+      + '<div class="video-play"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>'
+      + '<span class="video-platform" style="color:' + color + '">' + label + '</span>'
+      + '</div><div class="video-info"><div class="video-title">' + (item.title||'') + '</div>'
+      + '<div class="video-date">' + fmtDate(item.pubDate) + '</div></div></a>';
+  }
+
+  var ytUrl = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + YT_CHANNEL_ID;
+  var rtUrl = 'https://rutube.ru/feeds/video/person/' + RT_PERSON_ID + '/';
+  var tgUrl = 'https://rsshub.app/telegram/channel/' + TG_CHANNEL;
+
+  function rss(url) {
+    return fetch(PROXY + encodeURIComponent(url)).then(function(r){ return r.json(); }).catch(function(){ return {items:[]}; });
+  }
+
+  function fallbackVideo(platform, href) {
+    var label = platform === 'youtube' ? 'YouTube' : 'RuTube';
+    var color = platform === 'youtube' ? 'var(--gold)' : 'var(--cyan)';
+    return '<a href="' + href + '" target="_blank" rel="noopener" class="card video-card" style="justify-content:center;align-items:center;min-height:220px;text-decoration:none">'
+      + '<div style="text-align:center;color:var(--muted)">'
+      + '<div style="font-size:2.4rem;margin-bottom:.6rem">▶</div>'
+      + '<div style="font-family:JetBrains Mono,monospace;font-size:.85rem;color:' + color + '">' + label + '</div>'
+      + '<div style="font-size:.85rem;margin-top:.5rem">Смотреть видео →</div></div></a>';
+  }
+
+  rss(ytUrl).then(function(res) {
+    var item = (res.items || [])[0];
+    var slot = grid.children[0];
+    if (slot) slot.outerHTML = item ? videoCard(item, 'youtube') : fallbackVideo('youtube', 'https://www.youtube.com/@top_1c');
+  });
+  rss(rtUrl).then(function(res) {
+    var item = (res.items || [])[0];
+    var slot = grid.children[1];
+    if (slot) slot.outerHTML = item ? videoCard(item, 'rutube') : fallbackVideo('rutube', 'https://rutube.ru/channel/48898598/');
+  });
+  rss(tgUrl).then(function(res) {
+    var item = (res.items || [])[0];
+    var slot = grid.children[2];
+    if (!slot) return;
+    var link = item ? (item.link || '') : '';
+    var m = link.match(/\/(\d+)$/);
+    if (!m) { slot.outerHTML = ''; return; }
+    var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    var wrapper = document.createElement('div');
+    wrapper.className = 'tg-widget-wrap';
+    var s = document.createElement('script');
+    s.setAttribute('async', '');
+    s.src = 'https://telegram.org/js/telegram-widget.js?22';
+    s.setAttribute('data-telegram-post', TG_CHANNEL + '/' + m[1]);
+    s.setAttribute('data-width', '100%');
+    s.setAttribute('data-dark', isDark ? '1' : '0');
+    wrapper.appendChild(s);
+    grid.replaceChild(wrapper, slot);
+  });
 })();
 </script>
 </body>
