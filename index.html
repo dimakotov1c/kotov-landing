@@ -375,6 +375,16 @@
   .talk-foot { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 1.8rem; }
   .talk-foot p { color: var(--muted); font-size: .92rem; margin: 0; max-width: 60ch; }
 
+  .rider-block { display: none; width: 100%; }
+  .rider-block.rider-open { display: block; animation: riderIn .35s ease; }
+  @keyframes riderIn { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+  .rider-inner { margin-top: 1.4rem; padding: 1.4rem 1.6rem; border-radius: 16px; background: var(--surface); border: 1px solid var(--border-2); }
+  .rider-title { font-family: "JetBrains Mono", monospace; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
+  .rider-list { list-style: none; margin: 0 0 1.2rem; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
+  .rider-list li { display: flex; align-items: flex-start; gap: .75rem; font-size: .95rem; color: var(--muted); line-height: 1.5; }
+  .rider-list li strong { color: var(--text); }
+  .rider-icon { flex-shrink: 0; font-size: 1.1rem; }
+
   /* ====================== CONTENT ====================== */
   .content-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: start; }
   @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr 1fr; } }
@@ -549,7 +559,7 @@
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.5 20c-.3 1.1-.9 1.4-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.6-8.7c.4-.4-.1-.6-.6-.2L5.1 13.1l-5.1-1.6c-1.1-.4-1.1-1.1.2-1.6L20.5 2.8c.9-.3 1.7.2 1.4 1.5z"/></svg>
             Подписаться на канал
           </a>
-          <a class="btn btn-ghost" href="https://t.me/kotovdima" target="_blank" rel="noopener">Записаться на консультацию</a>
+          <a class="btn btn-ghost" href="#contacts">По вопросам рекламы</a>
         </div>
       </div>
     </div>
@@ -562,7 +572,6 @@
     <div class="section-head reveal">
       <p class="eyebrow">// Контент</p>
       <h2>Последние видео с <span class="grad-text">YouTube</span></h2>
-      <p>Три последних видео с YouTube — всё свежее в одном месте.</p>
     </div>
 
     <div class="content-grid" id="contentGrid">
@@ -787,7 +796,19 @@
 
     <div class="talk-foot reveal">
       <p>От первого митапа в родном Иркутске — до сцены в Москве и Екатеринбурге. Хочешь увидеть вживую — следи за <a href="https://t.me/top_1c" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">каналом</a>, там анонсы следующих выступлений.</p>
-      <a class="btn btn-primary" href="https://t.me/kotovdima" target="_blank" rel="noopener">Пригласить спикером</a>
+      <button class="btn btn-primary" id="riderBtn" onclick="document.getElementById('riderBlock').classList.toggle('rider-open');this.style.display='none'">Пригласить спикером</button>
+      <div id="riderBlock" class="rider-block">
+        <div class="rider-inner">
+          <p class="rider-title">Райдер спикера</p>
+          <ul class="rider-list">
+            <li><span class="rider-icon">🕐</span> Часовой пояс <strong>UTC+8</strong> (Иркутск, +5 от МСК) — учитывайте при планировании звонков и переписки</li>
+            <li><span class="rider-icon">✈️</span> Оплата перелёта из Иркутска до места проведения и обратно</li>
+            <li><span class="rider-icon">🏨</span> Оплата проживания на время конференции</li>
+            <li><span class="rider-icon">🚕</span> Оплата трансфера и такси: аэропорт ↔ место проведения</li>
+          </ul>
+          <a class="btn btn-primary" href="https://t.me/kotovdima" target="_blank" rel="noopener" style="margin-top:.5rem">Написать в Telegram →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -798,8 +819,8 @@
   <div class="wrap">
     <div class="foot-head">
       <p class="eyebrow">// Контакты</p>
-      <h2>Пиши — <span class="grad-text">обсудим</span> задачу или коллаб</h2>
-      <p class="foot-sub">Есть вопрос или идея для коллаба — пиши напрямую.</p>
+      <h2>Пиши — <span class="grad-text">обсудим</span> задачу, коллаб или рекламу</h2>
+      <p class="foot-sub">Есть вопрос, идея для коллаба или хочешь разместить рекламу в канале — пиши напрямую.</p>
       <a class="btn btn-primary" href="https://t.me/kotovdima" target="_blank" rel="noopener">Написать в Telegram →</a>
       <p class="foot-mail">Почта: <a href="mailto:kotovdima1c@gmail.com">kotovdima1c@gmail.com</a></p>
     </div>
