@@ -593,7 +593,8 @@
   .mb-table td.owner { color: var(--text); font-weight: 500; white-space: nowrap; }
   .btn-sm { padding: .5em 1em; font-size: .82rem; border-radius: 9px; }
 
-  .mb-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 1rem; }
+  .mb-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 1rem; }
+  @media (max-width: 960px) { .mb-steps { grid-template-columns: 1fr 1fr; } }
   .mb-step .num { font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .mb-step h3 { font-family: "Inter", sans-serif; font-weight: 700; font-size: 1.04rem; letter-spacing: 0; margin-top: .5rem; }
   .mb-step p { color: var(--muted); font-size: .92rem; margin: .7rem 0 0; }
@@ -1091,6 +1092,11 @@
       </article>
       <article class="card mb-step reveal">
         <div class="num">03</div>
+        <h3>Финальная неделя</h3>
+        <p>Когда желаемая сумма набрана — объявляю финальную неделю с конечной датой. До неё ещё можно перебить оппонента, после дедлайна торги закрываются.</p>
+      </article>
+      <article class="card mb-step reveal">
+        <div class="num">04</div>
         <h3>Забираешь слот</h3>
         <p>Когда сбор закрыт, победители присылают логотип — печатаю стикеры, клею на крышку и показываю результат постом в канале «1С Заметки».</p>
       </article>
