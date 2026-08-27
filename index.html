@@ -536,6 +536,74 @@
     .ch-links-grid { grid-template-columns: 1fr; }
   }
 
+  /* ====================== MACBOOK AUCTION ====================== */
+  .mb-progress-card { padding: 1.3rem 1.6rem; margin-bottom: 2.2rem; }
+  .mb-progress-top { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; align-items: baseline; justify-content: space-between; margin-bottom: .9rem; }
+  .mb-collected-wrap { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .mb-collected { font-family: "Unbounded", sans-serif; font-weight: 800; font-size: clamp(1.35rem, 3vw, 1.9rem); background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .mb-goal, .mb-slots-stat { font-family: "JetBrains Mono", monospace; font-size: .8rem; color: var(--muted); }
+  .mb-slots-stat b { color: var(--gold); }
+  .mb-bar { height: 12px; border-radius: 8px; background: var(--bg-2); border: 1px solid var(--border); overflow: hidden; }
+  .mb-bar-fill { height: 100%; min-width: 4px; background: var(--grad); border-radius: 8px; box-shadow: 0 0 14px var(--glow-gold); transition: width .8s ease; }
+
+  /* крышка всегда «space gray» — фиксированная палитра, не зависит от темы */
+  .mb-lid-wrap { display: grid; place-items: center; margin: 0 0 2.6rem; }
+  .mb-lid {
+    width: min(720px, 100%); aspect-ratio: 1.45;
+    background: linear-gradient(165deg, #3b3b46 0%, #23232c 45%, #17171f 100%);
+    border-radius: clamp(18px, 3vw, 30px); border: 1px solid rgba(255,255,255,.15);
+    box-shadow: 0 1px 0 rgba(255,255,255,.12) inset, 0 40px 90px -40px rgba(0,0,0,.9), 0 0 70px -24px var(--glow-violet);
+    padding: clamp(10px, 2.2vw, 20px);
+    display: grid; grid-template-rows: 1fr 1.25fr 1fr; gap: clamp(7px, 1.3vw, 12px);
+  }
+  .mb-lid-row { display: grid; gap: clamp(7px, 1.3vw, 12px); }
+  .mb-row-1, .mb-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .mb-row-2 { grid-template-columns: 1fr .85fr minmax(64px, .7fr) .85fr 1fr; }
+  .mb-apple { display: grid; place-items: center; }
+  .mb-apple svg { width: clamp(32px, 6.5vw, 56px); height: auto; fill: #d8d8e2; filter: drop-shadow(0 0 16px rgba(216,216,226,.35)); }
+
+  .mb-slot {
+    position: relative; border-radius: 12px;
+    border: 1.5px dashed rgba(255,255,255,.28);
+    background: rgba(255,255,255,.03); color: #c9c9d6;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px; padding: 6px 4px; text-align: center; cursor: pointer;
+    font-family: inherit;
+    transition: border-color .2s, background .2s, transform .2s, box-shadow .25s;
+  }
+  .mb-slot:hover { border-color: #FFC02E; background: rgba(255,192,46,.07); transform: translateY(-2px); box-shadow: 0 8px 24px -12px rgba(255,192,46,.4); }
+  .mb-slot .plus { font-size: clamp(.9rem, 2vw, 1.25rem); line-height: 1; color: #FFC02E; font-weight: 700; }
+  .mb-slot .sname { font-size: clamp(.52rem, 1.15vw, .68rem); font-weight: 600; line-height: 1.25; }
+  .mb-slot .sprice { font-family: "JetBrains Mono", monospace; font-size: clamp(.48rem, 1vw, .62rem); color: #8f8fa3; }
+  .mb-slot.taken { border-style: solid; border-color: rgba(34,211,238,.5); background: rgba(34,211,238,.08); }
+  .mb-slot.taken .sprice { color: #22D3EE; }
+  .mb-slot .crown { position: absolute; top: 3px; right: 6px; font-size: clamp(.6rem, 1.4vw, .8rem); }
+
+  .mb-table-wrap { overflow-x: auto; border-radius: 18px; border: 1px solid var(--border); background: linear-gradient(180deg, var(--surface), var(--surface-2)); box-shadow: var(--card-shadow); margin: 1rem 0 2.6rem; }
+  table.mb-table { width: 100%; border-collapse: collapse; min-width: 680px; font-size: .92rem; }
+  .mb-table th { font-family: "JetBrains Mono", monospace; font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--border); font-weight: 500; }
+  .mb-table td { padding: 12px 18px; border-bottom: 1px solid var(--border); color: var(--muted); }
+  .mb-table tr:last-child td { border-bottom: 0; }
+  .mb-table td.pos { color: var(--text); font-weight: 600; white-space: nowrap; }
+  .mb-table td.bid { font-family: "JetBrains Mono", monospace; font-weight: 700; color: var(--gold); white-space: nowrap; }
+  .mb-table td.bid .start-mark { font-weight: 400; color: var(--faint); font-size: .74em; margin-left: .4em; }
+  .mb-status { font-family: "JetBrains Mono", monospace; font-size: .64rem; font-weight: 700; padding: .35em .8em; border-radius: 30px; white-space: nowrap; }
+  .mb-status.free { background: rgba(34,211,238,.12); color: var(--cyan); border: 1px solid rgba(34,211,238,.3); }
+  .mb-status.taken { background: rgba(255,192,46,.12); color: var(--gold); border: 1px solid rgba(255,192,46,.3); }
+  .btn-sm { padding: .5em 1em; font-size: .82rem; border-radius: 9px; }
+  tr.mb-flash td { animation: mbFlash 1.6s ease; }
+  @keyframes mbFlash { 0%, 55% { background: rgba(255,192,46,.10); } 100% { background: transparent; } }
+
+  .mb-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 1rem; }
+  .mb-step .num { font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 1.5rem; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .mb-step h3 { font-family: "Inter", sans-serif; font-weight: 700; font-size: 1.04rem; letter-spacing: 0; margin-top: .5rem; }
+  .mb-step p { color: var(--muted); font-size: .92rem; margin: .7rem 0 0; }
+
+  @media (max-width: 720px) {
+    .mb-steps { grid-template-columns: 1fr; }
+    .mb-row-2 { grid-template-columns: 1fr .9fr minmax(44px, .6fr) .9fr 1fr; }
+  }
+
   /* ====================== FOOTER ====================== */
   footer { border-top: 1px solid var(--border); padding: clamp(56px, 8vh, 90px) 0 40px; position: relative; overflow: hidden; }
   footer h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); max-width: 18ch; }
@@ -596,6 +664,7 @@
       <a href="#content">Контент</a>
       <a href="#awards">Награды</a>
       <a href="#talks">Выступления</a>
+      <a href="#macbook">🍏 MacBook</a>
       <a href="#contacts">Контакты</a>
     </nav>
     <div class="theme-zone">
@@ -938,6 +1007,86 @@
   </div>
 </section>
 
+<!-- ============ MACBOOK AUCTION ============ -->
+<section id="macbook">
+  <div class="orb" style="width:400px;height:400px;background:var(--glow-cyan);top:-100px;left:-120px;"></div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">// Аукцион стикеров</p>
+      <h2>Купи место на крышке <span class="grad-text">моего макбука</span></h2>
+      <p>Собираю 350 000 ₽ на MacBook Pro для вайбкодинга и стримов. Взамен — стикер с логотипом твоей компании на крышке, которая светит со сцены митапов и конференций, в каждом стриме и видео. Идею подсмотрел у <a href="https://brandmymac.com" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">brandmymac.com</a> — только у нас всё по-нашему: ставки в Telegram.</p>
+    </div>
+
+    <!-- Прогресс сбора -->
+    <div class="card mb-progress-card reveal">
+      <div class="mb-progress-top">
+        <div class="mb-collected-wrap">
+          <span class="mb-collected" id="mbCollected">0 ₽</span>
+          <span class="mb-goal" id="mbGoal">из 350 000 ₽</span>
+        </div>
+        <span class="mb-slots-stat" id="mbTakenCount">занято <b>0</b> из 10 слотов</span>
+      </div>
+      <div class="mb-bar"><div class="mb-bar-fill" id="mbBarFill" style="width:0%"></div></div>
+    </div>
+
+    <!-- Крышка макбука -->
+    <div class="mb-lid-wrap reveal">
+      <div class="mb-lid" role="group" aria-label="Крышка макбука со слотами под стикеры">
+        <div class="mb-lid-row mb-row-1">
+          <button type="button" class="mb-slot" data-slot="top-left"></button>
+          <button type="button" class="mb-slot" data-slot="marquee"></button>
+          <button type="button" class="mb-slot" data-slot="top-right"></button>
+        </div>
+        <div class="mb-lid-row mb-row-2">
+          <button type="button" class="mb-slot" data-slot="mid-left"></button>
+          <button type="button" class="mb-slot" data-slot="apple-left"></button>
+          <div class="mb-apple" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.03 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+          </div>
+          <button type="button" class="mb-slot" data-slot="apple-right"></button>
+          <button type="button" class="mb-slot" data-slot="mid-right"></button>
+        </div>
+        <div class="mb-lid-row mb-row-3">
+          <button type="button" class="mb-slot" data-slot="bottom-left"></button>
+          <button type="button" class="mb-slot" data-slot="bottom-center"></button>
+          <button type="button" class="mb-slot" data-slot="bottom-right"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Таблица аукциона -->
+    <div class="eyebrow reveal">// Аукцион, вживую</div>
+    <div class="mb-table-wrap reveal">
+      <table class="mb-table">
+        <thead>
+          <tr><th>Позиция</th><th>Размер</th><th>Ставка</th><th>Статус</th><th></th></tr>
+        </thead>
+        <tbody id="mbTbody"></tbody>
+      </table>
+    </div>
+
+    <!-- Как это работает -->
+    <div class="eyebrow reveal">// Как это работает</div>
+    <div class="mb-steps">
+      <article class="card mb-step reveal">
+        <div class="num">01</div>
+        <h3>Делаешь ставку</h3>
+        <p>Жми кнопку у слота — откроется Telegram с готовым сообщением: слот и сумма уже подставлены. Шаг перебития — 5 000 ₽.</p>
+      </article>
+      <article class="card mb-step reveal">
+        <div class="num">02</div>
+        <h3>Следишь за аукционом</h3>
+        <p>После каждой подтверждённой ставки обновляю цифры на этой странице. Если твою ставку перебили — напишу лично, решишь: подниму или пас.</p>
+      </article>
+      <article class="card mb-step reveal">
+        <div class="num">03</div>
+        <h3>Забираешь слот</h3>
+        <p>Когда сбор закрыт, победители присылают логотип — печатаю стикеры, клею на крышку и показываю результат постом в канале «1С Заметки».</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FOOTER / CONTACTS ============ -->
 <footer id="contacts">
   <div class="orb" style="width:380px;height:380px;background:var(--glow-gold);bottom:-180px;right:-100px;"></div>
@@ -1077,6 +1226,88 @@
     };
     wireSubmit(sForm, sStatus, sSend);
   }
+})();
+</script>
+
+<script>
+/* ============ MACBOOK AUCTION ============
+   Данные аукциона. Чтобы обновить: у занятого слота заполни sponsor и bid,
+   у свободного оставь sponsor: null. Крышка, таблица и прогресс пересчитаются сами. */
+(function () {
+  "use strict";
+  var GOAL = 350000;
+  var STEP = 5000;
+  var TG_USER = "KotovDima";
+
+  var SLOTS = [
+    { id: "top-left",      name: "Верхний левый",   size: "Большой",           start: 50000, bid: null, sponsor: null },
+    { id: "marquee",       name: "Над яблоком",     size: "Большой · премиум", start: 50000, bid: null, sponsor: null, premium: true },
+    { id: "top-right",     name: "Верхний правый",  size: "Большой",           start: 50000, bid: null, sponsor: null },
+    { id: "mid-left",      name: "Средний левый",   size: "Маленький",         start: 23750, bid: null, sponsor: null },
+    { id: "apple-left",    name: "Слева у яблока",  size: "Маленький",         start: 23750, bid: null, sponsor: null },
+    { id: "apple-right",   name: "Справа у яблока", size: "Маленький",         start: 23750, bid: null, sponsor: null },
+    { id: "mid-right",     name: "Средний правый",  size: "Маленький",         start: 23750, bid: null, sponsor: null },
+    { id: "bottom-left",   name: "Нижний левый",    size: "Средний",           start: 35000, bid: null, sponsor: null },
+    { id: "bottom-center", name: "Нижний центр",    size: "Средний",           start: 35000, bid: null, sponsor: null },
+    { id: "bottom-right",  name: "Нижний правый",   size: "Средний",           start: 35000, bid: null, sponsor: null }
+  ];
+
+  function fmt(n) { return n.toLocaleString("ru-RU") + " ₽"; }
+  function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+  function tgLink(s) {
+    var text = s.sponsor
+      ? "Привет! Хочу перебить ставку за слот «" + s.name + "» на крышке макбука. Моя ставка: " + fmt(s.bid + STEP)
+      : "Привет! Хочу слот «" + s.name + "» на крышке макбука. Моя ставка: " + fmt(s.start);
+    return "https://t.me/" + TG_USER + "?text=" + encodeURIComponent(text);
+  }
+
+  /* крышка */
+  SLOTS.forEach(function (s) {
+    var el = document.querySelector('[data-slot="' + s.id + '"]');
+    if (!el) return;
+    if (s.sponsor) {
+      el.classList.add("taken");
+      el.innerHTML = '<span class="sname">' + esc(s.sponsor) + '</span><span class="sprice">' + fmt(s.bid) + "</span>";
+    } else {
+      el.innerHTML = '<span class="plus">+</span><span class="sname">' + esc(s.name) + '</span><span class="sprice">от ' + fmt(s.start) + "</span>";
+    }
+    if (s.premium) el.insertAdjacentHTML("beforeend", '<span class="crown">👑</span>');
+    el.setAttribute("aria-label", s.name + ", " + (s.sponsor ? "занят, ставка " + fmt(s.bid) : "свободен, от " + fmt(s.start)));
+    el.addEventListener("click", function () {
+      var row = document.getElementById("mb-row-" + s.id);
+      if (!row) return;
+      row.scrollIntoView({ behavior: "smooth", block: "center" });
+      row.classList.remove("mb-flash");
+      void row.offsetWidth;
+      row.classList.add("mb-flash");
+    });
+  });
+
+  /* таблица */
+  var tbody = document.getElementById("mbTbody");
+  SLOTS.forEach(function (s) {
+    var tr = document.createElement("tr");
+    tr.id = "mb-row-" + s.id;
+    tr.innerHTML =
+      '<td class="pos">' + (s.premium ? "👑 " : "") + esc(s.name) + "</td>" +
+      "<td>" + esc(s.size) + "</td>" +
+      '<td class="bid">' + fmt(s.sponsor ? s.bid : s.start) + (s.sponsor ? "" : '<span class="start-mark">старт</span>') + "</td>" +
+      "<td>" + (s.sponsor
+        ? '<span class="mb-status taken">' + esc(s.sponsor) + "</span>"
+        : '<span class="mb-status free">Свободен</span>') + "</td>" +
+      '<td><a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="' + tgLink(s) + '">' +
+        (s.sponsor ? "Перебить →" : "Сделать ставку →") + "</a></td>";
+    tbody.appendChild(tr);
+  });
+
+  /* прогресс */
+  var collected = SLOTS.reduce(function (a, s) { return a + (s.sponsor ? s.bid : 0); }, 0);
+  var taken = SLOTS.filter(function (s) { return s.sponsor; }).length;
+  document.getElementById("mbCollected").textContent = fmt(collected);
+  document.getElementById("mbGoal").textContent = "из " + fmt(GOAL);
+  document.getElementById("mbTakenCount").innerHTML = "занято <b>" + taken + "</b> из " + SLOTS.length + " слотов";
+  document.getElementById("mbBarFill").style.width = Math.min(100, Math.round(collected / GOAL * 100)) + "%";
 })();
 </script>
 </body>
