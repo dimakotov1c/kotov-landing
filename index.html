@@ -300,6 +300,8 @@
   }
   .nav-links a:hover { color: var(--text); }
   .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--text); }
+  .nav-links a.active::after { width: 100%; }
 
   /* theme toggle — the signature meme switch */
   .theme-zone { display: flex; align-items: center; gap: .7rem; }
@@ -443,7 +445,56 @@
   .awards-more { margin-top: 14px; font-family: "JetBrains Mono", monospace; font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
 
   /* ====================== SPEAKING ====================== */
-  .talks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .talks-carousel { position: relative; }
+  .talks-grid {
+    display: flex; gap: 22px;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .talks-grid::-webkit-scrollbar { display: none; }
+  .talks-grid .talk { flex: 0 0 calc((100% - 66px) / 4); scroll-snap-align: start; }
+  .car-btn {
+    position: absolute; top: 50%; translate: 0 -50%;
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 1px solid var(--border-2); background: var(--surface); color: var(--text);
+    display: grid; place-items: center; z-index: 5; cursor: pointer; padding: 0;
+    transition: border-color .2s ease, box-shadow .25s ease, opacity .25s ease;
+  }
+  .car-btn svg { width: 18px; height: 18px; position: relative; z-index: 1; }
+  .car-btn:hover { border-color: var(--gold); box-shadow: 0 0 22px -8px var(--glow-gold); }
+  .car-btn:disabled { opacity: .22; cursor: default; pointer-events: none; }
+  .car-prev { left: -21px; }
+  .car-next { right: -21px; }
+
+  /* beckoning pulse: smoothly breathes from normal to active gold state */
+  .car-btn--pulse { animation: car-beckon 1.9s ease-in-out infinite; }
+  .car-btn--pulse::before {
+    content: ""; position: absolute; inset: -1px; border-radius: 50%;
+    background: linear-gradient(120deg, var(--gold) 0%, #FF8A3D 95%);
+    opacity: 0; animation: car-beckon-bg 1.9s ease-in-out infinite;
+  }
+  @keyframes car-beckon {
+    0%, 100% { border-color: var(--border-2); color: var(--text); box-shadow: 0 0 0 0 rgba(255,192,46,0); }
+    50%      { border-color: var(--gold); color: #15100A; box-shadow: 0 0 28px -4px var(--glow-gold), 0 0 0 7px rgba(255,192,46,.10); }
+  }
+  @keyframes car-beckon-bg {
+    0%, 100% { opacity: 0; }
+    50%      { opacity: 1; }
+  }
+  .car-btn--pulse:hover { animation: none; }
+  .car-btn--pulse:hover::before { animation: none; opacity: 0; }
+  .car-dots { display: flex; justify-content: center; gap: 7px; margin-top: 1.3rem; }
+  .car-dot {
+    width: 7px; height: 7px; border-radius: 50%; padding: 0; border: 0;
+    background: var(--border-2); cursor: pointer;
+    transition: background .3s ease, box-shadow .3s ease;
+  }
+  .car-dot.on { background: var(--gold); box-shadow: 0 0 8px -1px var(--glow-gold); }
+  .car-dot:hover { background: var(--gold-soft); }
+  @media (prefers-reduced-motion: reduce) {
+    .car-btn--pulse, .car-btn--pulse::before { animation: none; }
+    .car-btn--pulse::before { opacity: 0; }
+  }
   .talk { display: flex; flex-direction: column; position: relative; overflow: hidden; padding: 1.5rem; }
   .talk:hover { box-shadow: 0 24px 60px -30px var(--glow-violet), var(--card-shadow); }
   .talk .tbadge {
@@ -451,7 +502,9 @@
     font-family: "JetBrains Mono", monospace; font-size: .64rem; font-weight: 700;
     padding: .4em .75em; border-radius: 30px; white-space: nowrap;
     background: var(--surface-2); border: 1px solid var(--border-2); color: var(--gold);
+    text-decoration: none;
   }
+  a.tbadge:hover { border-color: var(--gold); box-shadow: 0 0 18px -8px var(--glow-gold); }
   .talk .logo { font-size: 1.9rem; line-height: 1; margin-bottom: .8rem; filter: drop-shadow(0 0 12px var(--glow-violet)); }
   .talk .ev { font-family: "JetBrains Mono", monospace; font-size: .7rem; letter-spacing: .03em; color: var(--muted); }
   .talk .yr { font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 1.45rem; line-height: 1; margin: .15rem 0 .7rem; color: var(--muted); }
@@ -459,6 +512,16 @@
   .talk > p { color: var(--muted); font-size: .87rem; margin: .6rem 0 1rem; flex: 1; }
   .talk-foot { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 1.8rem; }
   .talk-foot p { color: var(--muted); font-size: .92rem; margin: 0; max-width: 60ch; }
+  .talk-actions { display: flex; flex-wrap: wrap; gap: .9rem; align-items: center; }
+  .md-text {
+    display: block; width: 100%; min-height: 240px; resize: vertical;
+    background: var(--bg-2); color: var(--text);
+    border: 1px solid var(--border-2); border-radius: 12px;
+    font-family: "JetBrains Mono", monospace; font-size: .8rem; line-height: 1.6;
+    padding: 1rem 1.1rem; white-space: pre; overflow-x: auto;
+  }
+  .md-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1rem; }
+  .md-actions .mail-status { margin: 0; }
 
   .rider-block { display: none; width: 100%; }
   .rider-block.rider-open { display: block; animation: riderIn .35s ease; }
@@ -683,7 +746,7 @@
   /* ====================== RESPONSIVE ====================== */
   @media (max-width: 960px) {
     .awards-grid { grid-template-columns: 1fr 1fr; }
-    .talks-grid { grid-template-columns: 1fr 1fr; }
+    .talks-grid .talk { flex-basis: calc((100% - 22px) / 2); }
     .rubrics { grid-template-columns: 1fr 1fr; }
     .hero-grid { grid-template-columns: 1fr; text-align: center; }
     .hero-photo { margin-bottom: 1rem; }
@@ -704,7 +767,9 @@
   }
   @media (max-width: 480px) {
     .awards-grid { grid-template-columns: 1fr; }
-    .talks-grid { grid-template-columns: 1fr; }
+    .talks-grid .talk { flex-basis: 86%; }
+    .car-prev { left: -8px; }
+    .car-next { right: -8px; }
     .rubrics { grid-template-columns: 1fr; }
     body { font-size: 16px; }
   }
@@ -915,11 +980,12 @@
         <a class="src" href="https://infostart.ru/profile/564942/" target="_blank" rel="noopener">Профиль →</a>
       </article>
       <article class="card award reveal">
-        <div class="ic">🏆</div>
-        <span class="yr grad-text">2018</span>
-        <h3>Infostart Awards</h3>
-        <p>Лауреат премии Infostart Awards — один из главных призов профессионального сообщества 1С.</p>
-        <a class="src" href="https://awards.infostart.ru/" target="_blank" rel="noopener">Источник →</a>
+        <div class="ic">🧢</div>
+        <span class="yr grad-text">2025</span>
+        <h3>Золотая кепка · Блогер №1</h3>
+        <p class="stat">Жёлтый клуб</p>
+        <p>Первое место в рейтинге телеграм-блогеров сообщества Жёлтый клуб. Золотая кепка — не виртуальная.</p>
+        <a class="src" href="https://t.me/yellowclub_official/945" target="_blank" rel="noopener">Источник →</a>
       </article>
       <article class="card award reveal">
         <div class="ic">🏆</div>
@@ -929,11 +995,11 @@
         <a class="src" href="https://awards.infostart.ru/" target="_blank" rel="noopener">Источник →</a>
       </article>
       <article class="card award reveal">
-        <div class="ic">🧢</div>
-        <h3>Золотая кепка · Блогер №1</h3>
-        <p class="stat">Жёлтый клуб</p>
-        <p>Первое место в рейтинге телеграм-блогеров сообщества Жёлтый клуб. Золотая кепка — не виртуальная.</p>
-        <a class="src" href="https://t.me/yellowclub_official/945" target="_blank" rel="noopener">Источник →</a>
+        <div class="ic">🏆</div>
+        <span class="yr grad-text">2018</span>
+        <h3>Infostart Awards</h3>
+        <p>Лауреат премии Infostart Awards — один из главных призов профессионального сообщества 1С.</p>
+        <a class="src" href="https://awards.infostart.ru/" target="_blank" rel="noopener">Источник →</a>
       </article>
     </div>
 
@@ -950,63 +1016,26 @@
       <p>От дебютного митапа в Иркутске до федеральных конференций и мастер-классов с живым кодом. Без слайдовой воды — с практикой, которую можно унести в проект.</p>
     </div>
 
+    <div class="talks-carousel reveal">
     <div class="talks-grid">
       <article class="card talk reveal">
-        <span class="tbadge">🎤 Дебют</span>
-        <div class="logo">🟡</div>
-        <div class="ev">Митап Жёлтого клуба · Иркутск</div>
-        <div class="yr" style="color:var(--faint)">2023</div>
-        <h3>«Разработка интерфейсов в 1С»</h3>
-        <p>Первое публичное выступление и первый опыт организации митапа — с этого начался путь спикера.</p>
-        <a class="src" href="https://t.me/top_1c/264" target="_blank" rel="noopener">Программа →</a>
-      </article>
-
-      <article class="card talk reveal">
-        <span class="tbadge">🏆 Топ-10</span>
-        <div class="logo">🏛</div>
-        <div class="ev">Infostart A&amp;PM · Санкт-Петербург</div>
-        <div class="yr">2024</div>
-        <h3>«Лайфхаки СКД без программиста»</h3>
-        <p>15 кейсов, как аналитику и пользователю обойтись без программиста. Доклад вошёл в топ-10 конференции.</p>
-        <a class="src" href="https://event.infostart.ru/analysis_pm2024/agenda/2050221/" target="_blank" rel="noopener">Программа →</a>
-      </article>
-
-      <article class="card talk reveal">
-        <div class="logo">🏛</div>
-        <div class="ev">Infostart Tech Event · Санкт-Петербург</div>
-        <div class="yr">2024</div>
-        <h3>«Разработка интерфейсов в 1С»</h3>
-        <p>Подходы к разработке интерфейсов на 1С, ограничения платформы и практика на примере реального проекта.</p>
-        <a class="src" href="https://event.infostart.ru/2024/agenda/2157144/" target="_blank" rel="noopener">Программа →</a>
-      </article>
-
-      <article class="card talk reveal">
-        <div class="logo">🏛</div>
-        <div class="ev">Infostart Teamlead &amp; CIO · Москва</div>
-        <div class="yr" style="color:var(--gold)">2025</div>
-        <h3>«Личный бренд»</h3>
-        <p>Зачем 1Снику личный бренд, с чего начать и какие риски ждут по дороге — сторителлинг от стажёра до тимлида.</p>
-        <a class="src" href="https://event.infostart.ru/teamlead_2025/agenda_complete/2246154/" target="_blank" rel="noopener">Программа →</a>
-      </article>
-
-      <article class="card talk reveal">
-        <span class="tbadge">🎓 По приглашению 1С</span>
-        <div class="logo">🎓</div>
-        <div class="ev">НПК «1С:Образование» · Москва</div>
+        <a class="tbadge" href="https://www.tsu.ru/" target="_blank" rel="noopener">🎓 По приглашению ТГУ</a>
+        <div class="logo">📚</div>
+        <div class="ev">ТГУ · Томск</div>
         <div class="yr"><span class="grad-text">2026</span></div>
-        <h3>«Карьерный респаун: зачем я стал 1Сником?»</h3>
-        <p>По приглашению фирмы «1С» — для студентов и преподавателей: почему выбор стека 1С — сильный карьерный ход.</p>
-        <a class="src" href="https://educonf.1c.ru/conf2026/about/agenda/?a529=Y&amp;b537=Y" target="_blank" rel="noopener">Программа →</a>
+        <h3>«1С-разработка: взгляд изнутри»</h3>
+        <p>По приглашению Томского государственного университета — рассказал студентам, как на самом деле устроена работа 1Сника и с чего начать путь в профессии.</p>
+        <a class="src" href="https://vk.ru/wall-238390055_126" target="_blank" rel="noopener">Запись выступления →</a>
       </article>
 
       <article class="card talk reveal">
-        <span class="tbadge">🐼 Первая конференция</span>
+        <span class="tbadge">🔥 70 человек</span>
         <div class="logo">🐼</div>
-        <div class="ev">Кунг-фу конфа · Екатеринбург</div>
+        <div class="ev">Кунг-фу митап · Иркутск</div>
         <div class="yr"><span class="grad-text">2026</span></div>
-        <h3>Мастер-класс «Вайбкодинг на 1С — проще простого!»</h3>
-        <p>Пилотный мастер-класс перед участниками. Первый опыт организации полноценной конференции — не митапа.</p>
-        <a class="src" href="https://kungfu-conf.ru/ekb2026" target="_blank" rel="noopener">Программа →</a>
+        <h3>Мастер-класс «Вайбкодинг на 1С — на стероидах!»</h3>
+        <p>Рекордный митап в Иркутске — 70 человек, почти вдвое больше обычного. Три часа практики в одном зале.</p>
+        <a class="src" href="https://kotovdima.timepad.ru/event/4024826/" target="_blank" rel="noopener">Регистрация →</a>
       </article>
 
       <article class="card talk reveal">
@@ -1020,19 +1049,90 @@
       </article>
 
       <article class="card talk reveal">
-        <span class="tbadge">🔥 70 человек</span>
+        <span class="tbadge">🐼 Первая конференция</span>
         <div class="logo">🐼</div>
-        <div class="ev">Кунг-фу митап · Иркутск</div>
+        <div class="ev">Кунг-фу конфа · Екатеринбург</div>
         <div class="yr"><span class="grad-text">2026</span></div>
-        <h3>Мастер-класс «Вайбкодинг на 1С — на стероидах!»</h3>
-        <p>Рекордный митап в Иркутске — 70 человек, почти вдвое больше обычного. Три часа практики в одном зале.</p>
-        <a class="src" href="https://kotovdima.timepad.ru/event/4024826/" target="_blank" rel="noopener">Регистрация →</a>
+        <h3>Мастер-класс «Вайбкодинг на 1С — проще простого!»</h3>
+        <p>Пилотный мастер-класс перед участниками. Первый опыт организации полноценной конференции — не митапа.</p>
+        <a class="src" href="https://kungfu-conf.ru/ekb2026" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <span class="tbadge">🎓 По приглашению 1С</span>
+        <div class="logo">🎓</div>
+        <div class="ev">НПК «1С:Образование» · Москва</div>
+        <div class="yr"><span class="grad-text">2026</span></div>
+        <h3>«Карьерный респаун: зачем я стал 1Сником?»</h3>
+        <p>По приглашению фирмы «1С» — для студентов и преподавателей: почему выбор стека 1С — сильный карьерный ход.</p>
+        <a class="src" href="https://educonf.1c.ru/conf2026/about/agenda/?a529=Y&amp;b537=Y" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <div class="logo">🏛</div>
+        <div class="ev">Infostart Teamlead &amp; CIO · Москва</div>
+        <div class="yr" style="color:var(--gold)">2025</div>
+        <h3>«Личный бренд»</h3>
+        <p>Зачем 1Снику личный бренд, с чего начать и какие риски ждут по дороге — сторителлинг от стажёра до тимлида.</p>
+        <a class="src" href="https://event.infostart.ru/teamlead_2025/agenda_complete/2246154/" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <div class="logo">🏛</div>
+        <div class="ev">Infostart Tech Event · Санкт-Петербург</div>
+        <div class="yr">2024</div>
+        <h3>«Разработка интерфейсов в 1С»</h3>
+        <p>Подходы к разработке интерфейсов на 1С, ограничения платформы и практика на примере реального проекта.</p>
+        <a class="src" href="https://event.infostart.ru/2024/agenda/2157144/" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <span class="tbadge">🏆 Топ-10</span>
+        <div class="logo">🏛</div>
+        <div class="ev">Infostart A&amp;PM · Санкт-Петербург</div>
+        <div class="yr">2024</div>
+        <h3>«Лайфхаки СКД без программиста»</h3>
+        <p>15 кейсов, как аналитику и пользователю обойтись без программиста. Доклад вошёл в топ-10 конференции.</p>
+        <a class="src" href="https://event.infostart.ru/analysis_pm2024/agenda/2050221/" target="_blank" rel="noopener">Программа →</a>
+      </article>
+
+      <article class="card talk reveal">
+        <span class="tbadge">🎤 Дебют</span>
+        <div class="logo">🟡</div>
+        <div class="ev">Митап Жёлтого клуба · Иркутск</div>
+        <div class="yr" style="color:var(--faint)">2023</div>
+        <h3>«Разработка интерфейсов в 1С»</h3>
+        <p>Первое публичное выступление и первый опыт организации митапа — с этого начался путь спикера.</p>
+        <a class="src" href="https://t.me/top_1c/264" target="_blank" rel="noopener">Программа →</a>
       </article>
     </div>
+    <button class="car-btn car-prev" type="button" aria-label="Предыдущие выступления">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="car-btn car-next car-btn--pulse" type="button" aria-label="Следующие выступления">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+    </div>
+
+    <div class="car-dots reveal" id="carDots"></div>
 
     <div class="talk-foot reveal">
       <p>От первого митапа в родном Иркутске — до сцены в Москве и Екатеринбурге. Хочешь увидеть вживую — следи за <a href="https://t.me/top_1c" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">каналом</a>, там анонсы следующих выступлений.</p>
-      <button class="btn btn-primary" id="riderBtn" onclick="document.getElementById('riderBlock').classList.toggle('rider-open');this.style.display='none'">Пригласить спикером</button>
+      <div class="talk-actions">
+        <button class="btn btn-ghost" id="mdBtn" onclick="openMdList()">Списком</button>
+        <button class="btn btn-primary" id="riderBtn" onclick="document.getElementById('riderBlock').classList.toggle('rider-open');this.style.display='none'">Пригласить спикером</button>
+      </div>
+      <div id="mdBlock" class="rider-block">
+        <div class="rider-inner">
+          <p class="rider-title">Все выступления · Markdown</p>
+          <textarea id="mdText" class="md-text" readonly rows="12" spellcheck="false" aria-label="Список выступлений в формате Markdown"></textarea>
+          <div class="md-actions">
+            <button class="btn btn-primary" id="mdCopy" type="button">Скопировать</button>
+            <button class="btn btn-ghost" id="mdClose" type="button">Закрыть</button>
+            <span class="mail-status" id="mdStatus"></span>
+          </div>
+        </div>
+      </div>
       <div id="riderBlock" class="rider-block">
         <div class="rider-inner">
           <p class="rider-title">Райдер спикера</p>
@@ -1304,6 +1404,159 @@
     };
     wireSubmit(sForm, sStatus, sSend);
   }
+})();
+</script>
+
+<script>
+/* ============ NAV SCROLLSPY ============ */
+(function () {
+  "use strict";
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav-links a[href^='#']"));
+  var secs = links
+    .map(function (l) { return document.getElementById(l.getAttribute("href").slice(1)); })
+    .filter(Boolean);
+  if (!secs.length) return;
+
+  var current = null;
+  function setActive(id) {
+    if (current === id) return;
+    current = id;
+    links.forEach(function (l) {
+      l.classList.toggle("active", l.getAttribute("href") === "#" + id);
+    });
+  }
+
+  function onScroll() {
+    var pos = window.scrollY + window.innerHeight * 0.35;
+    var id = secs[0].id;
+    secs.forEach(function (s) { if (s.offsetTop <= pos) id = s.id; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+      id = secs[secs.length - 1].id;
+    }
+    setActive(id);
+  }
+
+  var ticking = false;
+  window.addEventListener("scroll", function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; onScroll(); });
+  }, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+})();
+</script>
+
+<script>
+/* ============ TALKS CAROUSEL ============ */
+(function () {
+  "use strict";
+  var track = document.querySelector(".talks-grid");
+  var prev = document.querySelector(".car-prev");
+  var next = document.querySelector(".car-next");
+  if (!track || !prev || !next) return;
+
+  function step() {
+    var card = track.querySelector(".talk");
+    if (!card) return 300;
+    var gap = parseFloat(getComputedStyle(track).columnGap) || 22;
+    return card.getBoundingClientRect().width + gap;
+  }
+  /* dots: one per card, filled while the card is in view */
+  var dotsWrap = document.getElementById("carDots");
+  var cards = Array.prototype.slice.call(track.querySelectorAll(".talk"));
+  var dots = [];
+  if (dotsWrap) {
+    dots = cards.map(function (c, i) {
+      var d = document.createElement("button");
+      d.className = "car-dot";
+      d.type = "button";
+      d.setAttribute("aria-label", "Выступление " + (i + 1) + " из " + cards.length);
+      d.addEventListener("click", function () {
+        track.scrollTo({ left: c.offsetLeft, behavior: "smooth" });
+      });
+      dotsWrap.appendChild(d);
+      return d;
+    });
+  }
+
+  function update() {
+    var max = track.scrollWidth - track.clientWidth;
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= max - 2;
+    if (dots.length) {
+      var vs = track.scrollLeft, ve = vs + track.clientWidth;
+      cards.forEach(function (c, i) {
+        var l = c.offsetLeft, r = l + c.offsetWidth;
+        var overlap = Math.min(r, ve) - Math.max(l, vs);
+        dots[i].classList.toggle("on", overlap >= c.offsetWidth * 0.6);
+      });
+    }
+  }
+  prev.addEventListener("click", function () { track.scrollBy({ left: -step(), behavior: "smooth" }); });
+  next.addEventListener("click", function () { track.scrollBy({ left: step(), behavior: "smooth" }); });
+  track.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+
+  /* stop the beckoning pulse after first interaction */
+  function stopPulse() { next.classList.remove("car-btn--pulse"); }
+  next.addEventListener("click", stopPulse, { once: true });
+  track.addEventListener("scroll", stopPulse, { once: true, passive: true });
+})();
+</script>
+
+<script>
+/* ============ TALKS MD LIST ============ */
+(function () {
+  "use strict";
+  var block = document.getElementById("mdBlock");
+  var btn = document.getElementById("mdBtn");
+  var ta = document.getElementById("mdText");
+  var st = document.getElementById("mdStatus");
+  if (!block || !btn || !ta) return;
+
+  function buildTalksMd() {
+    var lines = ["# Выступления · Дмитрий Котов", ""];
+    document.querySelectorAll(".talks-grid .talk").forEach(function (t) {
+      var yr = (t.querySelector(".yr") || {}).textContent || "";
+      var ev = (t.querySelector(".ev") || {}).textContent || "";
+      var title = (t.querySelector("h3") || {}).textContent || "";
+      var badge = t.querySelector(".tbadge");
+      var src = t.querySelector("a.src");
+      var line = "- **" + yr.trim() + "** · " + ev.trim() + " — " + title.trim();
+      if (badge) line += " _(" + badge.textContent.trim() + ")_";
+      if (src) line += " — [" + src.textContent.replace(/\s*→\s*$/, "").trim() + "](" + src.href + ")";
+      lines.push(line);
+    });
+    return lines.join("\n");
+  }
+
+  window.openMdList = function () {
+    ta.value = buildTalksMd();
+    block.classList.add("rider-open");
+    btn.style.display = "none";
+    st.textContent = "";
+    st.className = "mail-status";
+  };
+
+  document.getElementById("mdClose").addEventListener("click", function () {
+    block.classList.remove("rider-open");
+    btn.style.display = "";
+  });
+
+  document.getElementById("mdCopy").addEventListener("click", function () {
+    ta.value = buildTalksMd();
+    function done() { st.textContent = "Скопировано ✓"; st.className = "mail-status ok"; }
+    function fallback() {
+      ta.focus(); ta.select();
+      try { document.execCommand("copy"); done(); }
+      catch (e) { st.textContent = "Выделите текст и нажмите Ctrl+C"; st.className = "mail-status err"; }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(done, fallback);
+    } else { fallback(); }
+  });
 })();
 </script>
 
