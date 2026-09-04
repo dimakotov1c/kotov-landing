@@ -15,15 +15,16 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotov.top/">
 <meta property="og:title" content="Дмитрий Котов — 1Сник, блогер, спикер">
-<meta property="og:description" content="Канал «1С Заметки» — вайбкодинг, ИИ в 1С, SRM/SCM. 8 400+ подписчиков.">
-<meta property="og:image" content="https://kotov.top/assets/dmitry.jpg">
-<meta property="og:image:width" content="1000">
-<meta property="og:image:height" content="1000">
+<meta property="og:description" content="Канал «1С Заметки» — вайбкодинг, ИИ в 1С, новости 1С, 8500+ подписчиков.">
+<meta property="og:image" content="https://kotov.top/assets/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="600">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Дмитрий Котов — 1Сник, блогер, спикер">
-<meta name="twitter:description" content="Канал «1С Заметки» — вайбкодинг, ИИ в 1С, SRM/SCM. 8 400+ подписчиков.">
-<meta name="twitter:image" content="https://kotov.top/assets/dmitry.jpg">
+<meta name="twitter:description" content="Канал «1С Заметки» — вайбкодинг, ИИ в 1С, новости 1С, 8500+ подписчиков.">
+<meta name="twitter:image" content="https://kotov.top/assets/og-image.jpg">
 
 <!-- Schema.org structured data -->
 <script type="application/ld+json">
@@ -743,10 +744,99 @@
     .btn, .card, .rubric { transition: none; }
   }
 
+  /* ====================== GENERIC CAROUSEL (articles / videos) ====================== */
+  .cgroup { margin-top: 2.6rem; }
+  .cgroup:first-of-type { margin-top: 0; }
+  .cgroup-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.1rem; }
+  .cgroup-head .eyebrow { margin: 0; }
+  .cgroup-count { font-family: "JetBrains Mono", monospace; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .car { position: relative; }
+  .car-track {
+    display: flex; gap: 22px;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -ms-overflow-style: none;
+    padding: 8px 2px 14px; margin: -8px -2px -14px;
+  }
+  .car-track::-webkit-scrollbar { display: none; }
+  .car-track > .car-item { flex: 0 0 calc((100% - 66px) / 4); scroll-snap-align: start; min-width: 0; }
+  .car--3 .car-track > .car-item { flex-basis: calc((100% - 44px) / 3); }
+
+  /* ---- article card (Infostart) ---- */
+  .pub { display: flex; flex-direction: column; padding: 1.3rem 1.35rem 1.25rem; text-decoration: none; color: inherit; position: relative; overflow: hidden; }
+  .pub::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent 70%); opacity: .55;
+  }
+  .pub:hover { box-shadow: 0 24px 60px -30px var(--glow-gold), var(--card-shadow); }
+  .pub-top { display: flex; align-items: center; gap: .5rem; font-family: "JetBrains Mono", monospace; font-size: .64rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .pub-top img { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; }
+  .pub-type { padding: .22em .6em; border-radius: 20px; border: 1px solid var(--border-2); background: var(--surface-2); }
+  .pub-yr { margin-left: auto; color: var(--faint); }
+  .pub h3 { font-family: "Inter", sans-serif; font-weight: 700; font-size: .97rem; line-height: 1.38; letter-spacing: 0; margin: .85rem 0 .5rem; }
+  .pub p { color: var(--muted); font-size: .85rem; line-height: 1.5; margin: 0 0 1rem; flex: 1; }
+  .pub-foot { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
+  .pub-plus { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: .86rem; color: var(--gold); display: inline-flex; align-items: center; gap: .4em; }
+  .pub-plus svg { width: 15px; height: 15px; fill: currentColor; filter: drop-shadow(0 0 6px var(--glow-gold)); }
+  .pub-plus small { font-weight: 500; font-size: .68rem; color: var(--faint); letter-spacing: .04em; }
+  .pub .src { font-size: .72rem; }
+
+  /* ---- video card ---- */
+  .vid { display: flex; flex-direction: column; padding: 0; overflow: hidden; cursor: pointer; text-align: left; font-family: inherit; color: inherit; }
+  .vid:hover { box-shadow: 0 24px 60px -30px var(--glow-violet), var(--card-shadow); }
+  .vid-thumb { position: relative; aspect-ratio: 16/9; background: var(--surface-2); overflow: hidden; }
+  .vid-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+  .vid:hover .vid-thumb img { transform: scale(1.05); }
+  .vid-play { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.45)); }
+  .vid-play span {
+    width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.4);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    transition: transform .25s ease, background .25s ease, border-color .25s ease;
+  }
+  .vid-play svg { width: 20px; height: 20px; fill: #fff; margin-left: 3px; }
+  .vid:hover .vid-play span { transform: scale(1.12); background: var(--gold); border-color: var(--gold); box-shadow: 0 0 30px -4px var(--glow-gold); }
+  .vid:hover .vid-play svg { fill: #15100A; }
+  .vid-plat, .vid-dur {
+    position: absolute; font-family: "JetBrains Mono", monospace; font-size: .62rem; font-weight: 700;
+    padding: .3em .6em; border-radius: 6px; background: rgba(10,10,15,.82); color: #fff;
+    border: 1px solid rgba(255,255,255,.12); letter-spacing: .04em;
+  }
+  .vid-plat { top: 8px; left: 8px; }
+  .vid-plat.yt { color: #ff6b6b; }
+  .vid-plat.vk { color: #7fb8ff; }
+  .vid-dur { bottom: 8px; right: 8px; }
+  .vid-info { padding: .95rem 1.05rem 1.05rem; display: flex; flex-direction: column; gap: .45rem; flex: 1; }
+  .vid h3 { font-family: "Inter", sans-serif; font-weight: 600; font-size: .92rem; line-height: 1.4; letter-spacing: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .vid-meta { font-family: "JetBrains Mono", monospace; font-size: .7rem; color: var(--faint); margin-top: auto; display: flex; gap: .6em; align-items: center; }
+  .vid-meta b { color: var(--muted); font-weight: 600; }
+
+  /* ---- video modal ---- */
+  .vmodal { position: fixed; inset: 0; z-index: 300; display: none; place-items: center; padding: clamp(12px, 4vw, 40px); background: rgba(5,5,10,.86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .vmodal.open { display: grid; }
+  .vmodal-box { width: min(1100px, 100%); position: relative; animation: vmodal-in .28s ease; }
+  @keyframes vmodal-in { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: none; } }
+  .vmodal-frame { position: relative; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; background: #000; border: 1px solid rgba(255,255,255,.14); box-shadow: 0 40px 120px -30px var(--glow-violet), 0 0 0 1px rgba(0,0,0,.4); }
+  .vmodal-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .vmodal-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: .9rem; color: #fff; }
+  .vmodal-title { font-weight: 600; font-size: .95rem; line-height: 1.4; margin: 0; }
+  .vmodal-ext { font-family: "JetBrains Mono", monospace; font-size: .72rem; color: var(--cyan); text-decoration: none; white-space: nowrap; }
+  .vmodal-ext:hover { text-decoration: underline; }
+  .vmodal-close {
+    position: absolute; top: -14px; right: -14px; z-index: 2;
+    width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
+    background: #15151F; border: 1px solid rgba(255,255,255,.22); color: #fff; font-size: 18px; line-height: 1;
+    display: grid; place-items: center; transition: transform .2s, border-color .2s;
+  }
+  .vmodal-close:hover { transform: rotate(90deg); border-color: var(--gold); color: var(--gold); }
+  body.vmodal-lock { overflow: hidden; }
+  @media (max-width: 720px) { .vmodal-close { top: -50px; right: 0; } .vmodal-bar { flex-direction: column; align-items: flex-start; gap: .4rem; } }
+  @media (prefers-reduced-motion: reduce) { .vmodal-box { animation: none; } }
+
   /* ====================== RESPONSIVE ====================== */
   @media (max-width: 960px) {
     .awards-grid { grid-template-columns: 1fr 1fr; }
     .talks-grid .talk { flex-basis: calc((100% - 22px) / 2); }
+    .car-track > .car-item, .car--3 .car-track > .car-item { flex-basis: calc((100% - 22px) / 2); }
     .rubrics { grid-template-columns: 1fr 1fr; }
     .hero-grid { grid-template-columns: 1fr; text-align: center; }
     .hero-photo { margin-bottom: 1rem; }
@@ -768,6 +858,7 @@
   @media (max-width: 480px) {
     .awards-grid { grid-template-columns: 1fr; }
     .talks-grid .talk { flex-basis: 86%; }
+    .car-track > .car-item, .car--3 .car-track > .car-item { flex-basis: 86%; }
     .car-prev { left: -8px; }
     .car-next { right: -8px; }
     .rubrics { grid-template-columns: 1fr; }
@@ -783,7 +874,9 @@
     <a href="#about" class="brand"><span class="dot"></span>Дмитрий&nbsp;Котов</a>
     <nav class="nav-links" id="navLinks">
       <a href="#about">Обо мне</a>
-      <a href="#content">Контент</a>
+      <a href="#social">Соц.сети</a>
+      <a href="#articles">Статьи</a>
+      <a href="#videos">Видео</a>
       <a href="#awards">Награды</a>
       <a href="#talks">Выступления</a>
       <a href="#macbook">🍏 MacBook</a>
@@ -841,11 +934,11 @@
   </div>
 </section>
 
-<!-- ============ CONTENT ============ -->
-<section id="content">
+<!-- ============ SOCIAL ============ -->
+<section id="social">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="eyebrow">// Контент</p>
+      <p class="eyebrow">// Соц.сети</p>
       <h2>Где меня <span class="grad-text">читать и смотреть</span></h2>
     </div>
 
@@ -961,6 +1054,107 @@
 
   </div>
 </section>
+
+<!-- ============ ARTICLES ============ -->
+<section id="articles">
+  <div class="orb" style="width:380px;height:380px;background:var(--glow-gold);top:-80px;left:max(-140px, calc(50% - 860px));"></div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">// Статьи</p>
+      <h2>Самое <span class="grad-text">интересное</span> с Инфостарта</h2>
+      <p>Не всё подряд, а то, что стоит времени: разборы из живой практики и разработки, которыми реально пользуются. Полный список — в <a href="https://infostart.ru/profile/564942/" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">профиле на Инфостарте</a>.</p>
+    </div>
+    <div class="cgroup reveal" data-group="exp">
+      <div class="cgroup-head"><p class="eyebrow">// Опыт</p><span class="cgroup-count" data-count></span></div>
+      <div class="car">
+        <div class="car-track" data-track></div>
+      <button class="car-btn car-prev" type="button" aria-label="Назад">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="car-btn car-next" type="button" aria-label="Вперёд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      </div>
+      <div class="car-dots" data-dots></div>
+    </div>
+    <div class="cgroup reveal" data-group="prod">
+      <div class="cgroup-head"><p class="eyebrow">// Продукты</p><span class="cgroup-count" data-count></span></div>
+      <div class="car">
+        <div class="car-track" data-track></div>
+      <button class="car-btn car-prev" type="button" aria-label="Назад">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="car-btn car-next" type="button" aria-label="Вперёд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      </div>
+      <div class="car-dots" data-dots></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIDEOS ============ -->
+<section id="videos">
+  <div class="orb" style="width:420px;height:420px;background:var(--glow-violet);bottom:-140px;left:min(calc(100% - 300px), calc(50% + 420px));"></div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">// Видео</p>
+      <h2>Самое <span class="grad-text">интересное</span> в эфире</h2>
+      <p>Стримы, где ИИ пишет код в 1С прямо на экране, эфиры в гостях у коллег и записи митапов, которые я организовал. Открывается прямо здесь — жми на превью. Всё остальное — на <a href="https://www.youtube.com/@top_1c" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">YouTube-канале</a>.</p>
+    </div>
+    <div class="cgroup reveal" data-group="streams">
+      <div class="cgroup-head"><p class="eyebrow">// Мои стримы</p><span class="cgroup-count" data-count></span></div>
+      <div class="car car--3">
+        <div class="car-track" data-track></div>
+      <button class="car-btn car-prev" type="button" aria-label="Назад">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="car-btn car-next" type="button" aria-label="Вперёд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      </div>
+      <div class="car-dots" data-dots></div>
+    </div>
+    <div class="cgroup reveal" data-group="guest">
+      <div class="cgroup-head"><p class="eyebrow">// В гостях у коллег</p><span class="cgroup-count" data-count></span></div>
+      <div class="car car--3">
+        <div class="car-track" data-track></div>
+      <button class="car-btn car-prev" type="button" aria-label="Назад">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="car-btn car-next" type="button" aria-label="Вперёд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      </div>
+      <div class="car-dots" data-dots></div>
+    </div>
+    <div class="cgroup reveal" data-group="meetups">
+      <div class="cgroup-head"><p class="eyebrow">// Мои митапы</p><span class="cgroup-count" data-count></span></div>
+      <div class="car car--3">
+        <div class="car-track" data-track></div>
+      <button class="car-btn car-prev" type="button" aria-label="Назад">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="car-btn car-next" type="button" aria-label="Вперёд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      </div>
+      <div class="car-dots" data-dots></div>
+    </div>
+  </div>
+</section>
+
+<!-- video player modal -->
+<div class="vmodal" id="vmodal" role="dialog" aria-modal="true" aria-label="Просмотр видео">
+  <div class="vmodal-box">
+    <button class="vmodal-close" type="button" id="vmodalClose" aria-label="Закрыть">✕</button>
+    <div class="vmodal-frame" id="vmodalFrame"></div>
+    <div class="vmodal-bar">
+      <p class="vmodal-title" id="vmodalTitle"></p>
+      <a class="vmodal-ext" id="vmodalExt" href="#" target="_blank" rel="noopener">Открыть на площадке ↗</a>
+    </div>
+  </div>
+</div>
 
 <!-- ============ AWARDS ============ -->
 <section id="awards">
@@ -1448,46 +1642,48 @@
 </script>
 
 <script>
-/* ============ TALKS CAROUSEL ============ */
-(function () {
+/* ============ GENERIC CAROUSEL ============ */
+/* Одна функция обслуживает карусель выступлений и все карусели статей/видео. */
+function initCarousel(opts) {
   "use strict";
-  var track = document.querySelector(".talks-grid");
-  var prev = document.querySelector(".car-prev");
-  var next = document.querySelector(".car-next");
+  var track = opts.track, prev = opts.prev, next = opts.next, dotsWrap = opts.dots;
   if (!track || !prev || !next) return;
+  var cards = Array.prototype.slice.call(track.querySelectorAll(opts.item));
+  var label = opts.label || "Элемент";
 
   function step() {
-    var card = track.querySelector(".talk");
+    var card = cards[0];
     if (!card) return 300;
     var gap = parseFloat(getComputedStyle(track).columnGap) || 22;
     return card.getBoundingClientRect().width + gap;
   }
-  /* dots: one per card, filled while the card is in view */
-  var dotsWrap = document.getElementById("carDots");
-  var cards = Array.prototype.slice.call(track.querySelectorAll(".talk"));
   var dots = [];
   if (dotsWrap) {
+    dotsWrap.innerHTML = "";
     dots = cards.map(function (c, i) {
       var d = document.createElement("button");
       d.className = "car-dot";
       d.type = "button";
-      d.setAttribute("aria-label", "Выступление " + (i + 1) + " из " + cards.length);
+      d.setAttribute("aria-label", label + " " + (i + 1) + " из " + cards.length);
       d.addEventListener("click", function () {
-        track.scrollTo({ left: c.offsetLeft, behavior: "smooth" });
+        track.scrollTo({ left: c.offsetLeft - track.offsetLeft, behavior: "smooth" });
       });
       dotsWrap.appendChild(d);
       return d;
     });
   }
-
   function update() {
     var max = track.scrollWidth - track.clientWidth;
-    prev.disabled = track.scrollLeft <= 2;
-    next.disabled = track.scrollLeft >= max - 2;
+    prev.disabled = track.scrollLeft <= 4;
+    next.disabled = track.scrollLeft >= max - 4;
+    /* если всё влезло — стрелки и точки не нужны */
+    var fits = max <= 4;
+    prev.style.display = next.style.display = fits ? "none" : "";
+    if (dotsWrap) dotsWrap.style.display = fits ? "none" : "";
     if (dots.length) {
       var vs = track.scrollLeft, ve = vs + track.clientWidth;
       cards.forEach(function (c, i) {
-        var l = c.offsetLeft, r = l + c.offsetWidth;
+        var l = c.offsetLeft - track.offsetLeft, r = l + c.offsetWidth;
         var overlap = Math.min(r, ve) - Math.max(l, vs);
         dots[i].classList.toggle("on", overlap >= c.offsetWidth * 0.6);
       });
@@ -1498,13 +1694,247 @@
   track.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", update);
   update();
-
-  /* stop the beckoning pulse after first interaction */
   function stopPulse() { next.classList.remove("car-btn--pulse"); }
   next.addEventListener("click", stopPulse, { once: true });
   track.addEventListener("scroll", stopPulse, { once: true, passive: true });
+}
+
+/* карусель выступлений */
+(function () {
+  var root = document.querySelector(".talks-carousel");
+  if (!root) return;
+  initCarousel({
+    track: root.querySelector(".talks-grid"), item: ".talk",
+    prev: root.querySelector(".car-prev"), next: root.querySelector(".car-next"),
+    dots: document.getElementById("carDots"), label: "Выступление"
+  });
 })();
 </script>
+
+<script>
+/* ============ ARTICLES & VIDEOS DATA ============ */
+/* Цифры (плюсы, просмотры, длительность) — статичный снимок на дату сборки, см. SNAPSHOT_DATE.
+   Добавить материал = одна строка в массив. Порядок внутри группы — по дате, новые сверху (сортируется автоматически). */
+var SNAPSHOT_DATE = "2026-09-04";
+
+/* group: exp | prod. type: Статья | Инструмент | Отчёт | Проект. plus — только плюсы. */
+var ARTICLES = [
+  /* Опыт */
+  { group: "exp", type: "Статья", date: "2026-07-24", plus: 43, url: "https://infostart.ru/1c/articles/2720233/",
+    title: "[1С + ИИ] Внешняя обработка за 3 минуты! Вайбкодинг стал быстрее и дешевле",
+    desc: "Та же задача на новых моделях: готовая EPF за 4 минуты и примерно 20 рублей. Регресс-тест вайбкодинга с неожиданным победителем." },
+  { group: "exp", type: "Статья", date: "2026-06-04", plus: 66, url: "https://infostart.ru/1c/articles/2708708/",
+    title: "[1С + ИИ] ИИ сделал внешнюю обработку за 19 минут. За сколько сделаешь ты?",
+    desc: "Разбор стрима: ИИ-агенты по одному промпту сделали внешнюю обработку и собрали EPF без Конфигуратора. С замерами, стендами и честными ограничениями." },
+  { group: "exp", type: "Статья", date: "2026-02-25", plus: 80, url: "https://infostart.ru/1c/articles/2624937/",
+    title: "[1С + ИИ] Вайбкодинг на 1С — Проще простого! Быстрый старт!",
+    desc: "Как за один вечер собрать стенд для вайбкодинга и начать решать реальные задачи 1С с ИИ: ТЗ, документация, анализ кода, поиск багов." },
+  { group: "exp", type: "Статья", date: "2025-09-11", plus: 27, url: "https://infostart.ru/1c/articles/2478682/",
+    title: "Практика разработки интерфейса на примере Терминала путевых листов",
+    desc: "Как проектировать интерфейсы в 1С с учётом ограничений платформы: полный путь от идеи до запуска на примере терминала путевых листов." },
+  { group: "exp", type: "Статья", date: "2019-09-06", plus: 1104, url: "https://infostart.ru/1c/articles/1118319/",
+    title: "[Шпаргалка] Программное создание элементов формы",
+    desc: "Готовые шаблоны кода для программного создания почти любого элемента управляемой формы. Самая читаемая моя публикация: под 700 тысяч просмотров." },
+  { group: "exp", type: "Статья", date: "2019-05-08", plus: 36, url: "https://infostart.ru/1c/articles/1058155/",
+    title: "[История разработки] Дорожная карта — контроль над движением первичных документов",
+    desc: "История разработки контроля за движением оригиналов первички между региональными офисами и бухгалтерией: задача, решения, уроки." },
+  { group: "exp", type: "Проект", date: "2019-03-22", plus: 21, url: "https://infostart.ru/pm/846893/",
+    title: "[Обзор. История внедрения] КИНТ: Управление санаторием — модуль «Питание»",
+    desc: "История внедрения модуля «Питание» в санатории: зачем автоматизировали, как выбирали продукт и что вышло на практике." },
+  { group: "exp", type: "Статья", date: "2018-07-23", plus: 415, url: "https://infostart.ru/1c/articles/872573/",
+    title: "[Шпаргалка] Свой заголовок отчёту на СКД с параметрами, картинками (без программирования)",
+    desc: "Как в отчёте на СКД вывести свой заголовок с параметрами и картинками одними настройками, без единой строки кода." },
+
+  /* Продукты */
+  { group: "prod", type: "Статья", date: "2022-08-12", plus: 98, url: "https://infostart.ru/1c/articles/1709735/",
+    title: "{UI/UX} Свой всплывающий информер у элемента формы",
+    desc: "Своя всплывающая подсказка у элемента формы вместо стандартного окна «Ошибка». В комплекте библиотека для программного формирования." },
+  { group: "prod", type: "Расширение", date: "2022-07-01", plus: 109, url: "https://infostart.ru/1c/tools/1661803/",
+    title: "[Расширение] Смена цветового стиля оформления интерфейса",
+    desc: "Расширение, которое меняет цветовой стиль интерфейса: боевая база и тестовые копии больше не путаются. Использую в проектах с 2018 года." },
+  { group: "prod", type: "Общий модуль", date: "2020-08-28", plus: 391, url: "https://infostart.ru/1c/articles/1284403/",
+    title: "[Общий модуль] Динамическое формирование интерфейса",
+    desc: "Библиотека готовых функций для программного создания элементов формы. Имена функций совпадают с меню Конфигуратора, чтобы ничего не искать." },
+  { group: "prod", type: "Статья", date: "2019-08-26", plus: 72, url: "https://infostart.ru/1c/articles/1112550/",
+    title: "[Механизм интерфейса] Часы",
+    desc: "Цифровые часы на форме через поле HTML вместо обработчика ожидания, который сбрасывал ввод пользователя. Бонусом аналоговый вариант." },
+  { group: "prod", type: "Инструмент", date: "2019-08-09", plus: 178, url: "https://infostart.ru/1c/tools/1106063/",
+    title: "[Механизм интерфейса] Свой флажок (чекбокс)",
+    desc: "Собственный флажок вместо стандартного, который нельзя увеличить. Работает на декорациях и группах, удобен для сенсорных экранов." },
+  { group: "prod", type: "Инструмент", date: "2018-11-07", plus: 36, url: "https://infostart.ru/1c/tools/937870/",
+    title: "[Механизм интерфейса] Интерактивный выбор периода (месяц, квартал, полугодие, год)",
+    desc: "Готовый механизм выбора периода для управляемых форм: месяц, квартал, полугодие или год со сдвигом вперёд и назад одной кнопкой." },
+  { group: "prod", type: "Инструмент", date: "2018-08-16", plus: 29, url: "https://infostart.ru/1c/reports/888041/",
+    title: "[Механизм интерфейса] Интерактивный выбор даты",
+    desc: "Интерактивный выбор даты для сенсорных терминалов и АРМ: каждая часть даты меняется кнопками «+» и «−», четыре варианта масштаба." },
+];
+
+/* group: streams | guest | meetups. p: yt | vk. id: youtube id или "oid_id" для VK. views — число, dur — секунды, date — YYYY-MM-DD. thumb — только для VK. */
+var VIDEOS = [
+  /* Мои стримы */
+  { group: "streams", p: "yt", id: "ou3hd6v5sSk", date: "2026-09-02", views: 5604, dur: 5880, title: "Анна Степанян. Другие правила на рынке 1С." },
+  { group: "streams", p: "yt", id: "NKXJZ8TTpTU", date: "2026-07-29", views: 1166, dur: 4865, title: "Дина Астахова. Сколько зарабатывает 1Сник в 2026 году?" },
+  { group: "streams", p: "yt", id: "wImZoF3GUlc", date: "2026-07-22", views: 817,  dur: 3610, title: "Самая дешёвая AI-разработка на 1С" },
+  { group: "streams", p: "yt", id: "O7cQKdI1K30", date: "2026-07-15", views: 592,  dur: 4115, title: "1С + ИИ Битва II. FABLE 5, SOL и GROK. ИИ пишет код на 1С." },
+  { group: "streams", p: "yt", id: "GZN-0vKbWJ0", date: "2026-06-24", views: 178,  dur: 3640, title: "Михаил Калимулин. Менеджеры продаж больше не нужны? Торговый бот выходит на смену" },
+  { group: "streams", p: "yt", id: "51Qz6dGJddo", date: "2026-06-03", views: 1076, dur: 5891, title: "1С + ИИ Битва. Cursor + Composer vs Visual Studio Code + Codex" },
+  { group: "streams", p: "yt", id: "nDQ98JOxA4I", date: "2026-05-20", views: 1717, dur: 3970, title: "1С + ИИ + MCP = Творим магию в 1С без айтишников!" },
+  { group: "streams", p: "yt", id: "FYyat8MZ53U", date: "2026-02-24", views: 7038, dur: 7050, title: "1С + ИИ = Проще простого! Вайбкодинг на 1С" },
+  { group: "streams", p: "yt", id: "ho9k1ftmQ-s", date: "2025-12-29", views: 1936, dur: 4736, title: "Новый интерфейс 1С:УНФ на платформе 8.5 (тёмная тема)" },
+  { group: "streams", p: "yt", id: "4F5IpMdosvc", date: "2025-09-16", views: 400,  dur: 5414, title: "Денис Соколов. Три книги для 1Сника. Книжный клуб 1С." },
+  { group: "streams", p: "yt", id: "abOI9MHW4QI", date: "2025-08-14", views: 923,  dur: 6185, title: "Игорь Апресов о разносторонней разработке на 1С" },
+
+  /* В гостях у коллег */
+  { group: "guest", p: "vk", id: "210707080_456239203", date: "2025-06-06", views: 2104, dur: 5583, channel: "CORS Academy", thumb: "assets/vk-cors-friday.jpg",
+    title: "CORS пятница №12: «Выбор профессии в 1С: программист, аналитик или кто-то ещё?»" },
+  { group: "guest", p: "yt", id: "GKsJ2S1it0Y", date: "2025-03-11", views: 4191, dur: 6891, channel: "Мир 1С",
+    title: "Путь 1С-ника. Как Дмитрий Котов до аналитика деградировал" },
+  { group: "guest", p: "vk", id: "42867005_456240438", date: "2025-02-24", views: 1503, dur: 1875, channel: "Инфостарт", thumb: "assets/vk-infostart-brand.jpg",
+    title: "Личный бренд в ИТ. Как Инфостарт и сообщество 1С помогут вам в карьерном росте" },
+
+  /* Мои митапы */
+  { group: "meetups", p: "yt", id: "TZFEjd5TjBY", date: "2026-06-09", views: 869,  dur: 3605, title: "Дарья Грабкина. EDT + GIT vs Хранилище + Конфигуратор." },
+  { group: "meetups", p: "yt", id: "jKAVUBx-LbE", date: "2026-02-19", views: 1006, dur: 7193, title: "Игорь Апресов. HTTP-сервисы в 1С. Кунг-фу митап, Иркутск" },
+  { group: "meetups", p: "yt", id: "ewnlWyl47AA", date: "2025-07-09", views: 121,  dur: 5764, title: "Жёлтый клуб Иркутск: ИИ при собесе 1Сника, 3 лицензии по цене 2-х" },
+  { group: "meetups", p: "yt", id: "n0pZpsuB3mw", date: "2024-11-19", views: 457,  dur: 6886, title: "Заменят ли нейросети 1Сников? Как правильно использовать индексы в 1С" },
+  { group: "meetups", p: "yt", id: "GI1CYzAkF0M", date: "2024-02-17", views: 1220, dur: 6402, title: "Архитектор ИС и База 1С на 40 терабайт" },
+];
+</script>
+
+<script>
+/* ============ ARTICLES & VIDEOS RENDER ============ */
+(function () {
+  "use strict";
+  var ICON_IS = "https://www.google.com/s2/favicons?domain=infostart.ru&sz=64";
+  var PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  var THUMB = '<svg viewBox="0 0 24 24"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.8V11c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83v7.84C7 18.95 8.05 20 9.34 20h8.11c.7 0 1.36-.37 1.72-.97l2.66-6.15z"/></svg>';
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function year(d) { return String(d).slice(0, 4); }
+  function fmtNum(n) {
+    n = Number(n) || 0;
+    if (n >= 1e6) return (Math.round(n / 1e5) / 10).toString().replace(".", ",") + " млн";
+    if (n >= 1e4) return Math.round(n / 1e3) + " тыс.";
+    if (n >= 1e3) return (Math.round(n / 100) / 10).toString().replace(".", ",") + " тыс.";
+    return String(n);
+  }
+  function fmtDur(sec) {
+    sec = Number(sec) || 0;
+    var h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
+    var mm = (h ? String(m).padStart(2, "0") : String(m)), ss = String(s).padStart(2, "0");
+    return h ? h + ":" + mm + ":" + ss : mm + ":" + ss;
+  }
+  function plural(n, one, few, many) {
+    n = Math.abs(n) % 100; var n1 = n % 10;
+    if (n > 10 && n < 20) return many;
+    if (n1 > 1 && n1 < 5) return few;
+    if (n1 === 1) return one;
+    return many;
+  }
+  function byDateDesc(a, b) { return String(b.date).localeCompare(String(a.date)); }
+
+  function articleCard(a) {
+    return '<a class="card pub car-item" href="' + esc(a.url) + '" target="_blank" rel="noopener">' +
+      '<div class="pub-top"><img src="' + ICON_IS + '" alt="" loading="lazy"><span class="pub-type">' + esc(a.type) + '</span><span class="pub-yr">' + year(a.date) + '</span></div>' +
+      '<h3>' + esc(a.title) + '</h3>' +
+      '<p>' + esc(a.desc) + '</p>' +
+      '<div class="pub-foot"><span class="pub-plus" title="Плюсы на Инфостарте">' + THUMB + esc(a.plus) + ' <small>' + plural(a.plus, "плюс", "плюса", "плюсов") + '</small></span><span class="src">Читать →</span></div>' +
+    '</a>';
+  }
+  function videoThumb(v) {
+    if (v.p === "yt") return "https://i.ytimg.com/vi/" + v.id + "/maxresdefault.jpg";
+    return v.thumb || "";
+  }
+  function videoUrl(v) {
+    if (v.p === "yt") return "https://www.youtube.com/watch?v=" + v.id;
+    return "https://vkvideo.ru/video-" + v.id;
+  }
+  function videoCard(v, idx) {
+    return '<button type="button" class="card vid car-item" data-video="' + idx + '" aria-label="Смотреть: ' + esc(v.title) + '">' +
+      '<div class="vid-thumb"><img src="' + esc(videoThumb(v)) + '" alt="" loading="lazy" width="640" height="360"' + (v.p === "yt" ? ' onerror="this.onerror=null;this.src=this.src.replace(&quot;maxresdefault&quot;,&quot;hqdefault&quot;)"' : '') + '>' +
+        '<span class="vid-plat ' + v.p + '">' + (v.p === "yt" ? "▶ YouTube" : "▶ VK Видео") + '</span>' +
+        (v.dur ? '<span class="vid-dur">' + fmtDur(v.dur) + '</span>' : '') +
+        '<span class="vid-play"><span>' + PLAY + '</span></span></div>' +
+      '<div class="vid-info"><h3>' + esc(v.title) + '</h3>' +
+        '<div class="vid-meta">' + (v.views ? '<b>👁 ' + fmtNum(v.views) + '</b><span>·</span>' : '') + '<span>' + year(v.date) + '</span>' + (v.channel ? '<span>·</span><span>' + esc(v.channel) + '</span>' : '') + '</div></div>' +
+    '</button>';
+  }
+
+  function render(groupEl, items, cardFn, label, noun) {
+    var track = groupEl.querySelector("[data-track]");
+    var count = groupEl.querySelector("[data-count]");
+    if (!track) return;
+    track.innerHTML = items.map(cardFn).join("");
+    if (count) count.textContent = items.length + " " + plural(items.length, noun[0], noun[1], noun[2]);
+    initCarousel({
+      track: track, item: ".car-item",
+      prev: groupEl.querySelector(".car-prev"), next: groupEl.querySelector(".car-next"),
+      dots: groupEl.querySelector("[data-dots]"), label: label
+    });
+  }
+
+  /* --- статьи --- */
+  document.querySelectorAll("#articles .cgroup[data-group]").forEach(function (g) {
+    var key = g.getAttribute("data-group");
+    var items = ARTICLES.filter(function (a) { return a.group === key; }).sort(byDateDesc);
+    render(g, items, articleCard, "Публикация", ["публикация", "публикации", "публикаций"]);
+  });
+
+  /* --- видео --- */
+  var flat = []; /* индекс для модалки */
+  document.querySelectorAll("#videos .cgroup[data-group]").forEach(function (g) {
+    var key = g.getAttribute("data-group");
+    var items = VIDEOS.filter(function (v) { return v.group === key; }).sort(byDateDesc);
+    var base = flat.length;
+    flat = flat.concat(items);
+    render(g, items, function (v, i) { return videoCard(v, base + i); }, "Видео", ["видео", "видео", "видео"]);
+  });
+
+  /* --- модалка с плеером --- */
+  var modal = document.getElementById("vmodal");
+  var frame = document.getElementById("vmodalFrame");
+  var title = document.getElementById("vmodalTitle");
+  var ext = document.getElementById("vmodalExt");
+  var closeBtn = document.getElementById("vmodalClose");
+  var lastFocus = null;
+  if (!modal || !frame) return;
+
+  function embedSrc(v) {
+    if (v.p === "yt") return "https://www.youtube-nocookie.com/embed/" + v.id + "?autoplay=1&rel=0&modestbranding=1";
+    var parts = v.id.split("_"); /* "42867005_456240438" → oid=-42867005 id=456240438 */
+    return "https://vkvideo.ru/video_ext.php?oid=-" + parts[0] + "&id=" + parts[1] + "&hd=2&autoplay=1";
+  }
+  function openVideo(v) {
+    lastFocus = document.activeElement;
+    var f = document.createElement("iframe");
+    f.src = embedSrc(v);
+    f.allow = "autoplay; fullscreen; encrypted-media; picture-in-picture";
+    f.allowFullscreen = true;
+    f.title = v.title;
+    frame.innerHTML = "";
+    frame.appendChild(f);
+    title.textContent = v.title;
+    ext.href = videoUrl(v);
+    ext.textContent = (v.p === "yt" ? "Открыть на YouTube" : "Открыть в VK Видео") + " ↗";
+    modal.classList.add("open");
+    document.body.classList.add("vmodal-lock");
+    closeBtn.focus();
+  }
+  function closeVideo() {
+    modal.classList.remove("open");
+    document.body.classList.remove("vmodal-lock");
+    frame.innerHTML = ""; /* убираем iframe — звук останавливается */
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.querySelectorAll("#videos [data-video]").forEach(function (b) {
+    b.addEventListener("click", function () { openVideo(flat[Number(b.getAttribute("data-video"))]); });
+  });
+  closeBtn.addEventListener("click", closeVideo);
+  modal.addEventListener("click", function (e) { if (e.target === modal) closeVideo(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && modal.classList.contains("open")) closeVideo(); });
+})();
+</script>
+
 
 <script>
 /* ============ TALKS MD LIST ============ */
