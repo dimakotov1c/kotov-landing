@@ -411,13 +411,13 @@
     width: var(--deck-w); height: var(--deck-h);
     margin: calc(var(--deck-h) / -2) 0 0 calc(var(--deck-w) / -2);
     transform: translateX(var(--tx, 0)) scale(var(--sc, 1));
-    transition: transform .45s cubic-bezier(.22,.8,.3,1), opacity .45s ease, border-color .45s ease, box-shadow .45s ease;
+    transition: transform .35s cubic-bezier(.22,.8,.3,1), opacity .35s ease, border-color .35s ease, box-shadow .35s ease;
     cursor: pointer; will-change: transform;
   }
   .deck-stage > .card::after {
     content: ""; position: absolute; inset: 0; border-radius: inherit;
     background: var(--bg); opacity: var(--dim, 0); pointer-events: none;
-    transition: opacity .45s ease;
+    transition: opacity .35s ease;
   }
   .deck-stage > .card.no-transition, .deck-stage > .card.no-transition::after { transition: none; }
   .deck-stage > .card.is-center {
@@ -901,7 +901,7 @@
       <div class="toggle" id="themeToggle" role="group" aria-label="Выбор темы">
         <button class="ico" type="button" data-mode="dark" aria-label="Тёмная тема" title="Тёмная тема" aria-pressed="false">🌙</button>
         <button class="ico" type="button" data-mode="light" aria-label="Светлая тема" title="Светлая тема" aria-pressed="false">☀️</button>
-        <button class="ico" type="button" data-mode="auto" aria-label="Авто — системная тема" title="Авто — системная тема" aria-pressed="true">🅰️</button>
+        <button class="ico" type="button" data-mode="auto" aria-label="Авто — системная тема" title="Авто — системная тема" aria-pressed="true">⚙️</button>
       </div>
     </div>
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">☰</button>
@@ -1714,7 +1714,8 @@ function initCarousel(opts) {
 
 /* ============ DECK CAROUSEL (колода, как на frappe.io) ============ */
 /* Карточки лежат в центре сцены; позиция = translateX(pos*step) scale(1 - |pos|*shrink).
-   Бесконечность: список карточек утроен, после анимации индекс тихо нормализуется в средний блок. */
+   Бесконечность: пять наборов карточек; индекс возвращается в средний блок после анимации
+   или перед исчерпанием запаса при непрерывном перелистывании. */
 function initDeck(opts) {
   "use strict";
   var root = opts.root; if (!root) return;
@@ -1725,14 +1726,16 @@ function initDeck(opts) {
   var n = originals.length; if (n < 2) return;
   var label = opts.label || "Элемент";
 
-  /* утраиваем DOM: [клоны][оригиналы][клоны] */
+  /* пять наборов DOM: [клоны][клоны][оригиналы][клоны][клоны] */
   var slides = [];
   function clone(el) { var c = el.cloneNode(true); c.setAttribute("data-clone", "1"); return c; }
   originals.forEach(function (el) { var c = clone(el); stage.insertBefore(c, originals[0]); slides.push(c); });
+  originals.forEach(function (el) { var c = clone(el); stage.insertBefore(c, originals[0]); slides.push(c); });
   originals.forEach(function (el) { slides.push(el); });
   originals.forEach(function (el) { var c = clone(el); stage.appendChild(c); slides.push(c); });
+  originals.forEach(function (el) { var c = clone(el); stage.appendChild(c); slides.push(c); });
 
-  var offset = n;
+  var offset = 2 * n;
   var current = (typeof opts.start === "number" ? opts.start : Math.floor(n / 2)) % n;
   var animating = true;
   var normTimer = 0;
@@ -1768,7 +1771,7 @@ function initDeck(opts) {
     });
     if (animating) {
       clearTimeout(normTimer);
-      normTimer = setTimeout(normalize, 480); /* после окончания transition (.45s) */
+      normTimer = setTimeout(normalize, 380); /* после окончания transition (.35s) */
     }
     renderDots();
   }
@@ -1799,7 +1802,12 @@ function initDeck(opts) {
     var k = ((current % n) + n) % n;
     dots.forEach(function (d, i) { d.classList.toggle("on", i === k); });
   }
-  function move(delta) { animating = true; current += delta; render(); stopPulse(); }
+  function move(delta) {
+    /* Не ждём паузы, если следующий шаг исчерпает запас карточек по краям. */
+    var target = current + offset + delta, margin = cfg().vis + 1;
+    if (target < margin || target >= slides.length - margin) normalize();
+    animating = true; current += delta; render(); stopPulse();
+  }
   function goTo(i) {
     var k = ((current % n) + n) % n;
     var d = i - k;
