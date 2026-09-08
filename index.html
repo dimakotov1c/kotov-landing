@@ -3,9 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Дмитрий Котов — 1С-эксперт, блогер, спикер</title>
-<meta name="description" content="Дмитрий Котов — 1С-эксперт, блогер, спикер. Telegram-канал «1С Заметки» 8 400+ подписчиков. Реклама в 1С-сообществе, коллаборации, выступления.">
+<title>Дмитрий Котов (Дима Котов) — 1С, ИИ и «1С Заметки»</title>
+<meta name="description" content="Личный сайт Дмитрия Котова (Димы Котова) — аналитика 1С, блогера и спикера из Иркутска. Автор «1С Заметок»: статьи, видео, ИИ в 1С, выступления и контакты.">
 <meta name="theme-color" content="#0A0A0F">
+<script>
+(function () {
+  var mode = "auto";
+  try { mode = localStorage.getItem("dk-theme") || "auto"; } catch (e) {}
+  if (["dark", "light", "auto"].indexOf(mode) === -1) mode = "auto";
+  var root = document.documentElement;
+  var dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  root.setAttribute("data-theme-mode", mode);
+  root.setAttribute("data-theme", mode === "auto" ? (dark ? "dark" : "light") : mode);
+  root.style.colorScheme = root.getAttribute("data-theme");
+})();
+</script>
 <link rel="canonical" href="https://kotov.top/">
 <meta name="google-site-verification" content="R0PFfoeWEN7X-b4MmfXg0vOxYkhuOobw4cZAFVjG27Y">
 <meta name="yandex-verification" content="aba25e1fe92ba385">
@@ -14,101 +26,57 @@
 <!-- Open Graph / Telegram / соцсети -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotov.top/">
-<meta property="og:title" content="Дмитрий Котов — 1Сник, блогер, спикер">
-<meta property="og:description" content="Канал «1С Заметки» — вайбкодинг, ИИ в 1С, новости 1С, 8500+ подписчиков.">
+<meta property="og:title" content="Дмитрий Котов (Дима Котов) — 1С, ИИ и «1С Заметки»">
+<meta property="og:description" content="Личный сайт автора «1С Заметок»: статьи, видео, ИИ в 1С, выступления и контакты.">
 <meta property="og:image" content="https://kotov.top/assets/og-image.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="600">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Дмитрий Котов — 1Сник, блогер, спикер">
-<meta name="twitter:description" content="Канал «1С Заметки» — вайбкодинг, ИИ в 1С, новости 1С, 8500+ подписчиков.">
+<meta name="twitter:title" content="Дмитрий Котов (Дима Котов) — 1С, ИИ и «1С Заметки»">
+<meta name="twitter:description" content="Личный сайт автора «1С Заметок»: статьи, видео, ИИ в 1С, выступления и контакты.">
 <meta name="twitter:image" content="https://kotov.top/assets/og-image.jpg">
 
-<!-- Schema.org structured data -->
+<!-- Schema.org: личный сайт и его автор; сведения соответствуют видимому содержанию. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Дмитрий Котов",
-  "jobTitle": "1С-эксперт, аналитик, блогер",
-  "url": "https://kotov.top",
-  "image": "https://kotov.top/assets/dmitry.jpg",
-  "email": "kotovdima1c@gmail.com",
-  "address": { "@type": "PostalAddress", "addressLocality": "Иркутск", "addressCountry": "RU" },
-  "knowsAbout": ["1С", "SRM", "SCM", "ERP", "вайбкодинг", "ИИ в 1С", "менторство", "реклама в 1С", "Telegram-канал 1С"],
-  "sameAs": [
-    "https://t.me/top_1c",
-    "https://t.me/KotovDima",
-    "https://infostart.ru/profile/564942/",
-    "https://github.com/DimaKotov1C",
-    "https://vk.com/kotovdima1c"
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Услуги и размещение рекламы",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "name": "Реклама в Telegram-канале «1С Заметки»",
-        "description": "Размещение рекламы в Telegram-канале для 1С-специалистов с аудиторией 8 400+ подписчиков. Аудитория: программисты 1С, аналитики, руководители IT-проектов.",
-        "url": "https://kotov.top/#contacts"
-      },
-      {
-        "@type": "Offer",
-        "name": "Менторство в 1С",
-        "description": "Персональное менторство для 1С-специалистов: карьерные развилки, технологии, личный бренд",
-        "price": "10000",
-        "priceCurrency": "RUB"
-      }
-    ]
-  }
-}
-</script>
-
-<!-- Schema.org FAQPage — для поисковых ботов -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "Как разместить рекламу в 1С Telegram-канале?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Напишите Дмитрию Котову в Telegram @KotovDima. Канал «1С Заметки» (@top_1c) — специализированная аудитория: 1С-программисты, аналитики и руководители IT-проектов. Условия размещения обсуждаются индивидуально."
-      }
+      "@type": "ProfilePage",
+      "@id": "https://kotov.top/#profile",
+      "url": "https://kotov.top/",
+      "name": "Дмитрий Котов (Дима Котов) — 1С, ИИ и «1С Заметки»",
+      "inLanguage": "ru-RU",
+      "mainEntity": { "@id": "https://kotov.top/#person" }
     },
     {
-      "@type": "Question",
-      "name": "Какая аудитория у канала «1С Заметки»?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Канал @top_1c объединяет 8 400+ подписчиков — специалистов по платформе 1С: программисты, аналитики, внедренцы, руководители IT-проектов в российских компаниях."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Какие форматы рекламы доступны в канале 1С?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Нативный пост, упоминание в тематическом материале, интеграция в видео на YouTube. Все форматы обсуждаются с Дмитрием Котовым напрямую через Telegram @KotovDima."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Сколько стоит реклама в 1С Telegram-канале?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Цена на размещение рекламы в канале «1С Заметки» обсуждается индивидуально. Свяжитесь с автором канала Дмитрием Котовым в Telegram @KotovDima для получения условий."
-      }
+      "@type": "Person",
+      "@id": "https://kotov.top/#person",
+      "name": "Дмитрий Котов",
+      "givenName": "Дмитрий",
+      "familyName": "Котов",
+      "alternateName": ["Дима Котов", "DimaKotov1C"],
+      "jobTitle": "Аналитик 1С, блогер, спикер",
+      "url": "https://kotov.top/",
+      "mainEntityOfPage": { "@id": "https://kotov.top/#profile" },
+      "image": "https://kotov.top/assets/dmitry.jpg",
+      "email": "kotovdima1c@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Иркутск", "addressCountry": "RU" },
+      "knowsAbout": ["1С", "SRM", "SCM", "ERP", "вайбкодинг", "ИИ в 1С"],
+      "sameAs": [
+        "https://t.me/KotovDima",
+        "https://t.me/top_1c",
+        "https://infostart.ru/profile/564942/",
+        "https://github.com/DimaKotov1C",
+        "https://vk.com/kotovdima1c",
+        "https://www.youtube.com/@top_1c"
+      ]
     }
   ]
 }
 </script>
-
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
@@ -120,7 +88,7 @@
 
     ym(110165700, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/110165700" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
 <!-- /Yandex.Metrika counter -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -313,22 +281,28 @@
   }
   .meme b { color: var(--gold); font-weight: 700; }
   .toggle {
-    position: relative; width: 64px; height: 32px; border-radius: 20px;
+    position: relative; width: 96px; height: 32px; border-radius: 20px;
     border: 1px solid var(--border-2); background: var(--surface-2);
-    display: inline-flex; align-items: center; padding: 0 4px; flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: space-between; padding: 0 4px; flex-shrink: 0;
     transition: background .3s ease, border-color .3s ease;
   }
   .toggle::after {
-    content: "🌙"; position: absolute; top: 50%; left: 4px;
+    content: ""; position: absolute; top: 50%; left: 4px; pointer-events: none;
     width: 24px; height: 24px; border-radius: 50%;
     background: var(--grad); transform: translate(0, -50%);
     display: grid; place-items: center; font-size: 13px;
     box-shadow: 0 2px 10px -2px var(--glow-gold);
     transition: transform .32s cubic-bezier(.5,1.6,.4,1), content .3s;
   }
-  [data-theme="light"] .toggle::after { content: "☀️"; transform: translate(32px, -50%); }
-  .toggle .ico { font-size: 12px; opacity: .5; width: 24px; text-align: center; }
-  .toggle .ico:last-child { margin-left: auto; }
+  [data-theme-mode="light"] .toggle::after { transform: translate(31px, -50%); }
+  [data-theme-mode="auto"] .toggle::after { transform: translate(62px, -50%); }
+  .toggle .ico {
+    position: relative; z-index: 1; display: grid; place-items: center;
+    font-size: 12px; opacity: .5; width: 24px; height: 30px; padding: 0;
+    border: 0; border-radius: 12px; background: transparent; cursor: pointer;
+  }
+  .toggle .ico[aria-pressed="true"] { opacity: 1; }
+  .toggle .ico:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
   .burger { display: none; background: none; border: 1px solid var(--border-2); border-radius: 10px; width: 42px; height: 38px; color: var(--text); font-size: 1.1rem; }
 
@@ -429,7 +403,7 @@
   }
   .deck:focus-visible .deck-stage { box-shadow: 0 0 0 2px var(--gold) inset; border-radius: 22px; }
   .deck-stage {
-    position: relative; height: calc(var(--deck-h) + 70px);
+    position: relative; isolation: isolate; height: calc(var(--deck-h) + 70px);
     overflow: hidden; touch-action: pan-y; user-select: none;
   }
   .deck-stage > .card {
@@ -455,7 +429,7 @@
   .deck-stage > .card.is-center:hover { transform: translateX(var(--tx, 0)) scale(calc(var(--sc, 1) + .015)); }
   /* длинные описания обрезаем по строкам, чтобы карточка фиксированной высоты не ломалась */
   .deck-stage > .card > p:not(.stat) { display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
-  .deck--pub { --deck-h: 400px; }
+  .deck--pub { --deck-h: 550px; }
   .deck--talks { --deck-h: 440px; }
   .deck .car-btn { top: calc(50% - 20px); }
   .deck .car-dots { margin-top: .4rem; }
@@ -716,7 +690,14 @@
   .mb-slot.taken .sprice { color: #22D3EE; }
   .mb-slot .crown { position: absolute; top: 3px; right: 6px; font-size: clamp(.6rem, 1.4vw, .8rem); }
 
-  .mb-table-wrap { overflow-x: auto; border-radius: 18px; border: 1px solid var(--border); background: linear-gradient(180deg, var(--surface), var(--surface-2)); box-shadow: var(--card-shadow); margin: 1rem 0 2.6rem; }
+  .mb-participants { margin-bottom: 2.6rem; }
+  .mb-participants > summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); color: var(--text); font-weight: 600; cursor: pointer; list-style: none; }
+  .mb-participants > summary::-webkit-details-marker { display: none; }
+  .mb-participants > summary::after { content: "+"; color: var(--cyan); font-size: 1.4rem; line-height: 1; }
+  .mb-participants[open] > summary::after { content: "−"; }
+  .mb-participants > summary:hover { border-color: var(--cyan); }
+  .mb-participants > summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+  .mb-table-wrap { overflow-x: auto; border-radius: 18px; border: 1px solid var(--border); background: linear-gradient(180deg, var(--surface), var(--surface-2)); box-shadow: var(--card-shadow); margin: 1rem 0 0; }
   table.mb-table { width: 100%; border-collapse: collapse; min-width: 760px; font-size: .92rem; }
   .mb-table th { font-family: "JetBrains Mono", monospace; font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--border); font-weight: 500; }
   .mb-table td { padding: 12px 18px; border-bottom: 1px solid var(--border); color: var(--muted); }
@@ -765,10 +746,11 @@
   .foot-bottom { margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; color: var(--faint); font-size: .8rem; font-family: "JetBrains Mono", monospace; }
 
   /* ====================== REVEAL ====================== */
-  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s ease; }
+  .reveal.reveal-pending { opacity: 0; transform: translateY(22px); }
   .reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
+    .reveal, .reveal.reveal-pending { opacity: 1; transform: none; transition: none; }
     .btn, .card, .rubric { transition: none; }
   }
 
@@ -796,6 +778,10 @@
     background: linear-gradient(90deg, var(--gold), transparent 70%); opacity: .55;
   }
   .pub:hover { box-shadow: 0 24px 60px -30px var(--glow-gold), var(--card-shadow); }
+  .pub-thumb { position: relative; isolation: isolate; aspect-ratio: 16 / 9; flex: none; margin-bottom: 1rem; border-radius: 10px; overflow: hidden; background: var(--surface-2); }
+  .pub-thumb img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: contain; }
+  .pub-thumb .pub-thumb-backdrop { position: absolute; inset: 0; z-index: 0; object-fit: cover; filter: blur(18px) brightness(.8); transform: scale(1.25); pointer-events: none; }
+  .pub-thumb[hidden] { display: none; }
   .pub-top { display: flex; align-items: center; gap: .5rem; font-family: "JetBrains Mono", monospace; font-size: .64rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
   .pub-top img { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; }
   .pub-type { padding: .22em .6em; border-radius: 20px; border: 1px solid var(--border-2); background: var(--surface-2); }
@@ -884,6 +870,7 @@
   }
   @media (max-width: 480px) {
     .deck { --deck-w: 258px; --deck-h: 370px; --deck-step: 52px; --deck-vis: 2; --deck-shrink: .08; }
+    .deck--pub { --deck-h: 550px; }
     .car-track > .car-item, .car--3 .car-track > .car-item { flex-basis: 86%; }
     .car-prev { left: -8px; }
     .car-next { right: -8px; }
@@ -893,6 +880,7 @@
 </style>
 </head>
 <body>
+<noscript><div><img src="https://mc.yandex.ru/watch/110165700" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
 <!-- ============ HEADER ============ -->
 <header>
@@ -905,14 +893,16 @@
       <a href="#videos">Видео</a>
       <a href="#awards">Награды</a>
       <a href="#talks">Выступления</a>
-      <a href="#macbook">🍏 MacBook</a>
+      <a href="#macbook" aria-label="MacBook">🍏</a>
       <a href="#contacts">Контакты</a>
     </nav>
     <div class="theme-zone">
       <span class="meme">В конфигураторе нет,<br>а <b>у меня есть</b></span>
-      <button class="toggle" id="themeToggle" role="switch" aria-checked="true" aria-label="Переключить тёмную и светлую тему">
-        <span class="ico">🌙</span><span class="ico">☀️</span>
-      </button>
+      <div class="toggle" id="themeToggle" role="group" aria-label="Выбор темы">
+        <button class="ico" type="button" data-mode="dark" aria-label="Тёмная тема" title="Тёмная тема" aria-pressed="false">🌙</button>
+        <button class="ico" type="button" data-mode="light" aria-label="Светлая тема" title="Светлая тема" aria-pressed="false">☀️</button>
+        <button class="ico" type="button" data-mode="auto" aria-label="Авто — системная тема" title="Авто — системная тема" aria-pressed="true">🅰️</button>
+      </div>
     </div>
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">☰</button>
   </div>
@@ -934,9 +924,8 @@
         <h1 class="reveal"><span class="grad-text">Дмитрий Котов</span></h1>
         <p class="hero-sub reveal">1Сник · блогер · спикер · организатор митапов · вайбкодер в выходные</p>
         <div class="hero-text reveal">
-          <p>20 лет в ИТ. 10 — в обнимку с 1С, всегда in-house. Был программистом, стал аналитиком. Карьерный путь: алкоголь → газ → золото → нефть → конфетки. Сейчас кручу <b>SRM/SCM</b> и показываю, как ИИ реально работает в 1С — не в презентациях, а на экране.</p>
-          <p>Веду канал <a href="https://t.me/top_1c" target="_blank" rel="noopener">«Дмитрий Котов | 1С Заметки»</a>, организую митапы и конференции <a href="https://kungfu-conf.ru/" target="_blank" rel="noopener">«Кунг-фу»</a> — живые встречи 1Сников. Дважды лауреат <a href="https://awards.infostart.ru/" target="_blank" rel="noopener">Infostart Awards</a>.</p>
-          <p>Живу в Иркутске. Люблю Байкал, путешествия и настольные игры.</p>
+          <p>20 лет в ИТ, из них 10 — с 1С. Был программистом, стал аналитиком. Прошёл путь от алкоголя через газ, золото и нефть до конфеток. Применяю ИИ в работе с 1С и не только. Показываю, что из этого получается.</p>
+          <p>Веду <a href="https://t.me/top_1c" target="_blank" rel="noopener">«1С Заметки»</a>, организую митапы и конференции <a href="https://kungfu-conf.ru/" target="_blank" rel="noopener">«Кунг-фу»</a>. Дважды лауреат <a href="https://awards.infostart.ru/" target="_blank" rel="noopener">Infostart Awards</a>.</p>
         </div>
         <div class="hero-cta reveal">
           <a class="btn btn-primary" href="https://t.me/top_1c" target="_blank" rel="noopener">
@@ -976,7 +965,7 @@
         <img class="ch-logo" src="https://cdn.simpleicons.org/telegram/22d3ee" alt="Telegram">
         <div class="ch-name">Telegram</div>
         <div class="ch-desc">1С Заметки · вайбкодинг<br>ИИ · инсайды</div>
-        <div class="ch-count">8 400+</div>
+        <div class="ch-count">8 600+</div>
         <div class="ch-count-label">подписчиков</div>
         <div class="ch-spacer"></div>
         <a class="ch-btn tg-btn" href="https://t.me/top_1c" target="_blank" rel="noopener">Подписаться</a>
@@ -986,7 +975,7 @@
         <img class="ch-logo" src="https://cdn.simpleicons.org/youtube/ff4444" alt="YouTube">
         <div class="ch-name">YouTube</div>
         <div class="ch-desc">Стримы и подкасты<br>записи митапов</div>
-        <div class="ch-count">900+</div>
+        <div class="ch-count">1 000+</div>
         <div class="ch-count-label">подписчиков</div>
         <div class="ch-spacer"></div>
         <a class="ch-btn yt-btn" href="https://www.youtube.com/@top_1c" target="_blank" rel="noopener">Подписаться</a>
@@ -1057,26 +1046,12 @@
         <img class="ch-link-icon" src="https://cdn.simpleicons.org/vk/5ba4ff" alt="VK">
         <span class="ch-link-name">kotovdima1c</span>
       </a>
-      <button type="button" class="ch-link-item" id="mailBtn" onclick="openMailForm()" style="cursor:pointer;font-family:inherit;text-align:left;width:100%">
+      <a class="ch-link-item" href="mailto:kotovdima1c@gmail.com">
         <div class="ch-link-icon-box" style="background:#8b5cf6;font-size:13px">✉</div>
-        <span class="ch-link-name">Написать письмо</span>
-      </button>
+        <span class="ch-link-name">kotovdima1c@gmail.com</span>
+      </a>
     </div>
 
-    <!-- Форма отправки письма -->
-    <form id="mailForm" class="mail-form reveal" action="https://formsubmit.co/ajax/kotovdima1c@gmail.com" method="POST">
-      <p class="mail-form-title">Написать на почту</p>
-      <label class="mail-label">Тема:</label>
-      <input type="text" name="_subject" value="Сообщение с сайта kotov.top" required>
-      <label class="mail-label">Сообщение:</label>
-      <textarea name="message" rows="4" placeholder="Сообщение" required></textarea>
-      <input type="text" name="_honey" style="display:none">
-      <div class="mail-actions">
-        <button type="submit" class="btn btn-primary" id="mailSend">Отправить письмо →</button>
-        <button type="button" class="btn btn-ghost" onclick="closeMailForm()">Отмена</button>
-      </div>
-      <p class="mail-status" id="mailStatus"></p>
-    </form>
 
   </div>
 </section>
@@ -1421,7 +1396,7 @@
               <button type="submit" class="btn btn-primary" id="speakerSend">Отправить письмо →</button>
               <button type="button" class="btn btn-ghost" onclick="closeSpeakerForm()">Отмена</button>
             </div>
-            <p class="mail-status" id="speakerStatus"></p>
+            <p class="mail-status" id="speakerStatus">Открываем ваш почтовый клиент</p>
           </form>
         </div>
       </div>
@@ -1436,7 +1411,7 @@
     <div class="section-head reveal">
       <p class="eyebrow">// Аукцион стикеров</p>
       <h2>Купи место на крышке <span class="grad-text">моего макбука</span></h2>
-      <p>Собираю 370 000 ₽ на MacBook Pro для вайбкодинга. Взамен — стикер с логотипом твоей компании на крышке, которая всегда со мной: на митапах и конференциях, в поездках, командировках и путешествиях — везде, где я с ноутом. Идею подсмотрел у <a href="https://brandmymac.com" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">brandmymac.com</a> — только у нас всё по-нашему: ставки в Telegram.</p>
+      <p>Купи место под стикер с логотипом твоей компании на моём MacBook Pro. Я буду брать его во все поездки — на митапы, конференции, в командировки и путешествия. Ставки — в Telegram.</p>
     </div>
 
     <!-- Прогресс сбора -->
@@ -1444,7 +1419,7 @@
       <div class="mb-progress-top">
         <div class="mb-collected-wrap">
           <span class="mb-collected" id="mbCollected">0 ₽</span>
-          <span class="mb-goal" id="mbGoal">из 370 000 ₽</span>
+          <span class="mb-goal" id="mbGoal">из 300 000 ₽</span>
         </div>
         <span class="mb-slots-stat" id="mbTakenCount">занято <b>0</b> из 10 слотов</span>
       </div>
@@ -1477,15 +1452,17 @@
     </div>
 
     <!-- Таблица аукциона -->
-    <div class="eyebrow reveal">// Аукцион, вживую</div>
-    <div class="mb-table-wrap reveal">
+    <details class="mb-participants reveal">
+      <summary>Участники аукциона</summary>
+      <div class="mb-table-wrap">
       <table class="mb-table">
         <thead>
           <tr><th>Позиция</th><th>Размер</th><th>Ставка</th><th>Владелец</th><th>Статус</th><th></th></tr>
         </thead>
         <tbody id="mbTbody"></tbody>
       </table>
-    </div>
+      </div>
+    </details>
 
     <!-- Как это работает -->
     <div class="eyebrow reveal">// Как это работает</div>
@@ -1493,7 +1470,7 @@
       <article class="card mb-step reveal">
         <div class="num">01</div>
         <h3>Делаешь ставку</h3>
-        <p>Жми кнопку у слота — откроется Telegram с готовым сообщением: слот и сумма уже подставлены. Шаг перебития — 5 000 ₽.</p>
+        <p>Жми кнопку у слота — откроется Telegram с готовым сообщением: слот и сумма уже подставлены. Шаг перебития: верхний ряд — 500 ₽, средний — 200 ₽, нижний — 100 ₽.</p>
       </article>
       <article class="card mb-step reveal">
         <div class="num">02</div>
@@ -1531,16 +1508,8 @@
       <a class="btn btn-primary" href="https://t.me/kotovdima" target="_blank" rel="noopener">Написать в Telegram →</a>
       <p class="foot-mail">Почта: <a href="mailto:kotovdima1c@gmail.com">kotovdima1c@gmail.com</a></p>
     </div>
-    <!-- Семантический блок для поисковых систем -->
-    <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;" aria-hidden="true">
-      <h2>Реклама в 1С Telegram-канале</h2>
-      <p>Дмитрий Котов — автор Telegram-канала «1С Заметки» (@top_1c) с аудиторией более 8400 подписчиков. Канал специализируется на теме 1С: программирование, аналитика, внедрение, ИИ в 1С, вайбкодинг. Аудитория канала — профессиональные 1С-специалисты: разработчики, аналитики, внедренцы и руководители IT-проектов российских компаний.</p>
-      <p>Разместить рекламу в 1С канале, реклама для 1С специалистов, реклама в Telegram 1С, реклама для программистов 1С — по всем вопросам размещения пишите в Telegram @KotovDima.</p>
-      <p>Также доступны: коллаборации с 1С-экспертом, нативная интеграция в видео на YouTube, партнёрские упоминания в постах канала.</p>
-    </div>
-
     <div class="foot-bottom">
-      <span>© 2026 Дмитрий Котов · Иркутск · 1С</span>
+      <span>© 2026 Дмитрий Котов · Иркутск</span>
       <span>made with vibecoding ⚡</span>
     </div>
   </div>
@@ -1554,20 +1523,28 @@
   /* ---------- THEME ---------- */
   var root = document.documentElement;
   var toggle = document.getElementById("themeToggle");
-  var saved = null;
-  try { saved = localStorage.getItem("dk-theme"); } catch (e) {}
-  if (saved) root.setAttribute("data-theme", saved);
+  var systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+  var themeButtons = toggle.querySelectorAll("[data-mode]");
   function syncToggle() {
-    var dark = root.getAttribute("data-theme") !== "light";
-    toggle.setAttribute("aria-checked", String(dark));
+    var mode = root.getAttribute("data-theme-mode");
+    var theme = mode === "auto" ? (systemTheme.matches ? "dark" : "light") : mode;
+    root.setAttribute("data-theme", theme);
+    root.style.colorScheme = theme;
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", theme === "dark" ? "#0A0A0F" : "#EEF1F7");
+    themeButtons.forEach(function (button) {
+      button.setAttribute("aria-pressed", String(button.getAttribute("data-mode") === mode));
+    });
   }
   syncToggle();
-  toggle.addEventListener("click", function () {
-    var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
-    root.setAttribute("data-theme", next);
-    try { localStorage.setItem("dk-theme", next); } catch (e) {}
-    syncToggle();
+  themeButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      var mode = button.getAttribute("data-mode");
+      root.setAttribute("data-theme-mode", mode);
+      try { localStorage.setItem("dk-theme", mode); } catch (e) {}
+      syncToggle();
+    });
   });
+  systemTheme.addEventListener("change", syncToggle);
 
   /* ---------- MOBILE NAV ---------- */
   var burger = document.getElementById("burger");
@@ -1590,6 +1567,7 @@
     document.querySelectorAll(".reveal").forEach(function (el, i) {
       el.style.transitionDelay = Math.min(i % 4, 3) * 60 + "ms";
       io.observe(el);
+      if (el.getBoundingClientRect().top >= window.innerHeight) el.classList.add("reveal-pending");
     });
   } else {
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
@@ -1599,28 +1577,9 @@
 
 <script>
 (function () {
-  var btn = document.getElementById("mailBtn");
-  var form = document.getElementById("mailForm");
-  var status = document.getElementById("mailStatus");
-  var send = document.getElementById("mailSend");
-  if (!form) return;
-
-  window.openMailForm = function () {
-    form.classList.add("mail-open");
-    if (btn) btn.style.display = "none";
-    var firstInput = form.querySelector("textarea[name='message']");
-    if (firstInput) firstInput.focus();
-  };
-  window.closeMailForm = function () {
-    form.classList.remove("mail-open");
-    if (btn) btn.style.display = "";
-    status.textContent = "";
-    status.className = "mail-status";
-  };
-
   var MAIL_TO = "kotovdima1c@gmail.com";
 
-  function wireSubmit(theForm, theStatus, theSend) {
+  function wireSubmit(theForm) {
     theForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var f = theForm.elements;
@@ -1633,18 +1592,13 @@
         + "&body=" + encodeURIComponent(body);
       window.location.href = href;
 
-      theStatus.textContent = "Открываем ваш почтовый клиент…";
-      theStatus.className = "mail-status ok";
     });
   }
-  wireSubmit(form, status, send);
 
   // Форма приглашения спикером
   var sBtn = document.getElementById("speakerMailBtn");
   var sForm = document.getElementById("speakerForm");
   if (sForm) {
-    var sStatus = document.getElementById("speakerStatus");
-    var sSend = document.getElementById("speakerSend");
     window.openSpeakerForm = function () {
       sForm.classList.add("mail-open");
       if (sBtn) sBtn.style.display = "none";
@@ -1654,10 +1608,8 @@
     window.closeSpeakerForm = function () {
       sForm.classList.remove("mail-open");
       if (sBtn) sBtn.style.display = "";
-      sStatus.textContent = "";
-      sStatus.className = "mail-status";
     };
-    wireSubmit(sForm, sStatus, sSend);
+    wireSubmit(sForm);
   }
 })();
 </script>
@@ -1898,89 +1850,91 @@ window.talksDeck = initDeck({ root: document.querySelector("#talks .deck"), labe
 <script>
 /* ============ ARTICLES & VIDEOS DATA ============ */
 /* Цифры (плюсы, просмотры, длительность) — статичный снимок на дату сборки, см. SNAPSHOT_DATE.
-   Добавить материал = одна строка в массив. Порядок внутри группы — по дате, новые сверху (сортируется автоматически). */
+   Добавить материал = одна строка в массив. Внутри группы статьи сортируются по дате, новые сверху; видео — по просмотрам, популярные сверху. */
 var SNAPSHOT_DATE = "2026-09-04";
 
-/* group: exp | prod. type: Статья | Инструмент | Отчёт | Проект. plus — только плюсы. */
+/* group: exp | prod. type: Статья | Инструмент | Отчёт | Проект. plus — только плюсы. thumb — локальное превью; источники в assets/articles/sources.json. */
 var ARTICLES = [
   /* Опыт */
-  { group: "exp", type: "Статья", date: "2026-07-24", plus: 43, url: "https://infostart.ru/1c/articles/2720233/",
+  { group: "exp", type: "Статья", date: "2026-07-24", plus: 43, url: "https://infostart.ru/1c/articles/2720233/", thumb: "assets/articles/2720233.webp",
     title: "[1С + ИИ] Внешняя обработка за 3 минуты! Вайбкодинг стал быстрее и дешевле",
     desc: "Та же задача на новых моделях: готовая EPF за 4 минуты и примерно 20 рублей. Регресс-тест вайбкодинга с неожиданным победителем." },
-  { group: "exp", type: "Статья", date: "2026-06-04", plus: 66, url: "https://infostart.ru/1c/articles/2708708/",
+  { group: "exp", type: "Статья", date: "2026-06-04", plus: 66, url: "https://infostart.ru/1c/articles/2708708/", thumb: "assets/articles/2708708.webp",
     title: "[1С + ИИ] ИИ сделал внешнюю обработку за 19 минут. За сколько сделаешь ты?",
     desc: "Разбор стрима: ИИ-агенты по одному промпту сделали внешнюю обработку и собрали EPF без Конфигуратора. С замерами, стендами и честными ограничениями." },
-  { group: "exp", type: "Статья", date: "2026-02-25", plus: 80, url: "https://infostart.ru/1c/articles/2624937/",
+  { group: "exp", type: "Статья", date: "2026-02-25", plus: 80, url: "https://infostart.ru/1c/articles/2624937/", thumb: "assets/articles/2624937.webp",
     title: "[1С + ИИ] Вайбкодинг на 1С — Проще простого! Быстрый старт!",
     desc: "Как за один вечер собрать стенд для вайбкодинга и начать решать реальные задачи 1С с ИИ: ТЗ, документация, анализ кода, поиск багов." },
-  { group: "exp", type: "Статья", date: "2025-09-11", plus: 27, url: "https://infostart.ru/1c/articles/2478682/",
+  { group: "exp", type: "Статья", date: "2025-09-11", plus: 27, url: "https://infostart.ru/1c/articles/2478682/", thumb: "assets/articles/2478682.webp",
     title: "Практика разработки интерфейса на примере Терминала путевых листов",
     desc: "Как проектировать интерфейсы в 1С с учётом ограничений платформы: полный путь от идеи до запуска на примере терминала путевых листов." },
-  { group: "exp", type: "Статья", date: "2019-09-06", plus: 1104, url: "https://infostart.ru/1c/articles/1118319/",
+  { group: "exp", type: "Статья", date: "2019-09-06", plus: 1104, url: "https://infostart.ru/1c/articles/1118319/", thumb: "assets/articles/1118319.webp",
     title: "[Шпаргалка] Программное создание элементов формы",
     desc: "Готовые шаблоны кода для программного создания почти любого элемента управляемой формы. Самая читаемая моя публикация: под 700 тысяч просмотров." },
-  { group: "exp", type: "Статья", date: "2019-05-08", plus: 36, url: "https://infostart.ru/1c/articles/1058155/",
+  { group: "exp", type: "Статья", date: "2019-05-08", plus: 36, url: "https://infostart.ru/1c/articles/1058155/", thumb: "assets/articles/1058155.webp",
     title: "[История разработки] Дорожная карта — контроль над движением первичных документов",
     desc: "История разработки контроля за движением оригиналов первички между региональными офисами и бухгалтерией: задача, решения, уроки." },
-  { group: "exp", type: "Проект", date: "2019-03-22", plus: 21, url: "https://infostart.ru/pm/846893/",
+  { group: "exp", type: "Проект", date: "2019-03-22", plus: 21, url: "https://infostart.ru/pm/846893/", thumb: "assets/articles/846893.webp",
     title: "[Обзор. История внедрения] КИНТ: Управление санаторием — модуль «Питание»",
     desc: "История внедрения модуля «Питание» в санатории: зачем автоматизировали, как выбирали продукт и что вышло на практике." },
-  { group: "exp", type: "Статья", date: "2018-07-23", plus: 415, url: "https://infostart.ru/1c/articles/872573/",
+  { group: "exp", type: "Статья", date: "2018-07-23", plus: 415, url: "https://infostart.ru/1c/articles/872573/", thumb: "assets/articles/872573.webp",
     title: "[Шпаргалка] Свой заголовок отчёту на СКД с параметрами, картинками (без программирования)",
     desc: "Как в отчёте на СКД вывести свой заголовок с параметрами и картинками одними настройками, без единой строки кода." },
 
   /* Продукты */
-  { group: "prod", type: "Статья", date: "2022-08-12", plus: 98, url: "https://infostart.ru/1c/articles/1709735/",
+  { group: "prod", type: "Статья", date: "2022-08-12", plus: 98, url: "https://infostart.ru/1c/articles/1709735/", thumb: "assets/articles/1709735.webp",
     title: "{UI/UX} Свой всплывающий информер у элемента формы",
     desc: "Своя всплывающая подсказка у элемента формы вместо стандартного окна «Ошибка». В комплекте библиотека для программного формирования." },
-  { group: "prod", type: "Расширение", date: "2022-07-01", plus: 109, url: "https://infostart.ru/1c/tools/1661803/",
+  { group: "prod", type: "Расширение", date: "2022-07-01", plus: 109, url: "https://infostart.ru/1c/tools/1661803/", thumb: "assets/articles/1661803.webp",
     title: "[Расширение] Смена цветового стиля оформления интерфейса",
     desc: "Расширение, которое меняет цветовой стиль интерфейса: боевая база и тестовые копии больше не путаются. Использую в проектах с 2018 года." },
-  { group: "prod", type: "Общий модуль", date: "2020-08-28", plus: 391, url: "https://infostart.ru/1c/articles/1284403/",
+  { group: "prod", type: "Общий модуль", date: "2020-08-28", plus: 391, url: "https://infostart.ru/1c/articles/1284403/", thumb: "assets/articles/1284403.webp",
     title: "[Общий модуль] Динамическое формирование интерфейса",
     desc: "Библиотека готовых функций для программного создания элементов формы. Имена функций совпадают с меню Конфигуратора, чтобы ничего не искать." },
-  { group: "prod", type: "Статья", date: "2019-08-26", plus: 72, url: "https://infostart.ru/1c/articles/1112550/",
+  { group: "prod", type: "Статья", date: "2019-08-26", plus: 72, url: "https://infostart.ru/1c/articles/1112550/", thumb: "assets/articles/1112550.webp",
     title: "[Механизм интерфейса] Часы",
     desc: "Цифровые часы на форме через поле HTML вместо обработчика ожидания, который сбрасывал ввод пользователя. Бонусом аналоговый вариант." },
-  { group: "prod", type: "Инструмент", date: "2019-08-09", plus: 178, url: "https://infostart.ru/1c/tools/1106063/",
+  { group: "prod", type: "Инструмент", date: "2019-08-09", plus: 178, url: "https://infostart.ru/1c/tools/1106063/", thumb: "assets/articles/1106063.webp",
     title: "[Механизм интерфейса] Свой флажок (чекбокс)",
     desc: "Собственный флажок вместо стандартного, который нельзя увеличить. Работает на декорациях и группах, удобен для сенсорных экранов." },
-  { group: "prod", type: "Инструмент", date: "2018-11-07", plus: 36, url: "https://infostart.ru/1c/tools/937870/",
+  { group: "prod", type: "Инструмент", date: "2018-11-07", plus: 36, url: "https://infostart.ru/1c/tools/937870/", thumb: "assets/articles/937870.webp",
     title: "[Механизм интерфейса] Интерактивный выбор периода (месяц, квартал, полугодие, год)",
     desc: "Готовый механизм выбора периода для управляемых форм: месяц, квартал, полугодие или год со сдвигом вперёд и назад одной кнопкой." },
-  { group: "prod", type: "Инструмент", date: "2018-08-16", plus: 29, url: "https://infostart.ru/1c/reports/888041/",
+  { group: "prod", type: "Инструмент", date: "2018-08-16", plus: 29, url: "https://infostart.ru/1c/reports/888041/", thumb: "assets/articles/888041.webp",
     title: "[Механизм интерфейса] Интерактивный выбор даты",
     desc: "Интерактивный выбор даты для сенсорных терминалов и АРМ: каждая часть даты меняется кнопками «+» и «−», четыре варианта масштаба." },
 ];
 
 /* group: streams | guest | meetups. p: yt | vk. id: youtube id или "oid_id" для VK. views — число, dur — секунды, date — YYYY-MM-DD. thumb — только для VK. */
+/* Просмотры YouTube проверены 2026-09-08, см. video-views-check.json.
+   VK: 2026-09-08 доступны только округлённые 2,1 тыс. и 1,5 тыс.; точные значения оставлены из SNAPSHOT_DATE. */
 var VIDEOS = [
   /* Мои стримы */
-  { group: "streams", p: "yt", id: "ou3hd6v5sSk", date: "2026-09-02", views: 5604, dur: 5880, title: "Анна Степанян. Другие правила на рынке 1С." },
-  { group: "streams", p: "yt", id: "NKXJZ8TTpTU", date: "2026-07-29", views: 1166, dur: 4865, title: "Дина Астахова. Сколько зарабатывает 1Сник в 2026 году?" },
-  { group: "streams", p: "yt", id: "wImZoF3GUlc", date: "2026-07-22", views: 817,  dur: 3610, title: "Самая дешёвая AI-разработка на 1С" },
-  { group: "streams", p: "yt", id: "O7cQKdI1K30", date: "2026-07-15", views: 592,  dur: 4115, title: "1С + ИИ Битва II. FABLE 5, SOL и GROK. ИИ пишет код на 1С." },
-  { group: "streams", p: "yt", id: "GZN-0vKbWJ0", date: "2026-06-24", views: 178,  dur: 3640, title: "Михаил Калимулин. Менеджеры продаж больше не нужны? Торговый бот выходит на смену" },
-  { group: "streams", p: "yt", id: "51Qz6dGJddo", date: "2026-06-03", views: 1076, dur: 5891, title: "1С + ИИ Битва. Cursor + Composer vs Visual Studio Code + Codex" },
-  { group: "streams", p: "yt", id: "nDQ98JOxA4I", date: "2026-05-20", views: 1717, dur: 3970, title: "1С + ИИ + MCP = Творим магию в 1С без айтишников!" },
-  { group: "streams", p: "yt", id: "FYyat8MZ53U", date: "2026-02-24", views: 7038, dur: 7050, title: "1С + ИИ = Проще простого! Вайбкодинг на 1С" },
-  { group: "streams", p: "yt", id: "ho9k1ftmQ-s", date: "2025-12-29", views: 1936, dur: 4736, title: "Новый интерфейс 1С:УНФ на платформе 8.5 (тёмная тема)" },
-  { group: "streams", p: "yt", id: "4F5IpMdosvc", date: "2025-09-16", views: 400,  dur: 5414, title: "Денис Соколов. Три книги для 1Сника. Книжный клуб 1С." },
-  { group: "streams", p: "yt", id: "abOI9MHW4QI", date: "2025-08-14", views: 923,  dur: 6185, title: "Игорь Апресов о разносторонней разработке на 1С" },
+  { group: "streams", p: "yt", id: "ou3hd6v5sSk", date: "2026-09-02", views: 8946, dur: 5880, title: "Анна Степанян. Другие правила на рынке 1С." },
+  { group: "streams", p: "yt", id: "NKXJZ8TTpTU", date: "2026-07-29", views: 1224, dur: 4865, title: "Дина Астахова. Сколько зарабатывает 1Сник в 2026 году?" },
+  { group: "streams", p: "yt", id: "wImZoF3GUlc", date: "2026-07-22", views: 858,  dur: 3610, title: "Самая дешёвая AI-разработка на 1С" },
+  { group: "streams", p: "yt", id: "O7cQKdI1K30", date: "2026-07-15", views: 608,  dur: 4115, title: "1С + ИИ Битва II. FABLE 5, SOL и GROK. ИИ пишет код на 1С." },
+  { group: "streams", p: "yt", id: "GZN-0vKbWJ0", date: "2026-06-24", views: 185,  dur: 3640, title: "Михаил Калимулин. Менеджеры продаж больше не нужны? Торговый бот выходит на смену" },
+  { group: "streams", p: "yt", id: "51Qz6dGJddo", date: "2026-06-03", views: 1130, dur: 5891, title: "1С + ИИ Битва. Cursor + Composer vs Visual Studio Code + Codex" },
+  { group: "streams", p: "yt", id: "nDQ98JOxA4I", date: "2026-05-20", views: 1766, dur: 3970, title: "1С + ИИ + MCP = Творим магию в 1С без айтишников!" },
+  { group: "streams", p: "yt", id: "FYyat8MZ53U", date: "2026-02-24", views: 7281, dur: 7050, title: "1С + ИИ = Проще простого! Вайбкодинг на 1С" },
+  { group: "streams", p: "yt", id: "ho9k1ftmQ-s", date: "2025-12-29", views: 1960, dur: 4736, title: "Новый интерфейс 1С:УНФ на платформе 8.5 (тёмная тема)" },
+  { group: "streams", p: "yt", id: "4F5IpMdosvc", date: "2025-09-16", views: 401,  dur: 5414, title: "Денис Соколов. Три книги для 1Сника. Книжный клуб 1С." },
+  { group: "streams", p: "yt", id: "abOI9MHW4QI", date: "2025-08-14", views: 930,  dur: 6185, title: "Игорь Апресов о разносторонней разработке на 1С" },
 
   /* В гостях у коллег */
   { group: "guest", p: "vk", id: "210707080_456239203", date: "2025-06-06", views: 2104, dur: 5583, channel: "CORS Academy", thumb: "assets/vk-cors-friday.jpg",
     title: "CORS пятница №12: «Выбор профессии в 1С: программист, аналитик или кто-то ещё?»" },
-  { group: "guest", p: "yt", id: "GKsJ2S1it0Y", date: "2025-03-11", views: 4191, dur: 6891, channel: "Мир 1С",
+  { group: "guest", p: "yt", id: "GKsJ2S1it0Y", date: "2025-03-11", views: 4204, dur: 6891, channel: "Мир 1С",
     title: "Путь 1С-ника. Как Дмитрий Котов до аналитика деградировал" },
   { group: "guest", p: "vk", id: "42867005_456240438", date: "2025-02-24", views: 1503, dur: 1875, channel: "Инфостарт", thumb: "assets/vk-infostart-brand.jpg",
     title: "Личный бренд в ИТ. Как Инфостарт и сообщество 1С помогут вам в карьерном росте" },
 
   /* Мои митапы */
-  { group: "meetups", p: "yt", id: "TZFEjd5TjBY", date: "2026-06-09", views: 869,  dur: 3605, title: "Дарья Грабкина. EDT + GIT vs Хранилище + Конфигуратор." },
-  { group: "meetups", p: "yt", id: "jKAVUBx-LbE", date: "2026-02-19", views: 1006, dur: 7193, title: "Игорь Апресов. HTTP-сервисы в 1С. Кунг-фу митап, Иркутск" },
+  { group: "meetups", p: "yt", id: "TZFEjd5TjBY", date: "2026-06-09", views: 879,  dur: 3605, title: "Дарья Грабкина. EDT + GIT vs Хранилище + Конфигуратор." },
+  { group: "meetups", p: "yt", id: "jKAVUBx-LbE", date: "2026-02-19", views: 1026, dur: 7193, title: "Игорь Апресов. HTTP-сервисы в 1С. Кунг-фу митап, Иркутск" },
   { group: "meetups", p: "yt", id: "ewnlWyl47AA", date: "2025-07-09", views: 121,  dur: 5764, title: "Жёлтый клуб Иркутск: ИИ при собесе 1Сника, 3 лицензии по цене 2-х" },
-  { group: "meetups", p: "yt", id: "n0pZpsuB3mw", date: "2024-11-19", views: 457,  dur: 6886, title: "Заменят ли нейросети 1Сников? Как правильно использовать индексы в 1С" },
+  { group: "meetups", p: "yt", id: "n0pZpsuB3mw", date: "2024-11-19", views: 460,  dur: 6886, title: "Заменят ли нейросети 1Сников? Как правильно использовать индексы в 1С" },
   { group: "meetups", p: "yt", id: "GI1CYzAkF0M", date: "2024-02-17", views: 1220, dur: 6402, title: "Архитектор ИС и База 1С на 40 терабайт" },
 ];
 </script>
@@ -2016,9 +1970,11 @@ var VIDEOS = [
     return many;
   }
   function byDateDesc(a, b) { return String(b.date).localeCompare(String(a.date)); }
+  function byViewsDesc(a, b) { return (b.views || 0) - (a.views || 0) || byDateDesc(a, b); }
 
   function articleCard(a) {
     return '<a class="card pub car-item" href="' + esc(a.url) + '" target="_blank" rel="noopener">' +
+      (a.thumb ? '<div class="pub-thumb"><img class="pub-thumb-backdrop" src="' + esc(a.thumb) + '" alt="" aria-hidden="true" loading="lazy" decoding="async" width="800" height="450"><img src="' + esc(a.thumb) + '" alt="" loading="lazy" decoding="async" width="800" height="450" onerror="this.parentNode.hidden=true"></div>' : '') +
       '<div class="pub-top"><img src="' + ICON_IS + '" alt="" loading="lazy"><span class="pub-type">' + esc(a.type) + '</span><span class="pub-yr">' + year(a.date) + '</span></div>' +
       '<h3>' + esc(a.title) + '</h3>' +
       '<p>' + esc(a.desc) + '</p>' +
@@ -2070,7 +2026,7 @@ var VIDEOS = [
   var flat = []; /* индекс для модалки */
   document.querySelectorAll("#videos .cgroup[data-group]").forEach(function (g) {
     var key = g.getAttribute("data-group");
-    var items = VIDEOS.filter(function (v) { return v.group === key; }).sort(byDateDesc);
+    var items = VIDEOS.filter(function (v) { return v.group === key; }).sort(byViewsDesc);
     var base = flat.length;
     flat = flat.concat(items);
     render(g, items, function (v, i) { return videoCard(v, base + i); }, "Видео", ["видео", "видео", "видео"]);
@@ -2182,21 +2138,20 @@ var VIDEOS = [
    у свободного оставь sponsor: null. Крышка, таблица и прогресс пересчитаются сами. */
 (function () {
   "use strict";
-  var GOAL = 370000;
-  var STEP = 5000;
+  var GOAL = 300000;
   var TG_USER = "KotovDima";
 
   var SLOTS = [
-    { id: "top-left",      name: "Верхний левый",   size: "Большой",           start: 50000, bid: null, sponsor: null },
-    { id: "marquee",       name: "Над яблоком",     size: "Большой · премиум", start: 80000, bid: null, sponsor: null, premium: true },
-    { id: "top-right",     name: "Верхний правый",  size: "Большой",           start: 50000, bid: null, sponsor: null },
-    { id: "mid-left",      name: "Средний левый",   size: "Маленький",         start: 25000, bid: null, sponsor: null },
-    { id: "apple-left",    name: "Слева у яблока",  size: "Маленький",         start: 25000, bid: null, sponsor: null },
-    { id: "apple-right",   name: "Справа у яблока", size: "Маленький",         start: 25000, bid: null, sponsor: null },
-    { id: "mid-right",     name: "Средний правый",  size: "Маленький",         start: 25000, bid: null, sponsor: null },
-    { id: "bottom-left",   name: "Нижний левый",    size: "Средний",           start: 30000, bid: null, sponsor: null },
-    { id: "bottom-center", name: "Нижний центр",    size: "Средний",           start: 30000, bid: null, sponsor: null },
-    { id: "bottom-right",  name: "Нижний правый",   size: "Средний",           start: 30000, bid: null, sponsor: null }
+    { id: "top-left",      name: "Верхний левый",   size: "Большой",           start: 1000, step: 500, bid: null, sponsor: null },
+    { id: "marquee",       name: "Над яблоком",     size: "Большой · премиум", start: 2000, step: 500, bid: null, sponsor: null, premium: true },
+    { id: "top-right",     name: "Верхний правый",  size: "Большой",           start: 1000, step: 500, bid: null, sponsor: null },
+    { id: "mid-left",      name: "Средний левый",   size: "Маленький",         start: 500, step: 200, bid: null, sponsor: null },
+    { id: "apple-left",    name: "Слева у яблока",  size: "Маленький",         start: 500, step: 200, bid: null, sponsor: null },
+    { id: "apple-right",   name: "Справа у яблока", size: "Маленький",         start: 500, step: 200, bid: null, sponsor: null },
+    { id: "mid-right",     name: "Средний правый",  size: "Маленький",         start: 500, step: 200, bid: null, sponsor: null },
+    { id: "bottom-left",   name: "Нижний левый",    size: "Средний",           start: 300, step: 100, bid: null, sponsor: null },
+    { id: "bottom-center", name: "Нижний центр",    size: "Средний",           start: 300, step: 100, bid: null, sponsor: null },
+    { id: "bottom-right",  name: "Нижний правый",   size: "Средний",           start: 300, step: 100, bid: null, sponsor: null }
   ];
 
   function fmt(n) { return n.toLocaleString("ru-RU") + " ₽"; }
@@ -2204,7 +2159,7 @@ var VIDEOS = [
 
   function tgLink(s) {
     var text = s.sponsor
-      ? "Привет! Хочу перебить ставку за слот «" + s.name + "» на крышке макбука. Моя ставка: " + fmt(s.bid + STEP)
+      ? "Привет! Хочу перебить ставку за слот «" + s.name + "» на крышке макбука. Моя ставка: " + fmt(s.bid + s.step)
       : "Привет! Хочу слот «" + s.name + "» на крышке макбука. Моя ставка: " + fmt(s.start);
     return "https://t.me/" + TG_USER + "?text=" + encodeURIComponent(text);
   }
