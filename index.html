@@ -1103,14 +1103,27 @@
       <h2>Самое <span class="grad-text">интересное</span> в эфире</h2>
       <p>Стримы, где ИИ пишет код в 1С прямо на экране, эфиры в гостях у коллег и записи митапов, которые я организовал. Открывается прямо здесь — жми на превью. Всё остальное — на <a href="https://www.youtube.com/@top_1c" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none">YouTube-канале</a>.</p>
     </div>
-    <div class="cgroup reveal" data-group="streams">
-      <div class="cgroup-head"><p class="eyebrow">// Мои стримы</p><span class="cgroup-count" data-count></span></div>
+    <div class="cgroup reveal" data-group="ai">
+      <div class="cgroup-head"><p class="eyebrow">// Видео и стримы про ИИ и 1С</p><span class="cgroup-count" data-count></span></div>
       <div class="car car--3">
         <div class="car-track" data-track></div>
       <button class="car-btn car-prev" type="button" aria-label="Назад">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
-      <button class="car-btn car-next" type="button" aria-label="Вперёд">
+      <button class="car-btn car-next car-btn--pulse" type="button" aria-label="Вперёд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      </div>
+      <div class="car-dots" data-dots></div>
+    </div>
+    <div class="cgroup reveal" data-group="streams">
+      <div class="cgroup-head"><p class="eyebrow">// Видео и стримы не про ИИ</p><span class="cgroup-count" data-count></span></div>
+      <div class="car car--3">
+        <div class="car-track" data-track></div>
+      <button class="car-btn car-prev" type="button" aria-label="Назад">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="car-btn car-next car-btn--pulse" type="button" aria-label="Вперёд">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
       </button>
       </div>
@@ -1123,20 +1136,20 @@
       <button class="car-btn car-prev" type="button" aria-label="Назад">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
-      <button class="car-btn car-next" type="button" aria-label="Вперёд">
+      <button class="car-btn car-next car-btn--pulse" type="button" aria-label="Вперёд">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
       </button>
       </div>
       <div class="car-dots" data-dots></div>
     </div>
     <div class="cgroup reveal" data-group="meetups">
-      <div class="cgroup-head"><p class="eyebrow">// Мои митапы</p><span class="cgroup-count" data-count></span></div>
+      <div class="cgroup-head"><p class="eyebrow">// Митапы и конференции, которые я организовал</p><span class="cgroup-count" data-count></span></div>
       <div class="car car--3">
         <div class="car-track" data-track></div>
       <button class="car-btn car-prev" type="button" aria-label="Назад">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
-      <button class="car-btn car-next" type="button" aria-label="Вперёд">
+      <button class="car-btn car-next car-btn--pulse" type="button" aria-label="Вперёд">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
       </button>
       </div>
@@ -1663,13 +1676,39 @@ function initCarousel(opts) {
   if (!track || !prev || !next) return;
   var cards = Array.prototype.slice.call(track.querySelectorAll(opts.item));
   var label = opts.label || "Элемент";
+  var n = cards.length;
+  var loop = opts.loop !== false && n > 1;
 
+  /* Бесконечность: до и после оригиналов лежит по копии набора (data-clone).
+     Когда прокрутка останавливается в зоне копий, прыгаем на ширину набора без анимации —
+     раскладка копий совпадает с оригиналами, поэтому скачок незаметен. */
+  var before = [], after = [];
+  function makeClone(c) {
+    var k = c.cloneNode(true);
+    k.setAttribute("data-clone", "");
+    k.setAttribute("aria-hidden", "true");
+    k.tabIndex = -1;
+    return k;
+  }
+  if (loop) {
+    before = cards.map(makeClone);
+    after = cards.map(makeClone);
+    before.forEach(function (k) { track.insertBefore(k, cards[0]); });
+    after.forEach(function (k) { track.appendChild(k); });
+  }
+  var all = before.concat(cards, after);
+
+  function pos(c) { /* scrollLeft, при котором карточка прижата к левому краю */
+    return track.scrollLeft + c.getBoundingClientRect().left - track.getBoundingClientRect().left - track.clientLeft;
+  }
+  function setWidth() { return loop ? pos(after[0]) - pos(cards[0]) : 0; }
   function step() {
     var card = cards[0];
     if (!card) return 300;
     var gap = parseFloat(getComputedStyle(track).columnGap) || 22;
     return card.getBoundingClientRect().width + gap;
   }
+
   var dots = [];
   if (dotsWrap) {
     dotsWrap.innerHTML = "";
@@ -1677,39 +1716,82 @@ function initCarousel(opts) {
       var d = document.createElement("button");
       d.className = "car-dot";
       d.type = "button";
-      d.setAttribute("aria-label", label + " " + (i + 1) + " из " + cards.length);
+      d.setAttribute("aria-label", label + " " + (i + 1) + " из " + n);
       d.addEventListener("click", function () {
-        track.scrollTo({ left: c.offsetLeft - track.offsetLeft, behavior: "smooth" });
+        /* едем к ближайшей копии этой карточки */
+        var target = c, best = Infinity, cur = track.scrollLeft;
+        all.forEach(function (k, j) {
+          if (j % n !== i) return;
+          var d2 = Math.abs(pos(k) - cur);
+          if (d2 < best) { best = d2; target = k; }
+        });
+        track.scrollTo({ left: pos(target), behavior: "smooth" });
       });
       dotsWrap.appendChild(d);
       return d;
     });
   }
-  function update() {
-    var max = track.scrollWidth - track.clientWidth;
-    prev.disabled = track.scrollLeft <= 4;
-    next.disabled = track.scrollLeft >= max - 4;
+
+  var looping = false; /* копии показаны и прокрутка зациклена */
+  function layout() {
+    var fits;
+    if (loop) {
+      all.forEach(function (k, j) { if (j < n || j >= 2 * n) k.hidden = false; });
+      fits = setWidth() - (parseFloat(getComputedStyle(track).columnGap) || 22) <= track.clientWidth + 4; /* ширина набора без хвостового зазора */
+      if (fits) { before.concat(after).forEach(function (k) { k.hidden = true; }); }
+      else if (!looping) { track.scrollLeft = pos(cards[0]); }
+      looping = !fits;
+    } else {
+      fits = track.scrollWidth - track.clientWidth <= 4;
+    }
     /* если всё влезло — стрелки и точки не нужны */
-    var fits = max <= 4;
     prev.style.display = next.style.display = fits ? "none" : "";
     if (dotsWrap) dotsWrap.style.display = fits ? "none" : "";
-    if (dots.length) {
-      var vs = track.scrollLeft, ve = vs + track.clientWidth;
-      cards.forEach(function (c, i) {
-        var l = c.offsetLeft - track.offsetLeft, r = l + c.offsetWidth;
-        var overlap = Math.min(r, ve) - Math.max(l, vs);
-        dots[i].classList.toggle("on", overlap >= c.offsetWidth * 0.6);
-      });
+    update();
+  }
+  function update() {
+    if (looping) {
+      prev.disabled = next.disabled = false;
+    } else {
+      var max = track.scrollWidth - track.clientWidth;
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = track.scrollLeft >= max - 4;
     }
+    if (dots.length) {
+      var vs = track.scrollLeft, ve = vs + track.clientWidth, on = [];
+      all.forEach(function (c, j) {
+        if (c.hidden) return;
+        var l = pos(c), r = l + c.offsetWidth;
+        var overlap = Math.min(r, ve) - Math.max(l, vs);
+        if (overlap >= c.offsetWidth * 0.6) on[j % n] = true;
+      });
+      dots.forEach(function (d, i) { d.classList.toggle("on", !!on[i]); });
+    }
+  }
+  /* прыжок из зоны копий в зону оригиналов после остановки прокрутки */
+  function rewind() {
+    if (!looping) return;
+    var w = setWidth(), start = pos(cards[0]), x = track.scrollLeft;
+    if (x < start - 1) track.scrollLeft = x + w;
+    else if (x >= start + w - 1) track.scrollLeft = x - w;
+  }
+  var endTimer = null;
+  function onScroll() {
+    update();
+    if ("onscrollend" in window) return;
+    clearTimeout(endTimer);
+    endTimer = setTimeout(rewind, 120);
   }
   prev.addEventListener("click", function () { track.scrollBy({ left: -step(), behavior: "smooth" }); });
   next.addEventListener("click", function () { track.scrollBy({ left: step(), behavior: "smooth" }); });
-  track.addEventListener("scroll", update, { passive: true });
-  window.addEventListener("resize", update);
-  update();
+  track.addEventListener("scroll", onScroll, { passive: true });
+  track.addEventListener("scrollend", rewind, { passive: true });
+  window.addEventListener("resize", layout);
+  layout();
+  /* пульсация гаснет только от действий пользователя (программные прыжки тоже шлют scroll) */
   function stopPulse() { next.classList.remove("car-btn--pulse"); }
   next.addEventListener("click", stopPulse, { once: true });
-  track.addEventListener("scroll", stopPulse, { once: true, passive: true });
+  ["wheel", "touchstart", "pointerdown"].forEach(function (ev) { track.addEventListener(ev, stopPulse, { once: true, passive: true }); });
 }
 
 /* ============ DECK CAROUSEL (колода, как на frappe.io) ============ */
@@ -1913,37 +1995,49 @@ var ARTICLES = [
     desc: "Интерактивный выбор даты для сенсорных терминалов и АРМ: каждая часть даты меняется кнопками «+» и «−», четыре варианта масштаба." },
 ];
 
-/* group: streams | guest | meetups. p: yt | vk. id: youtube id или "oid_id" для VK. views — число, dur — секунды, date — YYYY-MM-DD. thumb — только для VK. */
-/* Просмотры YouTube проверены 2026-09-08, см. video-views-check.json.
-   VK: 2026-09-08 доступны только округлённые 2,1 тыс. и 1,5 тыс.; точные значения оставлены из SNAPSHOT_DATE. */
+/* group: ai | streams | guest | meetups. p: yt | vk. id: youtube id или "oid_id" для VK. views — число, dur — секунды, date — YYYY-MM-DD. thumb — только для VK. */
+/* Просмотры YouTube проверены 2026-09-17, см. video-views-check.json.
+   VK: 2026-09-17 доступны только округлённые 2,1 тыс. и 1,5 тыс.; точные значения оставлены из SNAPSHOT_DATE. */
 var VIDEOS = [
-  /* Мои стримы */
-  { group: "streams", p: "yt", id: "ou3hd6v5sSk", date: "2026-09-02", views: 8946, dur: 5880, title: "Анна Степанян. Другие правила на рынке 1С." },
-  { group: "streams", p: "yt", id: "NKXJZ8TTpTU", date: "2026-07-29", views: 1224, dur: 4865, title: "Дина Астахова. Сколько зарабатывает 1Сник в 2026 году?" },
-  { group: "streams", p: "yt", id: "wImZoF3GUlc", date: "2026-07-22", views: 858,  dur: 3610, title: "Самая дешёвая AI-разработка на 1С" },
-  { group: "streams", p: "yt", id: "O7cQKdI1K30", date: "2026-07-15", views: 608,  dur: 4115, title: "1С + ИИ Битва II. FABLE 5, SOL и GROK. ИИ пишет код на 1С." },
-  { group: "streams", p: "yt", id: "GZN-0vKbWJ0", date: "2026-06-24", views: 185,  dur: 3640, title: "Михаил Калимулин. Менеджеры продаж больше не нужны? Торговый бот выходит на смену" },
-  { group: "streams", p: "yt", id: "51Qz6dGJddo", date: "2026-06-03", views: 1130, dur: 5891, title: "1С + ИИ Битва. Cursor + Composer vs Visual Studio Code + Codex" },
-  { group: "streams", p: "yt", id: "nDQ98JOxA4I", date: "2026-05-20", views: 1766, dur: 3970, title: "1С + ИИ + MCP = Творим магию в 1С без айтишников!" },
-  { group: "streams", p: "yt", id: "FYyat8MZ53U", date: "2026-02-24", views: 7281, dur: 7050, title: "1С + ИИ = Проще простого! Вайбкодинг на 1С" },
-  { group: "streams", p: "yt", id: "ho9k1ftmQ-s", date: "2025-12-29", views: 1960, dur: 4736, title: "Новый интерфейс 1С:УНФ на платформе 8.5 (тёмная тема)" },
-  { group: "streams", p: "yt", id: "4F5IpMdosvc", date: "2025-09-16", views: 401,  dur: 5414, title: "Денис Соколов. Три книги для 1Сника. Книжный клуб 1С." },
+  /* Видео и стримы про ИИ и 1С */
+  { group: "ai", p: "yt", id: "7kMkukMAmtY", date: "2026-09-14", views: 4686, dur: 3711, title: "1С + ИИ без КВН. Пишем внешнюю обработку с Z.ai (GLM 5.3) бесплатно" },
+  { group: "ai", p: "yt", id: "Cry0vT3JctY", date: "2026-09-10", views: 9055, dur: 2476, title: "1С + ИИ без КВН. Cursor ушёл, что делать? Пробуем DeepSeek v4 Pro Max" },
+  { group: "ai", p: "yt", id: "CXbI1eKvkpc", date: "2026-09-16", views: 1263, dur: 5580, title: "Сергей Костяков. 1С + ИИ: экономим и оптимизируем контекст с Code Index" },
+  { group: "ai", p: "yt", id: "pLbdPx6Bu9I", date: "2026-09-09", views: 3206, dur: 5360, title: "Константин Коробов. 1С + ИИ, переносим подсистему из УХ в ERP за 300$" },
+
+  /* Видео и стримы не про ИИ */
+  { group: "streams", p: "yt", id: "ou3hd6v5sSk", date: "2026-09-02", views: 9956, dur: 5880, title: "Анна Степанян. Другие правила на рынке 1С." },
+  { group: "streams", p: "yt", id: "NKXJZ8TTpTU", date: "2026-07-29", views: 1324, dur: 4865, title: "Дина Астахова. Сколько зарабатывает 1Сник в 2026 году?" },
+  { group: "ai", p: "yt", id: "wImZoF3GUlc", date: "2026-07-22", views: 965,  dur: 3610, title: "Самая дешёвая AI-разработка на 1С" },
+  { group: "ai", p: "yt", id: "O7cQKdI1K30", date: "2026-07-15", views: 639,  dur: 4115, title: "1С + ИИ Битва II. FABLE 5, SOL и GROK. ИИ пишет код на 1С." },
+  { group: "ai", p: "yt", id: "GZN-0vKbWJ0", date: "2026-06-24", views: 188,  dur: 3640, title: "Михаил Калимулин. Менеджеры продаж больше не нужны? Торговый бот выходит на смену" },
+  { group: "ai", p: "yt", id: "51Qz6dGJddo", date: "2026-06-03", views: 1181, dur: 5891, title: "1С + ИИ Битва. Cursor + Composer vs Visual Studio Code + Codex" },
+  { group: "ai", p: "yt", id: "nDQ98JOxA4I", date: "2026-05-20", views: 1829, dur: 3970, title: "1С + ИИ + MCP = Творим магию в 1С без айтишников!" },
+  { group: "ai", p: "yt", id: "FYyat8MZ53U", date: "2026-02-24", views: 7823, dur: 7050, title: "1С + ИИ = Проще простого! Вайбкодинг на 1С" },
+  { group: "streams", p: "yt", id: "ho9k1ftmQ-s", date: "2025-12-29", views: 2041, dur: 4736, title: "Новый интерфейс 1С:УНФ на платформе 8.5 (тёмная тема)" },
+  { group: "streams", p: "yt", id: "4F5IpMdosvc", date: "2025-09-16", views: 404,  dur: 5414, title: "Денис Соколов. Три книги для 1Сника. Книжный клуб 1С." },
   { group: "streams", p: "yt", id: "abOI9MHW4QI", date: "2025-08-14", views: 930,  dur: 6185, title: "Игорь Апресов о разносторонней разработке на 1С" },
 
   /* В гостях у коллег */
   { group: "guest", p: "vk", id: "210707080_456239203", date: "2025-06-06", views: 2104, dur: 5583, channel: "CORS Academy", thumb: "assets/vk-cors-friday.jpg",
     title: "CORS пятница №12: «Выбор профессии в 1С: программист, аналитик или кто-то ещё?»" },
-  { group: "guest", p: "yt", id: "GKsJ2S1it0Y", date: "2025-03-11", views: 4204, dur: 6891, channel: "Мир 1С",
+  { group: "guest", p: "yt", id: "GKsJ2S1it0Y", date: "2025-03-11", views: 4230, dur: 6891, channel: "Мир 1С",
     title: "Путь 1С-ника. Как Дмитрий Котов до аналитика деградировал" },
   { group: "guest", p: "vk", id: "42867005_456240438", date: "2025-02-24", views: 1503, dur: 1875, channel: "Инфостарт", thumb: "assets/vk-infostart-brand.jpg",
     title: "Личный бренд в ИТ. Как Инфостарт и сообщество 1С помогут вам в карьерном росте" },
 
-  /* Мои митапы */
-  { group: "meetups", p: "yt", id: "TZFEjd5TjBY", date: "2026-06-09", views: 879,  dur: 3605, title: "Дарья Грабкина. EDT + GIT vs Хранилище + Конфигуратор." },
-  { group: "meetups", p: "yt", id: "jKAVUBx-LbE", date: "2026-02-19", views: 1026, dur: 7193, title: "Игорь Апресов. HTTP-сервисы в 1С. Кунг-фу митап, Иркутск" },
-  { group: "meetups", p: "yt", id: "ewnlWyl47AA", date: "2025-07-09", views: 121,  dur: 5764, title: "Жёлтый клуб Иркутск: ИИ при собесе 1Сника, 3 лицензии по цене 2-х" },
-  { group: "meetups", p: "yt", id: "n0pZpsuB3mw", date: "2024-11-19", views: 460,  dur: 6886, title: "Заменят ли нейросети 1Сников? Как правильно использовать индексы в 1С" },
-  { group: "meetups", p: "yt", id: "GI1CYzAkF0M", date: "2024-02-17", views: 1220, dur: 6402, title: "Архитектор ИС и База 1С на 40 терабайт" },
+  /* Митапы и конференции, которые я организовал */
+  { group: "meetups", p: "yt", id: "QVrWsWP9lL4", date: "2026-08-26", views: 636,  dur: 2968, title: "Дмитрий Сидоренко. Практический WebSocket: сервер и клиент на JS, потом дружим с 1С" },
+  { group: "meetups", p: "yt", id: "1o-B8f-SOpk", date: "2026-08-20", views: 414,  dur: 1909, title: "Игорь Апресов. WebSocket: протокол и возможности 1С" },
+  { group: "meetups", p: "yt", id: "Weas9J9A1zI", date: "2026-08-08", views: 2353, dur: 2599, title: "Владимир Харин. От вайб-кодинга к инженерному подходу: ИИ-агенты в разработке на 1С" },
+  { group: "meetups", p: "yt", id: "jwZr39IQEl0", date: "2026-07-31", views: 2803, dur: 3516, title: "Алексей Корякин. LLM Wiki как память проекта. Skills как способ с ней работать" },
+  { group: "meetups", p: "yt", id: "JioULq6VwPQ", date: "2026-06-19", views: 226,  dur: 3450, title: "Павел Королёв. Практический опыт OData в интеграции 1С: что работает, а что нет" },
+  { group: "meetups", p: "yt", id: "Mrq3FUfXwBA", date: "2026-06-19", views: 220,  dur: 3592, title: "Игорь Апресов. О разработке HTTP-сервисов в 1С" },
+  { group: "meetups", p: "yt", id: "TZFEjd5TjBY", date: "2026-06-09", views: 942,  dur: 3605, title: "Дарья Грабкина. EDT + GIT vs Хранилище + Конфигуратор." },
+  { group: "meetups", p: "yt", id: "jKAVUBx-LbE", date: "2026-02-19", views: 1082, dur: 7193, title: "Игорь Апресов. HTTP-сервисы в 1С. Кунг-фу митап, Иркутск" },
+  { group: "meetups", p: "yt", id: "ewnlWyl47AA", date: "2025-07-09", views: 124,  dur: 5764, title: "Жёлтый клуб Иркутск: ИИ при собесе 1Сника, 3 лицензии по цене 2-х" },
+  { group: "meetups", p: "yt", id: "n0pZpsuB3mw", date: "2024-11-19", views: 463,  dur: 6886, title: "Заменят ли нейросети 1Сников? Как правильно использовать индексы в 1С" },
+  { group: "meetups", p: "yt", id: "GI1CYzAkF0M", date: "2024-02-17", views: 1221, dur: 6402, title: "Архитектор ИС и База 1С на 40 терабайт" },
 ];
 </script>
 
@@ -2019,7 +2113,7 @@ var VIDEOS = [
     initCarousel({
       track: track, item: ".car-item",
       prev: groupEl.querySelector(".car-prev"), next: groupEl.querySelector(".car-next"),
-      dots: groupEl.querySelector("[data-dots]"), label: label
+      dots: groupEl.querySelector("[data-dots]"), label: label, loop: true
     });
   }
 
